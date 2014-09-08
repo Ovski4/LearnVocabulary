@@ -1,0 +1,5 @@
+ovski_language:
+    resource: "@OvskiLanguageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
