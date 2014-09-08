@@ -20,16 +20,16 @@ class TranslationController extends Controller
     /**
      * Lists all Translation entities.
      *
-     * @Route("/", name="")
+     * @Route("/{slug}", name="_index")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findAll();
-
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findBySlug($slug);
+        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findByLearning($learning);
+//TODO
         return array(
             'entities' => $entities,
         );

@@ -37,6 +37,14 @@ class Word
     private $article;
 
     /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $wordType;
+
+    /**
      * @var Language
      *
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language")
@@ -121,5 +129,28 @@ class Word
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * Set wordType
+     *
+     * @param \Ovski\LanguageBundle\Entity\WordType $wordType
+     * @return Word
+     */
+    public function setWordType(\Ovski\LanguageBundle\Entity\WordType $wordType)
+    {
+        $this->wordType = $wordType;
+
+        return $this;
+    }
+
+    /**
+     * Get wordType
+     *
+     * @return \Ovski\LanguageBundle\Entity\WordType 
+     */
+    public function getWordType()
+    {
+        return $this->wordType;
     }
 }

@@ -5,12 +5,12 @@ namespace Ovski\LanguageBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Word
+ * WordType
  *
- * @ORM\Table()
+ * @ORM\Table(name="word_type")
  * @ORM\Entity
  */
-class Word
+class WordType
 {
     /**
      * @var integer
@@ -29,24 +29,9 @@ class Word
     private $value;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="article", type="string", length=255)
-     */
-    private $article;
-
-    /**
-     * @var Language
-     *
-     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $language;
-
-    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,33 +54,10 @@ class Word
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * Set article
-     *
-     * @param string $article
-     * @return Word
-     */
-    public function setArticle($article)
-    {
-        $this->article = $article;
-
-        return $this;
-    }
-
-    /**
-     * Get article
-     *
-     * @return string 
-     */
-    public function getArticle()
-    {
-        return $this->article;
     }
 }
