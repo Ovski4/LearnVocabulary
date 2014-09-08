@@ -26,7 +26,7 @@
       <file leaf-file-name="Learning.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Learning.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="14" selection-start="178" selection-end="178" vertical-scroll-proportion="-0.3659889" vertical-offset="378" max-vertical-offset="2034">
+            <state line="32" column="0" selection-start="609" selection-end="609" vertical-scroll-proportion="0.6392897" vertical-offset="0" max-vertical-offset="2034">
               <folding>
                 <element signature="e#47#79#0" expanded="true" />
               </folding>
@@ -37,10 +37,8 @@
       <file leaf-file-name="TranslationType.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Form/TranslationType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="16" selection-start="437" selection-end="437" vertical-scroll-proportion="-10.592592" vertical-offset="2" max-vertical-offset="828">
-              <folding>
-                <element signature="e#45#85#0" expanded="true" />
-              </folding>
+            <state line="16" column="16" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="828">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -48,7 +46,7 @@
       <file leaf-file-name="composer.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="14" selection-start="2228" selection-end="2228" vertical-scroll-proportion="-12.666667" vertical-offset="540" max-vertical-offset="1206">
+            <state line="49" column="14" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1206">
               <folding />
             </state>
           </provider>
@@ -57,10 +55,8 @@
       <file leaf-file-name="LoadLanguageData.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/DataFixtures/ORM/LoadLanguageData.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="26" selection-start="728" selection-end="728" vertical-scroll-proportion="-13.62963" vertical-offset="136" max-vertical-offset="702">
-              <folding>
-                <element signature="e#53#103#0" expanded="true" />
-              </folding>
+            <state line="28" column="26" selection-start="728" selection-end="728" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="702">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,7 +64,7 @@
       <file leaf-file-name="AppKernel.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="72" selection-start="722" selection-end="722" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="738">
+            <state line="17" column="72" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="756">
               <folding />
             </state>
           </provider>
@@ -77,7 +73,7 @@
       <file leaf-file-name="TranslationController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/TranslationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="1" selection-start="544" selection-end="544" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="4428">
+            <state line="18" column="1" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="4536">
               <folding />
             </state>
           </provider>
@@ -86,7 +82,7 @@
       <file leaf-file-name="Translation.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Translation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="8.666667" vertical-offset="324" max-vertical-offset="3060">
+            <state line="5" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3060">
               <folding />
             </state>
           </provider>
@@ -95,13 +91,8 @@
       <file leaf-file-name="LearningController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/LearningController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="63" selection-start="1500" selection-end="1500" vertical-scroll-proportion="-32.0" vertical-offset="0" max-vertical-offset="2574">
-              <folding>
-                <element signature="e#1491#1501#0" expanded="true" />
-                <element signature="e#2018#2035#1" expanded="true" />
-                <element signature="e#3290#3300#1" expanded="true" />
-                <element signature="e#3623#3640#0" expanded="true" />
-              </folding>
+            <state line="54" column="63" selection-start="1500" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="2682">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,10 +100,8 @@
       <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/views/Learning/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="24" selection-start="170" selection-end="170" vertical-scroll-proportion="-4.6666665" vertical-offset="18" max-vertical-offset="648">
-              <folding>
-                <element signature="e#555#567#0" expanded="true" />
-              </folding>
+            <state line="8" column="24" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="648">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,7 +109,7 @@
       <file leaf-file-name="Article.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Article.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="10" selection-start="95" selection-end="95" vertical-scroll-proportion="3.3333333" vertical-offset="216" max-vertical-offset="1782">
+            <state line="7" column="10" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="1782">
               <folding />
             </state>
           </provider>
@@ -154,10 +143,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="-4" />
-    <option name="width" value="1303" />
-    <option name="height" value="773" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -185,6 +174,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -475,7 +465,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -484,6 +473,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -511,21 +501,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1303" height="773" extended-state="6" />
-    <editor active="true" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25338647" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17789757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -552,39 +543,168 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Learning.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
+        <state line="10" column="14" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2034">
+          <folding>
+            <element signature="e#47#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Form/TranslationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="16" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="828">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="14" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1206">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/DataFixtures/ORM/LoadLanguageData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="26" selection-start="728" selection-end="728" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="702">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="72" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/TranslationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="1" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="4536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Translation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3060">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/LearningController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="63" selection-start="1500" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="2682">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/views/Learning/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="24" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="648">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Article.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="10" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="1782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Learning.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="14" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2034">
+          <folding>
+            <element signature="e#47#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Form/TranslationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="16" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="828">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="14" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1206">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/DataFixtures/ORM/LoadLanguageData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="26" selection-start="728" selection-end="728" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="702">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="72" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/TranslationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="1" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="4536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Translation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3060">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/LearningController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="63" selection-start="1500" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="2682">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/views/Learning/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="24" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="648">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Article.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="10" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="1782">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/config/services.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="468" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Language.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="1242">
-          <folding />
-        </state>
+        <state line="29" column="0" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0" vertical-offset="198" max-vertical-offset="1242" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Word.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="1782">
-          <folding />
-        </state>
+        <state line="15" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="1782" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Translation.php">
@@ -594,146 +714,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/config/services.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Form/WordType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <folding>
-            <element signature="e#45#85#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/views/Translation/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593">
-          <folding>
-            <element signature="e#12#28#0" expanded="false" />
-            <marker date="1410084295805" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1410084295805" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1410084295805" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="11" selection-start="378" selection-end="378" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="342">
-          <folding />
-        </state>
+        <state line="8" column="11" selection-start="378" selection-end="378" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="342" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Word.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="7" selection-start="0" selection-end="2052" vertical-scroll-proportion="-11.333333" vertical-offset="324" max-vertical-offset="2358">
-          <folding />
-        </state>
+        <state line="35" column="7" selection-start="0" selection-end="2052" vertical-scroll-proportion="-11.333333" vertical-offset="324" max-vertical-offset="2358" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Article.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="10" selection-start="95" selection-end="95" vertical-scroll-proportion="3.3333333" vertical-offset="216" max-vertical-offset="1782">
+        <state line="7" column="10" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="1782">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="72" selection-start="722" selection-end="722" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="738">
+        <state line="17" column="72" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="756">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/DataFixtures/ORM/LoadLanguageData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="26" selection-start="728" selection-end="728" vertical-scroll-proportion="-13.62963" vertical-offset="136" max-vertical-offset="702">
-          <folding>
-            <element signature="e#53#103#0" expanded="true" />
-          </folding>
+        <state line="28" column="26" selection-start="728" selection-end="728" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="702">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="14" selection-start="2228" selection-end="2228" vertical-scroll-proportion="-12.666667" vertical-offset="540" max-vertical-offset="1206">
+        <state line="49" column="14" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1206">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/TranslationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="1" selection-start="544" selection-end="544" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="4428">
+        <state line="18" column="1" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="4536">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Resources/views/Learning/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="24" selection-start="170" selection-end="170" vertical-scroll-proportion="-4.6666665" vertical-offset="18" max-vertical-offset="648">
-          <folding>
-            <element signature="e#555#567#0" expanded="true" />
-          </folding>
+        <state line="8" column="24" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="648">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Language.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="439" selection-end="582" vertical-scroll-proportion="-6.6666665" vertical-offset="360" max-vertical-offset="1422">
-          <folding />
-        </state>
+        <state line="30" column="0" selection-start="439" selection-end="582" vertical-scroll-proportion="-6.6666665" vertical-offset="360" max-vertical-offset="1422" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Form/TranslationType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="16" selection-start="437" selection-end="437" vertical-scroll-proportion="-10.592592" vertical-offset="2" max-vertical-offset="828">
-          <folding>
-            <element signature="e#45#85#0" expanded="true" />
-          </folding>
+        <state line="16" column="16" selection-start="437" selection-end="437" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="828">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Translation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="8.666667" vertical-offset="324" max-vertical-offset="3060">
+        <state line="5" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3060">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Controller/LearningController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="63" selection-start="1500" selection-end="1500" vertical-scroll-proportion="-32.0" vertical-offset="0" max-vertical-offset="2574">
-          <folding>
-            <element signature="e#1491#1501#0" expanded="true" />
-            <element signature="e#2018#2035#1" expanded="true" />
-            <element signature="e#3290#3300#1" expanded="true" />
-            <element signature="e#3623#3640#0" expanded="true" />
-          </folding>
+        <state line="54" column="63" selection-start="1500" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="2682">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ovski/LanguageBundle/Entity/Learning.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="14" selection-start="178" selection-end="178" vertical-scroll-proportion="-0.3659889" vertical-offset="378" max-vertical-offset="2034">
+        <state line="32" column="0" selection-start="609" selection-end="609" vertical-scroll-proportion="0.6392897" vertical-offset="0" max-vertical-offset="2034">
           <folding>
             <element signature="e#47#79#0" expanded="true" />
           </folding>
