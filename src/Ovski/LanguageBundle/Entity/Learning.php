@@ -3,12 +3,12 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ovski\ToolsBundle\Tools\Utils;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Learning
  *
- * @ORM\Table()
  * @ORM\Entity
  * @UniqueEntity({"language1", "language2"})
  */
@@ -38,6 +38,21 @@ class Learning
      * @ORM\JoinColumn(nullable=false)
      */
     private $language2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->slug = Utils::slugify($this->__toString());
+    }
 
     /**
      * Learning to string

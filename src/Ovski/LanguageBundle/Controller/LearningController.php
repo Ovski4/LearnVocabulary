@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\FormError;
 use Ovski\LanguageBundle\Entity\Learning;
 use Ovski\LanguageBundle\Form\LearningType;
 
@@ -48,17 +49,63 @@ class LearningController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            if (!$this->checkLearningUnicity($entity)) {
+                $error = new FormError("You are already learning those languages");
+                $form->get('language1')->addError($error);
+            } else if (!$this->checkLanguagesNotIdentical($entity)) {
+                $error = new FormError("You must choose 2 differents languages");
+                $form->get('language1')->addError($error);
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('learning', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('learning', array('id' => $entity->getId())));
+            }
         }
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    /**
+     * Check that the 2 languages are not identical
+     *
+     * @param $entity
+     * @return bool
+     */
+    private function checkLanguagesNotIdentical($entity)
+    {
+        if ($entity->getLanguage1() == $entity->getLanguage2()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check the unicity of the languages combination
+     *
+     * @param $entity
+     * @return bool
+     */
+    private function checkLearningUnicity($entity)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $language = $em->getRepository('OvskiLanguageBundle:Learning')->findBy(
+            array(
+                'language1' => $entity->getLanguage2(),
+                'language2' => $entity->getLanguage1()
+            )
+        );
+
+        if ($language) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
