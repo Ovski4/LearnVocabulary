@@ -3,38 +3,22 @@
 {% block body -%}
     <h1>Translation list</h1>
 
-    <table class="records_list">
+    {{ form(form) }}
+
+    <table class="table records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>CreatedA</th>
-                <th>Actions</th>
+                <th>{{ learning.language1 }}</th>
+                <th>{{ learning.language2 }}</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('translation_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('translation_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('translation_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
+                <td>{{ entity.word1 }} {% if entity.word1.article %}({{ entity.word1.article }}){% endif %}</td>
+                <td>{{ entity.word2 }} {% if entity.word2.article %}({{ entity.word2.article }}){% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <ul>
-        <li>
-            <a href="{{ path('translation_new', { 'slug': slug }) }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

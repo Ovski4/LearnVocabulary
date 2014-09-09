@@ -18,7 +18,7 @@ class LoadLearningData extends AbstractFixture implements OrderedFixtureInterfac
         $learning->setLanguage1($this->getReference('spanish'));
         $learning->setLanguage2($this->getReference('french'));
         $manager->persist($learning);
-        //$this->addReference($learning->getSlug(), $learning);
+        $this->addReference($learning->getSlug(), $learning);
 
         $manager->flush();
     }

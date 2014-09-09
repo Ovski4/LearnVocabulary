@@ -15,22 +15,46 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $articles = array(
-            'spanish' => 'el',
-            'spanish' => 'la',
-            'german'  => 'der',
-            'german'  => 'die',
-            'german'  => 'das',
-            'french'  => 'le',
-            'french'  => 'la',
-            'french'  => 'l\''
+            array(
+                'language' => 'spanish',
+                'value' => 'el'
+            ),
+            array(
+                'language' => 'spanish',
+                'value' => 'la'
+            ),
+            array(
+                'language' => 'german',
+                'value' => 'der'
+            ),
+            array(
+                'language' => 'german',
+                'value' => 'die'
+            ),
+            array(
+                'language' => 'german',
+                'value' => 'das'
+            ),
+            array(
+                'language' => 'french',
+                'value' => 'le'
+            ),
+            array(
+                'language' => 'french',
+                'value' => 'la'
+            ),
+            array(
+                'language' => 'french',
+                'value' => 'l\''
+            )
         );
 
-        foreach ($articles as $language => $value) {
+        foreach ($articles as $article) {
             $articleObj = new Article();
-            $articleObj->setLanguage($this->getReference($language));
-            $articleObj->setValue($value);
+            $articleObj->setLanguage($this->getReference($article['language']));
+            $articleObj->setValue($article['value']);
             $manager->persist($articleObj);
-            $this->addReference(sprintf('%s-%s', $language, $value), $articleObj);
+            $this->addReference(sprintf('%s-%s', $article['language'], $article['value']), $articleObj);
         }
 
         $manager->flush();

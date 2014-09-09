@@ -31,7 +31,7 @@ class Translation
     /**
      * @var Word
      *
-     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word")
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $word1;
@@ -39,7 +39,7 @@ class Translation
     /**
      * @var Word
      *
-     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word")
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $word2;

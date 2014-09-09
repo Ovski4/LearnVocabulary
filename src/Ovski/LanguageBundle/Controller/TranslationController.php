@@ -34,10 +34,14 @@ class TranslationController extends Controller
             throw new NotFoundHttpException();
         }
         $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(array("learning" => $learning));
+        $entity = new Translation();
+        $form  = $this->createCreateForm($entity, $slug);
 
         return array(
             'entities' => $entities,
-            'slug'     => $slug
+            'slug'     => $slug,
+            'learning' => $learning,
+            'form'     => $form->createView()
         );
     }
 
@@ -85,25 +89,6 @@ class TranslationController extends Controller
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
-    }
-
-    /**
-     * Displays a form to create a new Translation entity.
-     *
-     * @Route("/{slug}/new", name="translation_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction($slug)
-    {
-        $entity = new Translation();
-        $form   = $this->createCreateForm($entity, $slug);
-
-        return array(
-            'entity' => $entity,
-            'slug'   => $slug,
-            'form'   => $form->createView(),
-        );
     }
 
     /**

@@ -32,7 +32,7 @@ class Word
      * @var Article
      *
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Article")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $article;
 
@@ -51,6 +51,16 @@ class Word
      * @ORM\JoinColumn(nullable=false)
      */
     private $language;
+
+    /**
+     * Word to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->value;
+    }
 
     /**
      * Get id

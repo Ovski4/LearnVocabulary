@@ -15,10 +15,16 @@ class LoadTranslationData extends AbstractFixture implements OrderedFixtureInter
     public function load(ObjectManager $manager)
     {
         $translation1 = new Translation();
-        //$translation1->setLearning($this->getReference('french-spanish'));
-        /*$translation1->setWord1();
-        $translation1->setWord2();*/
+        $translation1->setLearning($this->getReference('french-spanish'));
+        $translation1->setWord1($this->getReference('la-manzana'));
+        $translation1->setWord2($this->getReference('la-pomme'));
         $manager->persist($translation1);
+
+        $translation2 = new Translation();
+        $translation2->setLearning($this->getReference('french-spanish'));
+        $translation2->setWord1($this->getReference('principalmente'));
+        $translation2->setWord2($this->getReference('surtout'));
+        $manager->persist($translation2);
 
         $manager->flush();
     }

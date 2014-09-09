@@ -37,6 +37,16 @@ class Article
     private $language;
 
     /**
+     * Article to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->value;
+    }
+
+    /**
      * Get id
      *
      * @return integer

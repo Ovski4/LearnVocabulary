@@ -23,6 +23,11 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
             ),
             array(
                 'language'  => 'spanish',
+                'word-type' => 'adverb',
+                'value'     => 'principalmente'
+            ),
+            array(
+                'language'  => 'spanish',
                 'word-type' => 'name',
                 'value'     => 'pan',
                 'article'   => 'el'
@@ -75,10 +80,12 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
             $wordObj = new Word();
             $wordObj->setLanguage($this->getReference($word['language']));
             $wordObj->setValue($word['value']);
-            $word->setWordType($this->getReference($word['word-type']));
+            $wordObj->setWordType($this->getReference($word['word-type']));
             if ($word['word-type'] == 'name') {
-                $wordObj->setArticle($this->getReference(sprintf('%s-%s', $word['language'], $word['word-type'])));
+                $wordObj->setArticle($this->getReference(sprintf('%s-%s', $word['language'], $word['article'])));
+                $this->setReference(sprintf('%s-%s', $word['article'], $word['value']), $wordObj);
             }
+            $this->setReference($word['value'], $wordObj);
             $manager->persist($wordObj);
         }
 

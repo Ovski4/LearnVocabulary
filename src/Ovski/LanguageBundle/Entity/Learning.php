@@ -55,7 +55,7 @@ class Learning
      */
     public function setSlug()
     {
-        $array = array($this->getLanguage1(), $this->getLanguage2());
+        $array = array($this->getLanguage1()->getName(), $this->getLanguage2()->getName());
         sort($array);
         $this->slug = Utils::slugify($array[0].' - '.$array[1]);
     }
@@ -67,7 +67,7 @@ class Learning
      */
     public function __toString()
     {
-        $array = array($this->getLanguage1(), $this->getLanguage2());
+        $array = array($this->getLanguage1()->getName(), $this->getLanguage2()->getName());
         sort($array);
         return $array[0].' - '.$array[1];
     }
