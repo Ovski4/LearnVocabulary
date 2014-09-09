@@ -45,6 +45,14 @@ class Translation
     private $word2;
 
     /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $wordType;
+
+    /**
      * @var Learning
      *
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Learning")
@@ -160,5 +168,28 @@ class Translation
     public function getLearning()
     {
         return $this->learning;
+    }
+
+    /**
+     * Set wordType
+     *
+     * @param \Ovski\LanguageBundle\Entity\WordType $wordType
+     * @return Translation
+     */
+    public function setWordType(\Ovski\LanguageBundle\Entity\WordType $wordType)
+    {
+        $this->wordType = $wordType;
+
+        return $this;
+    }
+
+    /**
+     * Get wordType
+     *
+     * @return \Ovski\LanguageBundle\Entity\WordType 
+     */
+    public function getWordType()
+    {
+        return $this->wordType;
     }
 }

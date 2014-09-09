@@ -18,12 +18,14 @@ class LoadTranslationData extends AbstractFixture implements OrderedFixtureInter
         $translation1->setLearning($this->getReference('french-spanish'));
         $translation1->setWord1($this->getReference('la-manzana'));
         $translation1->setWord2($this->getReference('la-pomme'));
+        $translation1->setWordType($this->getReference('name'));
         $manager->persist($translation1);
 
         $translation2 = new Translation();
         $translation2->setLearning($this->getReference('french-spanish'));
         $translation2->setWord1($this->getReference('principalmente'));
         $translation2->setWord2($this->getReference('surtout'));
+        $translation2->setWordType($this->getReference('adverb'));
         $manager->persist($translation2);
 
         $manager->flush();

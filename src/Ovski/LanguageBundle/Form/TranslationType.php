@@ -17,6 +17,9 @@ class TranslationType extends AbstractType
         $builder
             ->add('word1', new WordType())
             ->add('word2', new WordType())
+            ->add('wordType', 'entity', array(
+                'class' => 'OvskiLanguageBundle:WordType'
+            ))
         ;
     }
     
