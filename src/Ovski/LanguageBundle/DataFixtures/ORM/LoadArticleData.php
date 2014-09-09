@@ -21,7 +21,8 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             'german'  => 'die',
             'german'  => 'das',
             'french'  => 'le',
-            'french'  => 'la'
+            'french'  => 'la',
+            'french'  => 'l\''
         );
 
         foreach ($articles as $language => $value) {

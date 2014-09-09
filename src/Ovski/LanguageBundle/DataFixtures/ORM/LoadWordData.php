@@ -5,7 +5,7 @@ namespace Ovski\LanguageBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ovski\LanguageBundle\Entity\Article;
+use Ovski\LanguageBundle\Entity\Word;
 
 class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -14,12 +14,73 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        /*
-        $articleObj = new Article();
-        $articleObj->setLanguage($this->getReference($language));
-        $articleObj->setValue($value);
-        $manager->persist($articleObj);
-        */
+        // word = { language, wordType, value, [article] }
+        $words = array(
+            array(
+                'language'  => 'french',
+                'word-type' => 'adverb',
+                'value'     => 'surtout'
+            ),
+            array(
+                'language'  => 'spanish',
+                'word-type' => 'name',
+                'value'     => 'pan',
+                'article'   => 'el'
+            ),
+            array(
+                'language'  => 'spanish',
+                'word-type' => 'name',
+                'value'     => 'manzana',
+                'article'   => 'la'
+            ),
+            array(
+                'language'  => 'spanish',
+                'word-type' => 'name',
+                'value'     => 'mujer',
+                'article'   => 'la'
+            ),
+            array(
+                'language'  => 'spanish',
+                'word-type' => 'name',
+                'value'     => 'hombre',
+                'article'   => 'el'
+            ),
+            array(
+                'language'  => 'french',
+                'word-type' => 'name',
+                'value'     => 'pain',
+                'article'   => 'le'
+            ),
+            array(
+                'language'  => 'french',
+                'word-type' => 'name',
+                'value'     => 'pomme',
+                'article'   => 'la'
+            ),
+            array(
+                'language'  => 'french',
+                'word-type' => 'name',
+                'value'     => 'homme',
+                'article'   => 'l\''
+            ),
+            array(
+                'language'  => 'french',
+                'word-type' => 'name',
+                'value'     => 'mère',
+                'article'   => 'la'
+            )
+        );
+
+        foreach($words as $word) {
+            $wordObj = new Word();
+            $wordObj->setLanguage($this->getReference($word['language']));
+            $wordObj->setValue($word['value']);
+            $word->setWordType($this->getReference($word['word-type']));
+            if ($word['word-type'] == 'name') {
+                $wordObj->setArticle($this->getReference(sprintf('%s-%s', $word['language'], $word['word-type'])));
+            }
+            $manager->persist($wordObj);
+        }
 
         $manager->flush();
     }
