@@ -1,30 +1,36 @@
 <?php
 
-namespace Acme\HelloBundle\DataFixtures\ORM;
+namespace Ovski\LanguageBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ovski\LanguageBundle\Entity\WordType;
 
-class LoadWordTypeData implements FixtureInterface
+class LoadWordTypeData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $preposition = new WordType();
-        $preposition->setValue('preposition');
-        $manager->persist($preposition);
+        $wordTypes = array('preposition', 'name', 'verb', 'adverb', 'article', 'conjunction', 'pronoun', 'adjective');
 
-        $name = new WordType();
-        $name->setValue('name');
-        $manager->persist($name);
-
-        $verb = new WordType();
-        $verb->setValue('verb');
-        $manager->persist($verb);
+        foreach ($wordTypes as $wordType) {
+            $wordTypeObj = new WordType();
+            $wordTypeObj->setValue($wordType);
+            $manager->persist($wordTypeObj);
+            $this->addReference($wordTypeObj->getValue(), $wordTypeObj);
+        }
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 2;
     }
 }

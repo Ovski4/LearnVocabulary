@@ -1,34 +1,36 @@
 <?php
 
-namespace Acme\HelloBundle\DataFixtures\ORM;
+namespace Ovski\LanguageBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ovski\LanguageBundle\Entity\Language;
 
-class LoadLanguageData implements FixtureInterface
+class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $german = new Language();
-        $german->setName('german');
-        $manager->persist($german);
+        $languages = array('german', 'english', 'spanish', 'french');
 
-        $english = new Language();
-        $english->setName('english');
-        $manager->persist($english);
-
-        $spanish = new Language();
-        $spanish->setName('spanish');
-        $manager->persist($spanish);
-
-        $french = new Language();
-        $french->setName('french');
-        $manager->persist($french);
+        foreach ($languages as $language) {
+            $languageObj = new Language();
+            $languageObj->setName($language);
+            $manager->persist($languageObj);
+            $this->addReference($languageObj->getName(), $languageObj);
+        }
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 }
