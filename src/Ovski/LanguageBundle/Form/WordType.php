@@ -17,7 +17,6 @@ class WordType extends AbstractType
         $builder
             ->add('value')
             ->add('article')
-            ->add('language')
         ;
     }
     

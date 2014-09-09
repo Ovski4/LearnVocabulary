@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Learning
  *
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @UniqueEntity({"language1", "language2"})
  */
 class Learning
@@ -42,16 +43,21 @@ class Learning
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
 
     /**
-     * Constructor
+     * Set slug
+     *
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
-    public function __construct()
+    public function setSlug()
     {
-        $this->slug = Utils::slugify($this->__toString());
+        $array = array($this->getLanguage1(), $this->getLanguage2());
+        sort($array);
+        $this->slug = Utils::slugify($array[0].' - '.$array[1]);
     }
 
     /**
@@ -61,7 +67,9 @@ class Learning
      */
     public function __toString()
     {
-        return sprintf('%s - %s', $this->language1->getName(), $this->language2->getName());
+        $array = array($this->getLanguage1(), $this->getLanguage2());
+        sort($array);
+        return $array[0].' - '.$array[1];
     }
 
     /**
@@ -118,5 +126,15 @@ class Learning
     public function getLanguage2()
     {
         return $this->language2;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

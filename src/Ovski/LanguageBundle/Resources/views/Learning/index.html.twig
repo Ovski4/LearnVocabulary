@@ -12,7 +12,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{#{{ path('learning_show', { 'id': entity.id }) }}#}">{{ entity }}</a></td>
+                <td><a href="{{ path('translation', { 'slug': entity.slug }) }}">{{ entity }}</a></td>
                 <td>
                 </td>
             </tr>

@@ -137,6 +137,7 @@ class LearningController extends Controller
     public function newAction()
     {
         $entity = new Learning();
+
         $form   = $this->createCreateForm($entity);
 
         return array(

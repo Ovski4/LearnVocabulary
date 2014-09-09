@@ -3,12 +3,15 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ovski\ToolsBundle\Tools\Utils;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Learning
  *
- * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity({"language1", "language2"})
  */
 class Learning
 {
@@ -38,13 +41,35 @@ class Learning
     private $language2;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * Set slug
+     *
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function setSlug()
+    {
+        $array = array($this->getLanguage1(), $this->getLanguage2());
+        sort($array);
+        $this->slug = Utils::slugify($array[0].' - '.$array[1]);
+    }
+
+    /**
      * Learning to string
      *
      * @return string
      */
     public function __toString()
     {
-        return sprintf('%s - %s', $this->language1->getName(), $this->language2->getName());
+        $array = array($this->getLanguage1(), $this->getLanguage2());
+        sort($array);
+        return $array[0].' - '.$array[1];
     }
 
     /**

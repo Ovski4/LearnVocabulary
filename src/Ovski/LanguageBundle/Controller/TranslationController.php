@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ovski\LanguageBundle\Entity\Translation;
 use Ovski\LanguageBundle\Form\TranslationType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Translation controller.
@@ -20,31 +21,37 @@ class TranslationController extends Controller
     /**
      * Lists all Translation entities.
      *
-     * @Route("/{slug}", name="_index")
+     * @Route("/{slug}", name="translation")
      * @Method("GET")
      * @Template()
      */
     public function indexAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findBySlug($slug);
-        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findByLearning($learning);
-//TODO
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
+
+        if (!$learning) {
+            throw new NotFoundHttpException();
+        }
+        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(array("learning" => $learning));
+
         return array(
             'entities' => $entities,
+            'slug'     => $slug
         );
     }
+
     /**
      * Creates a new Translation entity.
      *
-     * @Route("/", name="_create")
+     * @Route("/{slug}", name="translation_create")
      * @Method("POST")
      * @Template("OvskiLanguageBundle:Translation:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $slug)
     {
         $entity = new Translation();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity, $slug);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -52,7 +59,7 @@ class TranslationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('translation_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -68,10 +75,10 @@ class TranslationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Translation $entity)
+    private function createCreateForm(Translation $entity, $slug)
     {
         $form = $this->createForm(new TranslationType(), $entity, array(
-            'action' => $this->generateUrl('_create'),
+            'action' => $this->generateUrl('translation_create', array('slug' => $slug)),
             'method' => 'POST',
         ));
 
@@ -83,17 +90,18 @@ class TranslationController extends Controller
     /**
      * Displays a form to create a new Translation entity.
      *
-     * @Route("/new", name="_new")
+     * @Route("/{slug}/new", name="translation_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($slug)
     {
         $entity = new Translation();
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity, $slug);
 
         return array(
             'entity' => $entity,
+            'slug'   => $slug,
             'form'   => $form->createView(),
         );
     }
@@ -101,7 +109,7 @@ class TranslationController extends Controller
     /**
      * Finds and displays a Translation entity.
      *
-     * @Route("/{id}", name="_show")
+     * @Route("/{slug}/{id}", name="translation_show")
      * @Method("GET")
      * @Template()
      */
@@ -126,7 +134,7 @@ class TranslationController extends Controller
     /**
      * Displays a form to edit an existing Translation entity.
      *
-     * @Route("/{id}/edit", name="_edit")
+     * @Route("/{slug}/{id}/edit", name="translation_edit")
      * @Method("GET")
      * @Template()
      */
@@ -160,7 +168,7 @@ class TranslationController extends Controller
     private function createEditForm(Translation $entity)
     {
         $form = $this->createForm(new TranslationType(), $entity, array(
-            'action' => $this->generateUrl('_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('translation_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -171,7 +179,7 @@ class TranslationController extends Controller
     /**
      * Edits an existing Translation entity.
      *
-     * @Route("/{id}", name="_update")
+     * @Route("{slug}/{id}", name="translation_update")
      * @Method("PUT")
      * @Template("OvskiLanguageBundle:Translation:edit.html.twig")
      */
@@ -192,7 +200,7 @@ class TranslationController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('translation_edit', array('id' => $id)));
         }
 
         return array(
@@ -204,7 +212,7 @@ class TranslationController extends Controller
     /**
      * Deletes a Translation entity.
      *
-     * @Route("/{id}", name="_delete")
+     * @Route("{slug}/{id}", name="translation_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -224,7 +232,7 @@ class TranslationController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl(''));
+        return $this->redirect($this->generateUrl('translation'));
     }
 
     /**
@@ -237,7 +245,7 @@ class TranslationController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('translation_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
