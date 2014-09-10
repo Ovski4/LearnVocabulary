@@ -2,6 +2,7 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,7 +32,7 @@ class TranslationController extends Controller
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
 
         if (!$learning) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
         }
         $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(array("learning" => $learning));
         $entity = new Translation();
@@ -57,13 +58,13 @@ class TranslationController extends Controller
         $entity = new Translation();
         $form = $this->createCreateForm($entity, $slug);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
+            $this->prepareTranslation($slug, $entity);
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('translation_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('translation', array('slug' => $slug)));
         }
 
         return array(
@@ -73,9 +74,56 @@ class TranslationController extends Controller
     }
 
     /**
-     * Creates a form to create a Translation entity.
+     * Prepare a translation by setting words attributes
      *
      * @param Translation $entity The entity
+     * @param string $slug
+     */
+    private function prepareTranslation($slug, $entity)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
+        $entity->getWord1()->setLanguage($learning->getLanguage1());
+        $entity->getWord2()->setLanguage($learning->getLanguage2());
+        $entity->getWord1()->setWordType($entity->getWordType());
+        $entity->getWord2()->setWordType($entity->getWordType());
+        $this->setWordsIfExist($em, $entity);
+        $entity->setLearning($learning);
+    }
+
+    /**
+     * Get words and set them to the translation instead of creating them if they already exist
+     *
+     * @param ObjectManager $em
+     * @param Translation $entity
+     */
+    private function setWordsIfExist($em, $entity)
+    {
+        $i = 1;
+        $wordArray = array($entity->getWord1(), $entity->getWord2());
+
+        foreach($wordArray as $word) {
+            $existingWord = $em->getRepository('OvskiLanguageBundle:Word')->findOneBy(
+                array(
+                    'language' => $word->getLanguage(),
+                    'value' => $word->getValue(),
+                    'article' => $word->getArticle(),
+                    'wordType' => $word->getWordType()
+                )
+            );
+            if ($existingWord) {
+                $setter = 'setWord'.$i;
+                $entity->$setter($existingWord);
+            }
+            $i++;
+        }
+    }
+
+    /**
+     * Creates a form to create a Translation entity.
+     * 
+     * @param Translation $entity
+     * @param string $slug
      *
      * @return \Symfony\Component\Form\Form The form
      */
