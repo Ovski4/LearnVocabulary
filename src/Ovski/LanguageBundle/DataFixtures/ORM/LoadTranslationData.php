@@ -14,19 +14,29 @@ class LoadTranslationData extends AbstractFixture implements OrderedFixtureInter
      */
     public function load(ObjectManager $manager)
     {
-        $translation1 = new Translation();
-        $translation1->setLearning($this->getReference('french-spanish'));
-        $translation1->setWord1($this->getReference('la-manzana'));
-        $translation1->setWord2($this->getReference('la-pomme'));
-        $translation1->setWordType($this->getReference('name'));
-        $manager->persist($translation1);
+        $translations = array(
+            array(
+                'learning'  => 'french-spanish',
+                'word1'     => 'la-manzana',
+                'word2'     => 'la-pomme',
+                'word_type' => 'name'
+            ),
+            array(
+                'learning'  => 'french-spanish',
+                'word1'     => 'principalmente',
+                'word2'     => 'surtout',
+                'word_type' => 'adverb'
+            )
+        );
 
-        $translation2 = new Translation();
-        $translation2->setLearning($this->getReference('french-spanish'));
-        $translation2->setWord1($this->getReference('principalmente'));
-        $translation2->setWord2($this->getReference('surtout'));
-        $translation2->setWordType($this->getReference('adverb'));
-        $manager->persist($translation2);
+        foreach ($translations as $translation) {
+            $translationObj = new Translation();
+            $translationObj->setLearning($this->getReference($translation['learning']));
+            $translationObj->setWord1($this->getReference($translation['word1']));
+            $translationObj->setWord2($this->getReference($translation['word2']));
+            $translationObj->setWordType($this->getReference($translation['word_type']));
+            $manager->persist($translationObj);
+        }
 
         $manager->flush();
     }

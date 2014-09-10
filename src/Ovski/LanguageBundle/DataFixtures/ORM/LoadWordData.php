@@ -18,59 +18,59 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
         $words = array(
             array(
                 'language'  => 'french',
-                'word-type' => 'adverb',
+                'word_type' => 'adverb',
                 'value'     => 'surtout'
             ),
             array(
                 'language'  => 'spanish',
-                'word-type' => 'adverb',
+                'word_type' => 'adverb',
                 'value'     => 'principalmente'
             ),
             array(
                 'language'  => 'spanish',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'pan',
                 'article'   => 'el'
             ),
             array(
                 'language'  => 'spanish',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'manzana',
                 'article'   => 'la'
             ),
             array(
                 'language'  => 'spanish',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'mujer',
                 'article'   => 'la'
             ),
             array(
                 'language'  => 'spanish',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'hombre',
                 'article'   => 'el'
             ),
             array(
                 'language'  => 'french',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'pain',
                 'article'   => 'le'
             ),
             array(
                 'language'  => 'french',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'pomme',
                 'article'   => 'la'
             ),
             array(
                 'language'  => 'french',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'homme',
                 'article'   => 'l\''
             ),
             array(
                 'language'  => 'french',
-                'word-type' => 'name',
+                'word_type' => 'name',
                 'value'     => 'mère',
                 'article'   => 'la'
             )
@@ -80,8 +80,8 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
             $wordObj = new Word();
             $wordObj->setLanguage($this->getReference($word['language']));
             $wordObj->setValue($word['value']);
-            $wordObj->setWordType($this->getReference($word['word-type']));
-            if ($word['word-type'] == 'name') {
+            $wordObj->setWordType($this->getReference($word['word_type']));
+            if ($word['word_type'] == 'name') {
                 $wordObj->setArticle($this->getReference(sprintf('%s-%s', $word['language'], $word['article'])));
                 $this->setReference(sprintf('%s-%s', $word['article'], $word['value']), $wordObj);
             }

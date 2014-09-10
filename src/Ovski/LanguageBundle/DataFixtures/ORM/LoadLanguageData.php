@@ -14,11 +14,17 @@ class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $languages = array('german', 'english', 'spanish', 'french');
+        $languages = array(
+            array('name' => 'german',  'require_articles' => true),
+            array('name' => 'english', 'require_articles' => false),
+            array('name' => 'spanish', 'require_articles' => true),
+            array('name' => 'french',  'require_articles' => true)
+        );
 
         foreach ($languages as $language) {
             $languageObj = new Language();
-            $languageObj->setName($language);
+            $languageObj->setName($language['name']);
+            $languageObj->setRequireArticles($language['require_articles']);
             $manager->persist($languageObj);
             $this->addReference($languageObj->getName(), $languageObj);
         }

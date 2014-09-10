@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
+{% block body %}
     <h1>Translation list</h1>
 
     {{ form(form) }}
@@ -21,4 +21,8 @@
         {% endfor %}
         </tbody>
     </table>
-    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/toggleArticles.js"></script>
+{% endblock %}

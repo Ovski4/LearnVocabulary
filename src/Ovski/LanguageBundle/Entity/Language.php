@@ -29,6 +29,13 @@ class Language
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="require_articles", type="boolean")
+     */
+    private $requireArticles;
+
+    /**
      * Language to string
      *
      * @return string
@@ -69,5 +76,28 @@ class Language
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set requireArticles
+     *
+     * @param boolean $requireArticles
+     * @return Language
+     */
+    public function setRequireArticles($requireArticles)
+    {
+        $this->requireArticles = $requireArticles;
+
+        return $this;
+    }
+
+    /**
+     * Get requireArticles
+     *
+     * @return boolean 
+     */
+    public function getRequireArticles()
+    {
+        return $this->requireArticles;
     }
 }

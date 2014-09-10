@@ -2,7 +2,7 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -88,7 +88,30 @@ class TranslationController extends Controller
         $entity->getWord1()->setWordType($entity->getWordType());
         $entity->getWord2()->setWordType($entity->getWordType());
         $this->setWordsIfExist($em, $entity);
+        $this->checkArticles($entity);
         $entity->setLearning($learning);
+    }
+
+    /**
+     * Check the article value (null or not) for a word
+     */
+    private function checkArticles(Translation $entity)
+    {
+        $wordArray = array($entity->getWord1(), $entity->getWord2());
+
+        foreach($wordArray as $word) {
+            // if the words have name as wordType,
+            // they must have an article except if the language has requiredArticle to false
+            if ($word->getWordType()->getValue() == 'name' && !$word->getArticle()) {
+                throw new \Exception('You need to specify an article because the type of the word is \'name\'');
+            // if the words have not name as wordType,
+            // they must not have an article
+            } else if ($word->getWordType()->getValue() != 'name' && $word->getArticle()) {
+                throw new \Exception('A word which is not a \'name\' should not have an article');
+            }
+        }
+
+
     }
 
     /**
@@ -121,7 +144,7 @@ class TranslationController extends Controller
 
     /**
      * Creates a form to create a Translation entity.
-     * 
+     *
      * @param Translation $entity
      * @param string $slug
      *
@@ -129,7 +152,9 @@ class TranslationController extends Controller
      */
     private function createCreateForm(Translation $entity, $slug)
     {
-        $form = $this->createForm(new TranslationType(), $entity, array(
+        $em = $this->getDoctrine()->getManager();
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
+        $form = $this->createForm(new TranslationType($learning), $entity, array(
             'action' => $this->generateUrl('translation_create', array('slug' => $slug)),
             'method' => 'POST',
         ));
@@ -200,7 +225,9 @@ class TranslationController extends Controller
     */
     private function createEditForm(Translation $entity)
     {
-        $form = $this->createForm(new TranslationType(), $entity, array(
+        $em = $this->getDoctrine()->getManager();
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
+        $form = $this->createForm(new TranslationType($learning), $entity, array(
             'action' => $this->generateUrl('translation_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

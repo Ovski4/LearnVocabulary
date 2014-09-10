@@ -10,3 +10,6 @@
 /bin/
 /composer.phar
 .idea/
+
+#tmp files
+*~
