@@ -13,3 +13,10 @@
  * parameter for the number of translation in 1 page
  * filter by word type, creation date
  * starred translations 
+
+### details ###
+rename $entity -> $translation in controllers and views
+edit table name in entites (no capitals)
+name by default in select box instead of preposition
+unicity constraint in word
+unicity constraint in translation
