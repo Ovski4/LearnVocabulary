@@ -1,0 +1,70 @@
+
+/* Translation page */
+
+#ovski_languagebundle_translation > div:nth-child(-n+3) > label {
+    text-transform: capitalize;
+}
+
+#ovski_languagebundle_translation > div:nth-child(2),
+#ovski_languagebundle_translation > div:nth-child(3) {
+    width: 100%;
+    overflow: auto;
+}
+
+#ovski_languagebundle_translation > div:nth-child(2) > *,
+#ovski_languagebundle_translation > div:nth-child(3) > * {
+    float: left;
+}
+
+#ovski_languagebundle_translation > div:nth-child(2) > label,
+#ovski_languagebundle_translation > div:nth-child(3) > label {
+    display: block;
+    min-width: 20%;
+}
+
+#ovski_languagebundle_translation > div:nth-child(-n+3) {
+    /*float: left;*/
+}
+
+#ovski_languagebundle_translation label {
+    padding-right: 5px;
+}
+
+#ovski_languagebundle_translation .ovski-word input[type="text"] {
+    margin-left: 6px;
+}
+
+/***********
+  * DESKTOP *
+  ***********/
+
+@media (min-width: 768px) {
+
+    label[for="ovski_languagebundle_translation_wordType"] {
+        display: block;
+    }
+
+    #ovski_languagebundle_translation > div:nth-child(-n+3) {
+        float: left;
+        padding: 0 5px;
+    }
+
+    #ovski_languagebundle_translation > div:nth-child(1) {
+        width: 120px;
+        float: left;
+        padding: 0 5px;
+    }
+
+    #ovski_languagebundle_translation > div:nth-child(2) {
+        width: 290px;
+    }
+
+    #ovski_languagebundle_translation > div:nth-child(3) {
+        width: 290px;
+    }
+
+    /* submit parent div */
+    #ovski_languagebundle_translation > div:nth-child(4) {
+        clear: left;
+    }
+}

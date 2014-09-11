@@ -6,10 +6,18 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bundles/ovskilanguage/css/styles.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header >
+            <h1 class="container">Vocabulary learner</h1>
+        </header>
+        <div>
+            <section class="container">
+                {% block body %}{% endblock %}
+            </section>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

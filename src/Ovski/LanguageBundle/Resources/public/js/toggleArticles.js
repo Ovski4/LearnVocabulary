@@ -14,8 +14,8 @@ jQuery(document).ready(function() {
  */
 function hideOrDisplayArticle(selectBox) {
     if (jQuery(selectBox).find('option:selected').text() == 'name') {
-        jQuery('.ovski-word div:nth-child(2)').fadeIn().css('display', 'block');
+        jQuery('.ovski-word div:nth-child(1)').fadeIn().css('display', 'block');
     } else {
-        jQuery('.ovski-word div:nth-child(2)').fadeOut();
+        jQuery('.ovski-word div:nth-child(1)').fadeOut();
     }
 }
