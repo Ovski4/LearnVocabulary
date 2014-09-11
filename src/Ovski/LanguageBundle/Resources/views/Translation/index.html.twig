@@ -15,8 +15,14 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.word1 }} {% if entity.word1.article %}({{ entity.word1.article }}){% endif %}</td>
-                <td>{{ entity.word2 }} {% if entity.word2.article %}({{ entity.word2.article }}){% endif %}</td>
+                <td>
+                    <span class="visible">{{ entity.word1 }}</span>
+                    {% if entity.word1.article %}<span class="visible">({{ entity.word1.article }})</span>{% endif %}
+                </td>
+                <td>
+                    <span class="visible">{{ entity.word2 }}</span>
+                    {% if entity.word2.article %}<span class="visible">({{ entity.word2.article }})</span>{% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -24,5 +30,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/toggleArticles.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/translation.js"></script>
 {% endblock %}
