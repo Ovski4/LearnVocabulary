@@ -1,4 +1,5 @@
 jQuery(document).ready(function() {
+
     // reset article select box on word type change
     // and hide select box on word type 'name'
     jQuery('#ovski_languagebundle_translation_wordType').change(function() {
@@ -6,38 +7,72 @@ jQuery(document).ready(function() {
         hideOrDisplayArticle(this);
     });
 
-    // hide or display columns
-    var $HideButtons = jQuery('<div class="hide-column"></div>');
-    var $leftHideButton = jQuery('<button class="hide-column-left">Hide left column</button>');
-    var $rightHideButton = jQuery('<button class="hide-column-right">Hide right column</button>');
-    var $resetColumns = jQuery('<button class="show-columns">Reset columns</button>');
+    var hiddenColumn = null;
+    var tableSize = jQuery('table > tbody > tr').length;
+    var hiddenWordCount = 0;
 
-    $HideButtons.append($leftHideButton);
-    $HideButtons.append($rightHideButton);
-    $HideButtons.insertBefore('table');
+    // hide or display columns
+    var $actions = jQuery('<div class="actions"></div>');
+    var $leftHideButton = jQuery('<button class="hide-column-left hide-column">Hide left column</button>');
+    var $rightHideButton = jQuery('<button class="hide-column-right hide-column">Hide right column</button>');
+    var $resetColumns = jQuery('<button class="show-columns">Display everything</button>');
+
+    $actions.append($leftHideButton);
+    $actions.append($rightHideButton);
+    $actions.insertBefore('table');
 
     // hide left column on click
     jQuery(document).on('click', '.hide-column-left', function() {
-        jQuery($HideButtons).replaceWith($resetColumns);
+        hiddenWordCount = tableSize;
+        hiddenColumn = 'left';
+        jQuery('.hide-column').remove();
+        jQuery($actions).append($resetColumns);
         jQuery('table > tbody > tr > td:first-child > span').each(function() {
-            jQuery(this).attr('class', 'invisible');
+            jQuery(this).attr('class', 'is-invisible');
         });
     });
 
     // hide right column on click
     jQuery(document).on('click', '.hide-column-right', function() {
-        jQuery($HideButtons).replaceWith($resetColumns);
+        hiddenWordCount = tableSize;
+        hiddenColumn = 'right';
+        jQuery('.hide-column').remove();
+        jQuery($actions).append($resetColumns);
         jQuery('table > tbody > tr > td:nth-child(2) > span').each(function() {
-            jQuery(this).attr('class', 'invisible');
+            jQuery(this).attr('class', 'is-invisible');
         });
     });
 
-    // display all columns on click
+    // display all columns on click on reset button
     jQuery(document).on('click', '.show-columns', function() {
-        jQuery($resetColumns).replaceWith($HideButtons);
+        hiddenColumn = null;
+        $actions.append($leftHideButton);
+        $actions.append($rightHideButton);
+        $resetColumns.remove();
         jQuery('table > tbody > tr > td > span').each(function() {
-            jQuery(this).attr('class', 'visible');
+            jQuery(this).attr('class', 'is-visible');
         });
+    });
+
+    // on click on span
+    jQuery(document).on('click', 'table tr td', function() {
+        if (jQuery(this).find('span').hasClass('is-invisible')) {
+            jQuery(this).find('span').attr('class', 'is-visible');
+            hiddenWordCount--;
+            if (hiddenColumn == 'left') {
+                jQuery('div.actions').prepend($leftHideButton);
+            } else {
+                jQuery('div.actions').prepend($rightHideButton);
+            }
+            if (hiddenWordCount == 0) {
+                $resetColumns.remove();
+                if (hiddenColumn == 'left') {
+                    jQuery('div.actions').append($rightHideButton);
+                } else {
+                    jQuery('div.actions').prepend($leftHideButton);
+                }
+            }
+        }
     });
 });
 

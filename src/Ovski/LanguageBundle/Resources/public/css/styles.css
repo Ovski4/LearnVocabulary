@@ -38,11 +38,11 @@ table td {
     width: 50%;
 }
 
-table tr td > span.invisible {
+table tr td > span.is-invisible {
     display: none;
 }
 
-table tr td > span.visible {
+table tr td > span.is-visible {
     display: inline;
 }
 

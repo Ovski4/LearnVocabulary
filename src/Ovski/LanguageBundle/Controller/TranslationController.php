@@ -34,7 +34,10 @@ class TranslationController extends Controller
         if (!$learning) {
             throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
         }
-        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(array("learning" => $learning));
+        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(
+            array("learning" => $learning),
+            array("createdAt" => 'DESC')
+        );
         $entity = new Translation();
         $form  = $this->createCreateForm($entity, $slug);
 

@@ -16,12 +16,12 @@
         {% for entity in entities %}
             <tr>
                 <td>
-                    <span class="visible">{{ entity.word1 }}</span>
-                    {% if entity.word1.article %}<span class="visible">({{ entity.word1.article }})</span>{% endif %}
+                    <span class="is-visible">{{ entity.word1 }}</span>
+                    {% if entity.word1.article %}<span class="is-visible">({{ entity.word1.article }})</span>{% endif %}
                 </td>
                 <td>
-                    <span class="visible">{{ entity.word2 }}</span>
-                    {% if entity.word2.article %}<span class="visible">({{ entity.word2.article }})</span>{% endif %}
+                    <span class="is-visible">{{ entity.word2 }}</span>
+                    {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
                 </td>
             </tr>
         {% endfor %}
