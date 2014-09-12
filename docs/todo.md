@@ -13,9 +13,11 @@
  * starred translations
  * filter search
  * csv export
+ * learn pronoun for names (list all word languages)
 
 ### details ###
-
+set parameter max_translations_per_page in database
+doctrineOrmAdapter instead of arrayAdapter
 rename $entity -> $translation in controllers and views
 edit table name in entites (no capitals) and attributes name (underscores)
 name by default in select box instead of preposition

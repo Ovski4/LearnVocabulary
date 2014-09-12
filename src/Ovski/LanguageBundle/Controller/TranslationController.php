@@ -11,6 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ovski\LanguageBundle\Entity\Translation;
 use Ovski\LanguageBundle\Form\TranslationType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 
 /**
  * Translation controller.
@@ -22,11 +25,12 @@ class TranslationController extends Controller
     /**
      * Lists all Translation entities.
      *
-     * @Route("/{slug}", name="translation")
+     * @Route("/{slug}", name="translation", defaults={"page" = 1})
+     * @Route("/{slug}/{page}", name="translation_paginated")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction($slug)
+    public function indexAction($slug, $page)
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
@@ -38,11 +42,21 @@ class TranslationController extends Controller
             array("learning" => $learning),
             array("createdAt" => 'DESC')
         );
+
+        $pager = new Pagerfanta(new ArrayAdapter($entities));
+        $pager->setMaxPerPage(10);
+
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException();
+        }
+
         $entity = new Translation();
         $form  = $this->createCreateForm($entity, $slug);
 
         return array(
-            'entities' => $entities,
+            'pager'    => $pager,
             'slug'     => $slug,
             'learning' => $learning,
             'form'     => $form->createView()

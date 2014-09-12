@@ -6,6 +6,9 @@
 
         {{ form(form) }}
 
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
+        {% endif %}
         <table class="table records_list">
             <thead>
                 <tr>
@@ -14,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for entity in entities %}
+            {% for entity in pager.currentPageResults %}
                 <tr>
                     <td>
                         <span class="is-visible">{{ entity.word1 }}</span>
@@ -28,6 +31,9 @@
             {% endfor %}
             </tbody>
         </table>
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
+        {% endif %}
     </div>
 {% endblock %}
 
