@@ -14,12 +14,18 @@ class LoadLearningData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $learning = new Learning();
-        $learning->setLanguage1($this->getReference('spanish'));
-        $learning->setLanguage2($this->getReference('french'));
-        $manager->persist($learning);
-        $this->addReference($learning->getSlug(), $learning);
+        $learnings = array(
+            array('language1' => 'spanish',  'language2' => 'french'),
+            array('language1' => 'german',   'language2' => 'french'),
+        );
 
+        foreach($learnings as $learning) {
+            $learningObj = new Learning();
+            $learningObj->setLanguage1($this->getReference($learning['language1']));
+            $learningObj->setLanguage2($this->getReference($learning['language2']));
+            $manager->persist($learningObj);
+            $this->addReference($learningObj->getSlug(), $learningObj);
+        }
         $manager->flush();
     }
 
