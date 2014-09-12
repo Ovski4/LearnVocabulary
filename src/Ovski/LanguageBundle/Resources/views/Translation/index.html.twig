@@ -1,32 +1,34 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Translation list</h2>
+    <div class="translation">
+        <h2>Translation list</h2>
 
-    {{ form(form) }}
+        {{ form(form) }}
 
-    <table class="table records_list">
-        <thead>
-            <tr>
-                <th>{{ learning.language1 }}</th>
-                <th>{{ learning.language2 }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>
-                    <span class="is-visible">{{ entity.word1 }}</span>
-                    {% if entity.word1.article %}<span class="is-visible">({{ entity.word1.article }})</span>{% endif %}
-                </td>
-                <td>
-                    <span class="is-visible">{{ entity.word2 }}</span>
-                    {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table records_list">
+            <thead>
+                <tr>
+                    <th>{{ learning.language1 }}</th>
+                    <th>{{ learning.language2 }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>
+                        <span class="is-visible">{{ entity.word1 }}</span>
+                        {% if entity.word1.article %}<span class="is-visible">({{ entity.word1.article }})</span>{% endif %}
+                    </td>
+                    <td>
+                        <span class="is-visible">{{ entity.word2 }}</span>
+                        {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

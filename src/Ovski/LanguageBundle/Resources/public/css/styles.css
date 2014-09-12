@@ -46,6 +46,14 @@ table tr td > span.is-visible {
     display: inline;
 }
 
+#ovski_languagebundle_translation button[type="submit"] {
+    margin-top: 10px;
+}
+
+.translation button {
+    margin: 5px 5px 0 0;
+}
+
 /***********
   * DESKTOP *
   ***********/
@@ -78,9 +86,5 @@ table tr td > span.is-visible {
     /* submit parent div */
     #ovski_languagebundle_translation > div:nth-child(4) {
         clear: left;
-    }
-
-    #ovski_languagebundle_translation button[type="submit"] {
-        margin-top: 10px;
     }
 }

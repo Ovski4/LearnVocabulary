@@ -12,6 +12,7 @@
  * filter by word type, creation date
  * starred translations
  * filter search
+ * csv export
 
 ### details ###
 
