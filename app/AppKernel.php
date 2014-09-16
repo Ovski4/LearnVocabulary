@@ -8,6 +8,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            new FOS\UserBundle\FOSUserBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -20,6 +21,7 @@ class AppKernel extends Kernel
             new Ovski\LanguageBundle\OvskiLanguageBundle(),
             new Ovski\ToolsBundle\OvskiToolsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Ovski\UserBundle\OvskiUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

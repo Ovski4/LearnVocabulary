@@ -16,16 +16,17 @@
  * learn pronoun for names (list all word languages)
 
 ### details ###
-set parameter max_translations_per_page in database
-doctrineOrmAdapter instead of arrayAdapter
-rename $entity -> $translation in controllers and views
-edit table name in entites (no capitals) and attributes name (underscores)
-name by default in select box instead of preposition
-unicity constraint in word
-unicity constraint in translation
-check if there is no article with a non name word
-check if there is an article with a name word (except for english)
-Handle exceptions in a better way
+ * Set parameter max_translations_per_page in database
+ * DoctrineOrmAdapter instead of arrayAdapter
+ * Rename $entity -> $translation in controllers and views
+ * Edit table name in entites (no capitals) and attributes name (underscores)
+ * Name by default in select box instead of preposition
+ * Unicity constraint in word
+ * Unicity constraint in translation
+ * Check if there is no article with a non name word
+ * Check if there is an article with a name word (except for english)
+ * Handle exceptions in a better way
+ * Rename routes with ovski_prefix
 
 ### at the very end ###
 use cdn to load jquery/bootsrap, etc, else modernizer and load files
