@@ -4,16 +4,14 @@ namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ovski\ToolsBundle\Tools\Utils;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Learning
  *
  * @ORM\Table(name="ovski_learning")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\LearningRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity({"language1", "language2"})
  */
 class Learning
 {

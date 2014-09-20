@@ -29,7 +29,9 @@ class LearningController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('OvskiLanguageBundle:Learning')->findAll();
+        $entities = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
+            $this->getUser()->getId()
+        );
 
         return array(
             'entities' => $entities,
@@ -56,8 +58,11 @@ class LearningController extends Controller
                 $error = new FormError("You must choose 2 differents languages");
                 $form->get('language1')->addError($error);
             } else {
-                // TODO check if learning already exist
+                if ($learning = $this->checkLearningExists($entity)) {
+                    $entity = $learning;
+                }
                 $em = $this->getDoctrine()->getManager();
+                $entity->addUser($this->getUser());
                 $em->persist($entity);
                 $em->flush();
 
@@ -94,20 +99,58 @@ class LearningController extends Controller
      */
     private function checkLearningUnicity($entity)
     {
-        // TODO with users
         $em = $this->getDoctrine()->getManager();
-        $language = $em->getRepository('OvskiLanguageBundle:Learning')->findBy(
+        $learning1 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
+            $this->getUser()->getId(),
+            array(
+                'language2' => $entity->getLanguage2()->getId(),
+                'language1' => $entity->getLanguage1()->getId()
+            )
+        );
+        $learning2 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
+            $this->getUser()->getId(),
+            array(
+                'language1' => $entity->getLanguage2()->getId(),
+                'language2' => $entity->getLanguage1()->getId()
+            )
+        );
+
+        if ($learning1 || $learning2) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if a learning already exists
+     *
+     * @param $entity
+     * @return mixed
+     */
+    private function checkLearningExists($entity)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $learning1 = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBy(
+            array(
+                'language2' => $entity->getLanguage2(),
+                'language1' => $entity->getLanguage1()
+            )
+        );
+        $learning2 = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBy(
             array(
                 'language1' => $entity->getLanguage2(),
                 'language2' => $entity->getLanguage1()
             )
         );
 
-        if ($language) {
+        if (!$learning1 && !$learning2) {
             return false;
+        } else if ($learning1) {
+            return $learning1;
+        } else {
+            return $learning2;
         }
-
-        return true;
     }
 
     /**
