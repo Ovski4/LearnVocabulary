@@ -3,11 +3,12 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Translation
  *
- * @ORM\Table()
+ * @ORM\Table(name="ovski_translation")
  * @ORM\Entity
  */
 class Translation
@@ -61,11 +62,18 @@ class Translation
     private $learning;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="translations")
+     * @ORM\JoinTable(name="ovski_user_translation")
+     */
+    private $users;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -191,5 +199,38 @@ class Translation
     public function getWordType()
     {
         return $this->wordType;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     * @return Translation
+     */
+    public function addUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     */
+    public function removeUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

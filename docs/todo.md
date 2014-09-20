@@ -5,7 +5,6 @@
  * Paginated translations to the right
 
 ### features ###
- * add a translation
  * edit a translation
  * delete a translation
  * parameter for the number of translation in 1 page
@@ -14,7 +13,7 @@
  * filter search
  * csv export
  * learn pronoun for names (list all word languages)
-
+ * rename LnguageBundle to VocabularyBundle
 ### details ###
  * Set parameter max_translations_per_page in database
  * DoctrineOrmAdapter instead of arrayAdapter
@@ -27,6 +26,7 @@
  * Check if there is an article with a name word (except for english)
  * Handle exceptions in a better way
  * Rename routes with ovski_prefix
+ * Add users on entities and constraints (not create 2 translations identicals, use exisiting translations, etc)
 
 ### at the very end ###
 use cdn to load jquery/bootsrap, etc, else modernizer and load files

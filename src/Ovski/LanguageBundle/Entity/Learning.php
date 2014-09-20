@@ -5,10 +5,12 @@ namespace Ovski\LanguageBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Ovski\ToolsBundle\Tools\Utils;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Learning
  *
+ * @ORM\Table(name="ovski_learning")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity({"language1", "language2"})
@@ -46,6 +48,20 @@ class Learning
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="learnings", cascade={"persist"})
+     * @ORM\JoinTable(name="ovski_user_learning")
+     */
+    private $users;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Set slug
@@ -136,5 +152,38 @@ class Learning
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     * @return Learning
+     */
+    public function addUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     */
+    public function removeUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

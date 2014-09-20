@@ -23,6 +23,7 @@ class LoadLearningData extends AbstractFixture implements OrderedFixtureInterfac
             $learningObj = new Learning();
             $learningObj->setLanguage1($this->getReference($learning['language1']));
             $learningObj->setLanguage2($this->getReference($learning['language2']));
+            $learningObj->addUser($this->getReference('baptiste'));
             $manager->persist($learningObj);
             $this->addReference($learningObj->getSlug(), $learningObj);
         }
@@ -34,6 +35,6 @@ class LoadLearningData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function getOrder()
     {
-        return 4;
+        return 5;
     }
 }

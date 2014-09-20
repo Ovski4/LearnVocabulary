@@ -85,6 +85,7 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
                 $wordObj->setArticle($this->getReference(sprintf('%s-%s', $word['language'], $word['article'])));
                 $this->setReference(sprintf('%s-%s', $word['article'], $word['value']), $wordObj);
             }
+            $wordObj->addUser($this->getReference('baptiste'));
             $this->setReference($word['value'], $wordObj);
             $manager->persist($wordObj);
         }
@@ -97,6 +98,6 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 5;
+        return 6;
     }
 }

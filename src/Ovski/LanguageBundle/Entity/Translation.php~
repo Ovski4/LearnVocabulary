@@ -3,7 +3,6 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Language;
 
 /**
  * Translation
@@ -32,7 +31,7 @@ class Translation
     /**
      * @var Word
      *
-     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word")
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $word1;
@@ -40,10 +39,18 @@ class Translation
     /**
      * @var Word
      *
-     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word")
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $word2;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $wordType;
 
     /**
      * @var Learning
@@ -52,6 +59,11 @@ class Translation
      * @ORM\JoinColumn(nullable=false)
      */
     private $learning;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User")
+     */
+    private $user;
 
     /**
      * Constructor
@@ -138,5 +150,51 @@ class Translation
     public function getWord2()
     {
         return $this->word2;
+    }
+
+    /**
+     * Set learning
+     *
+     * @param \Ovski\LanguageBundle\Entity\Learning $learning
+     * @return Translation
+     */
+    public function setLearning(\Ovski\LanguageBundle\Entity\Learning $learning)
+    {
+        $this->learning = $learning;
+
+        return $this;
+    }
+
+    /**
+     * Get learning
+     *
+     * @return \Ovski\LanguageBundle\Entity\Learning 
+     */
+    public function getLearning()
+    {
+        return $this->learning;
+    }
+
+    /**
+     * Set wordType
+     *
+     * @param \Ovski\LanguageBundle\Entity\WordType $wordType
+     * @return Translation
+     */
+    public function setWordType(\Ovski\LanguageBundle\Entity\WordType $wordType)
+    {
+        $this->wordType = $wordType;
+
+        return $this;
+    }
+
+    /**
+     * Get wordType
+     *
+     * @return \Ovski\LanguageBundle\Entity\WordType 
+     */
+    public function getWordType()
+    {
+        return $this->wordType;
     }
 }

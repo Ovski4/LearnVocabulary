@@ -3,11 +3,12 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Word
  *
- * @ORM\Table()
+ * @ORM\Table(name="ovski_word")
  * @ORM\Entity
  */
 class Word
@@ -51,6 +52,20 @@ class Word
      * @ORM\JoinColumn(nullable=false)
      */
     private $language;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="words")
+     * @ORM\JoinTable(name="ovski_user_word")
+     */
+    private $users;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Word to string
@@ -162,5 +177,38 @@ class Word
     public function getWordType()
     {
         return $this->wordType;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     * @return Word
+     */
+    public function addUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     */
+    public function removeUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

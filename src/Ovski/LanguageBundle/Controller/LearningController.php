@@ -56,6 +56,7 @@ class LearningController extends Controller
                 $error = new FormError("You must choose 2 differents languages");
                 $form->get('language1')->addError($error);
             } else {
+                // TODO check if learning already exist
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($entity);
                 $em->flush();
@@ -93,6 +94,7 @@ class LearningController extends Controller
      */
     private function checkLearningUnicity($entity)
     {
+        // TODO with users
         $em = $this->getDoctrine()->getManager();
         $language = $em->getRepository('OvskiLanguageBundle:Learning')->findBy(
             array(
