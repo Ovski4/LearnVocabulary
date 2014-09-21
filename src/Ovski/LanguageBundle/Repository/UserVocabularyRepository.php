@@ -18,15 +18,15 @@ class UserVocabularyRepository extends EntityRepository
      */
     public function getByUserQueryBuilder($userId, $params = array())
     {
-        $qb = $this->createQueryBuilder('t');
+        $qb = $this->createQueryBuilder('l');
         $qb
-            ->join('t.users', 'u')
+            ->join('l.users', 'u')
             ->where($qb->expr()->eq('u.id', $userId))
         ;
         foreach ($params as $key => $value) {
             $qb
-                ->andWhere(sprintf('t.%s = :param', $key))
-                ->setParameter('param', $value)
+                ->andWhere(sprintf('l.%s = :param'.$key, $key))
+                ->setParameter('param'.$key, $value)
             ;
         }
         return $qb;
@@ -46,6 +46,38 @@ class UserVocabularyRepository extends EntityRepository
         $qb = $this->getByUserQueryBuilder($userId, $params);
 
         return is_null($qb) ? $qb : $qb->getQuery();
+    }
+
+    /**
+     * getOneByUser
+     *
+     * Get one by user
+     *
+     * @param string : the user id
+     * @param array : params array('param_name' => 'value', ..)
+     * @return DoctrineCollection
+     */
+    public function getOneByUser($userId, $params = array())
+    {
+        $q = $this->getByUserQuery($userId, $params);
+
+        return is_null($q) ? array() : $q->getSingleResult();
+    }
+
+    /**
+     * getOneOrNullByUser
+     *
+     * Get one by user
+     *
+     * @param string : the user id
+     * @param array : params array('param_name' => 'value', ..)
+     * @return DoctrineCollection
+     */
+    public function getOneOrNullByUser($userId, $params = array())
+    {
+        $q = $this->getByUserQuery($userId, $params);
+
+        return is_null($q) ? array() : $q->getOneOrNullResult();
     }
 
     /**
