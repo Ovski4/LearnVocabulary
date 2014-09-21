@@ -33,13 +33,19 @@ class TranslationController extends Controller
     public function indexAction($slug, $page)
     {
         $em = $this->getDoctrine()->getManager();
-        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
+            $this->getUser()->getId(),
+            array('slug' => $slug)
+        );
 
         if (!$learning) {
             throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
         }
         $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(
-            array("learning" => $learning),
+            array(
+                "learning" => $learning,
+                "user" => $this->getUser(),
+            ),
             array("createdAt" => 'DESC')
         );
 
@@ -77,6 +83,7 @@ class TranslationController extends Controller
         $form->handleRequest($request);
         if ($form->isValid()) {
             $this->prepareTranslation($slug, $entity);
+            $entity->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();

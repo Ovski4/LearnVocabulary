@@ -35,7 +35,7 @@ class LoadTranslationData extends AbstractFixture implements OrderedFixtureInter
             $translationObj->setWord1($this->getReference($translation['word1']));
             $translationObj->setWord2($this->getReference($translation['word2']));
             $translationObj->setWordType($this->getReference($translation['word_type']));
-            $translationObj->addUser($this->getReference('baptiste'));
+            $translationObj->setUser($this->getReference('baptiste'));
             $manager->persist($translationObj);
         }
 

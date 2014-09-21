@@ -47,11 +47,13 @@ class LearningController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Learning();
+        //var_dump($entity); echo("-------------------------------");
         $form = $this->createCreateForm($entity);
+        //var_dump($entity); echo("-------------------------------");
         $form->handleRequest($request);
-
+        //var_dump($entity); echo("-------------------------------"); die;
         if ($form->isValid()) {
-            if (!$this->checkLearningUnicity($entity)) {
+            if (!$this->checkLearningUserExists($entity)) {
                 $error = new FormError("You are already learning those languages");
                 $form->get('language1')->addError($error);
             } else if (!$this->checkLanguagesNotIdentical($entity)) {
@@ -97,14 +99,14 @@ class LearningController extends Controller
      * @param $entity
      * @return bool
      */
-    private function checkLearningUnicity($entity)
+    private function checkLearningUserExists($entity)
     {
         $em = $this->getDoctrine()->getManager();
         $learning1 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
             $this->getUser()->getId(),
             array(
-                'language2' => $entity->getLanguage2()->getId(),
-                'language1' => $entity->getLanguage1()->getId()
+                'language1' => $entity->getLanguage1()->getId(),
+                'language2' => $entity->getLanguage2()->getId()
             )
         );
         $learning2 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(

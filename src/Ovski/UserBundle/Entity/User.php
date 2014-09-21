@@ -30,7 +30,7 @@ class User extends BaseUser
     private $learnings;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ovski\LanguageBundle\Entity\Translation", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="Ovski\LanguageBundle\Entity\Translation", mappedBy="user")
      */
     private $translations;
 

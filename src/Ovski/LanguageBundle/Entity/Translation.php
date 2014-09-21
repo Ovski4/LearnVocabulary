@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Translation
  *
  * @ORM\Table(name="ovski_translation")
- * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\TranslationRepository")
+ * @ORM\Entity()
  */
 class Translation
 {
@@ -62,10 +62,19 @@ class Translation
     private $learning;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="translations")
-     * @ORM\JoinTable(name="ovski_user_translation")
+     * @var Learning
+     *
+     * @ORM\ManyToOne(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="translations")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $users;
+    private $user;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_starred", type="boolean", nullable=false)
+     */
+    private $isStarred;
 
     /**
      * Constructor
@@ -73,7 +82,7 @@ class Translation
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
-        $this->users = new ArrayCollection();
+        $this->isStarred = false;
     }
 
     /**
@@ -202,35 +211,48 @@ class Translation
     }
 
     /**
-     * Add user
+     * Set user
      *
      * @param \Ovski\UserBundle\Entity\User $user
      * @return Translation
      */
-    public function addUser(\Ovski\UserBundle\Entity\User $user)
+    public function setUser(\Ovski\UserBundle\Entity\User $user)
     {
-        $this->users[] = $user;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Remove user
+     * Get user
      *
-     * @param \Ovski\UserBundle\Entity\User $user
+     * @return \Ovski\UserBundle\Entity\User 
      */
-    public function removeUser(\Ovski\UserBundle\Entity\User $user)
+    public function getUser()
     {
-        $this->users->removeElement($user);
+        return $this->user;
     }
 
     /**
-     * Get users
+     * Set isStarred
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param boolean $isStarred
+     * @return Translation
      */
-    public function getUsers()
+    public function setIsStarred($isStarred)
     {
-        return $this->users;
+        $this->isStarred = $isStarred;
+
+        return $this;
+    }
+
+    /**
+     * Get isStarred
+     *
+     * @return boolean 
+     */
+    public function getIsStarred()
+    {
+        return $this->isStarred;
     }
 }
