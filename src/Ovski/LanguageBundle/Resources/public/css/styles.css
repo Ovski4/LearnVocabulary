@@ -47,10 +47,6 @@ section.container {
     min-width: 20%;
 }
 
-#ovski_languagebundle_translation > div:nth-child(-n+3) {
-    /*float: left;*/
-}
-
 #ovski_languagebundle_translation label {
     padding-right: 5px;
 }
@@ -59,17 +55,23 @@ section.container {
     margin-left: 6px;
 }
 
-table th,
-table td {
-    width: 50%;
-}
-
 table tr td > span.is-invisible {
     display: none;
 }
 
 table tr td > span.is-visible {
     display: inline;
+}
+
+table tr td a.starred {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: url('../img/stars.png') 0 0;
+}
+
+table tr td a.starred:hover {
+    background: url('../img/stars.png') 0 32px;
 }
 
 #ovski_languagebundle_translation button[type="submit"] {

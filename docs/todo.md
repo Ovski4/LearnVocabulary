@@ -28,6 +28,7 @@
  * Handle exceptions in a better way
  * Rename routes with ovski_prefix
  * Add users on entities and constraints (not create 2 translations identicals, use exisiting translations, etc)
+ * check that no entities are created twice or more (word, translations, etc)
 
 ### at the very end ###
 use cdn to load jquery/bootsrap, etc, else modernizer and load files

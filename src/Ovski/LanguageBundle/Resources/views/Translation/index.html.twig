@@ -13,7 +13,7 @@
             <thead>
                 <tr>
                     <th>{{ learning.language1 }}</th>
-                    <th>{{ learning.language2 }}</th>
+                    <th colspan=2>{{ learning.language2 }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +27,7 @@
                         <span class="is-visible">{{ entity.word2 }}</span>
                         {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
                     </td>
+                    <td><a class="starred" href="#"></a></td>
                 </tr>
             {% endfor %}
             </tbody>
