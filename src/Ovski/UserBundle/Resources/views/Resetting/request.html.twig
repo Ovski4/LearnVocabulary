@@ -1,0 +1,10 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="request-form fos-user-form">
+        <h2>{{ 'resetting.email.subject'|trans }}</h2>
+        {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+    </div>
+{% endblock fos_user_content %}

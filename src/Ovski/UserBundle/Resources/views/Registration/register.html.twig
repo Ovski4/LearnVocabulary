@@ -1,0 +1,11 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="register-form fos-user-form">
+        <h2>{{ 'registration.submit'|trans }}</h2>
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}<br />
+        <p>If you want, you can edit your profile (such as your age and description) later</p>
+    </div>
+{% endblock fos_user_content %}

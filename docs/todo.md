@@ -1,8 +1,6 @@
 ## Todo ##
 
 ### View ### 
- * Learning leanguages to the left
- * Paginated translations to the right
 
 ### features ###
  * edit a translation
@@ -29,6 +27,7 @@
  * Rename routes with ovski_prefix
  * Add users on entities and constraints (not create 2 translations identicals, use exisiting translations, etc)
  * check that no entities are created twice or more (word, translations, etc)
-
+ * check not used actions
+ * novalidate everywhere (etc-> la, le, l' -> deesde)
 ### at the very end ###
 use cdn to load jquery/bootsrap, etc, else modernizer and load files
