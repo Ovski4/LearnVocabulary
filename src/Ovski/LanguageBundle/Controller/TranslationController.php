@@ -25,8 +25,8 @@ class TranslationController extends Controller
     /**
      * Lists all Translation entities.
      *
-     * @Route("/{slug}", name="translation", defaults={"page" = 1})
-     * @Route("/{slug}/{page}", name="translation_paginated")
+     * @Route("/{slug}/", name="translation", defaults={"page" = 1})
+     * @Route("/{slug}/{page}", name="translation_paginated", requirements={"page" = "\d+"})
      * @Method("GET")
      * @Template()
      */
@@ -50,7 +50,7 @@ class TranslationController extends Controller
         );
 
         $pager = new Pagerfanta(new ArrayAdapter($entities));
-        $pager->setMaxPerPage(10);
+        $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
 
         try {
             $pager->setCurrentPage($page);
@@ -260,6 +260,7 @@ class TranslationController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Translation entity.
      *
@@ -293,6 +294,7 @@ class TranslationController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Translation entity.
      *

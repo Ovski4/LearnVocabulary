@@ -20,6 +20,13 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="max_items_per_page", type="integer")
+     */
+    private $maxitemsPerPage;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Ovski\LanguageBundle\Entity\Word", mappedBy="users")
      */
     private $words;
@@ -37,6 +44,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->maxitemsPerPage = 20;
         $this->translations = new ArrayCollection();
         $this->learnings = new ArrayCollection();
         $this->words = new ArrayCollection();
@@ -50,6 +58,29 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set maxitemsPerPage
+     *
+     * @param integer $maxitemsPerPage
+     * @return Parameters
+     */
+    public function setMaxitemsPerPage($maxitemsPerPage)
+    {
+        $this->maxitemsPerPage = $maxitemsPerPage;
+
+        return $this;
+    }
+
+    /**
+     * Get maxitemsPerPage
+     *
+     * @return integer
+     */
+    public function getMaxitemsPerPage()
+    {
+        return $this->maxitemsPerPage;
     }
 
     /**

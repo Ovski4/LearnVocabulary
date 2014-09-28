@@ -3,5 +3,10 @@ ovski_language:
     type:     annotation
     prefix:   /
 
+ovski_user:
+    resource: "@OvskiUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

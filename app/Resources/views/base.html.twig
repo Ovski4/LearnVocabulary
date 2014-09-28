@@ -11,8 +11,15 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body>
-        <header >
-            <h1 class="container">Vocabulary learner</h1>
+        <header>
+            <div class="container">
+                <h1>Vocabulary learner</h1>
+                {% if is_granted("ROLE_USER") %}
+                    <a class="glyphicon glyphicon-cog" href={{ path("parameters_edit") }}>
+
+                    </a>
+                {%  endif %}
+            </div>
         </header>
         <div>
             <section class="container">
