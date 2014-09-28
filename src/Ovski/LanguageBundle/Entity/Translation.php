@@ -3,12 +3,13 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Translation
  *
- * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Table(name="ovski_translation")
+ * @ORM\Entity()
  */
 class Translation
 {
@@ -61,11 +62,27 @@ class Translation
     private $learning;
 
     /**
+     * @var Learning
+     *
+     * @ORM\ManyToOne(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="translations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_starred", type="boolean", nullable=false)
+     */
+    private $isStarred;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
+        $this->isStarred = false;
     }
 
     /**
@@ -191,5 +208,51 @@ class Translation
     public function getWordType()
     {
         return $this->wordType;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Ovski\UserBundle\Entity\User $user
+     * @return Translation
+     */
+    public function setUser(\Ovski\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Ovski\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set isStarred
+     *
+     * @param boolean $isStarred
+     * @return Translation
+     */
+    public function setIsStarred($isStarred)
+    {
+        $this->isStarred = $isStarred;
+
+        return $this;
+    }
+
+    /**
+     * Get isStarred
+     *
+     * @return boolean 
+     */
+    public function getIsStarred()
+    {
+        return $this->isStarred;
     }
 }

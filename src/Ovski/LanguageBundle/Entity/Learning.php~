@@ -48,6 +48,11 @@ class Learning
     private $slug;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User")
+     */
+    private $user;
+
+    /**
      * Set slug
      *
      * @ORM\PreUpdate
@@ -55,7 +60,7 @@ class Learning
      */
     public function setSlug()
     {
-        $array = array($this->getLanguage1(), $this->getLanguage2());
+        $array = array($this->getLanguage1()->getName(), $this->getLanguage2()->getName());
         sort($array);
         $this->slug = Utils::slugify($array[0].' - '.$array[1]);
     }
@@ -67,7 +72,7 @@ class Learning
      */
     public function __toString()
     {
-        $array = array($this->getLanguage1(), $this->getLanguage2());
+        $array = array($this->getLanguage1()->getName(), $this->getLanguage2()->getName());
         sort($array);
         return $array[0].' - '.$array[1];
     }
@@ -126,5 +131,15 @@ class Learning
     public function getLanguage2()
     {
         return $this->language2;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * WordType
  *
- * @ORM\Table(name="word_type")
+ * @ORM\Table(name="ovski_word_type")
  * @ORM\Entity
  */
 class WordType

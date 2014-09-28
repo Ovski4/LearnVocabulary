@@ -1,32 +1,41 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Translation list</h2>
+    <div class="translation">
+        <h2>Translation list</h2>
 
-    {{ form(form) }}
+        {{ form(form) }}
 
-    <table class="table records_list">
-        <thead>
-            <tr>
-                <th>{{ learning.language1 }}</th>
-                <th>{{ learning.language2 }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>
-                    <span class="visible">{{ entity.word1 }}</span>
-                    {% if entity.word1.article %}<span class="visible">({{ entity.word1.article }})</span>{% endif %}
-                </td>
-                <td>
-                    <span class="visible">{{ entity.word2 }}</span>
-                    {% if entity.word2.article %}<span class="visible">({{ entity.word2.article }})</span>{% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
+        {% endif %}
+        <table class="table records_list">
+            <thead>
+                <tr>
+                    <th>{{ learning.language1 }}</th>
+                    <th colspan=2>{{ learning.language2 }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in pager.currentPageResults %}
+                <tr>
+                    <td>
+                        <span class="is-visible">{{ entity.word1 }}</span>
+                        {% if entity.word1.article %}<span class="is-visible">({{ entity.word1.article }})</span>{% endif %}
+                    </td>
+                    <td>
+                        <span class="is-visible">{{ entity.word2 }}</span>
+                        {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
+                    </td>
+                    <td><a class="starred" href="#"></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
