@@ -45,7 +45,9 @@ class WordType extends AbstractType
                     ;
                 }
             ))
-            ->add('value')
+            ->add('value', null, array(
+                'label' => 'Word',
+            ))
         ;
     }
 
