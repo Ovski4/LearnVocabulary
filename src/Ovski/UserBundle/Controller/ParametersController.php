@@ -13,14 +13,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Parameters controller.
  *
- * @Route("/parameters")
+ * @Route("/settings")
  */
 class ParametersController extends Controller
 {
     /**
      * Displays a form to edit the maxItemsPerPage parameter.
      *
-     * @Route("/edit", name="parameters_edit")
+     * @Route("/", name="parameters_edit")
      * @Method("GET")
      * @Template()
      */

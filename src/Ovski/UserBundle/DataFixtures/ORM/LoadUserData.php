@@ -30,8 +30,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager)
     {
         $users = array(
-            'baptiste',
-            'lise'
+            'baptiste'
         );
 
         foreach ($users as $i => $name) {

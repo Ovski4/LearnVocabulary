@@ -36,6 +36,7 @@ class TranslationType extends AbstractType
             ))
             ->add('word1', new WordType($this->learning->getLanguage1()))
             ->add('word2', new WordType($this->learning->getLanguage2()))
+            ->add('submit', 'submit', array('label' => 'Add'));
         ;
     }
     

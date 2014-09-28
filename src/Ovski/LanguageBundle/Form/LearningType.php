@@ -15,8 +15,9 @@ class LearningType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('language1')
-            ->add('language2')
+            ->add('language1', null, array('label' => 'Language 1'))
+            ->add('language2', null, array('label' => 'Language 2'))
+            ->add('submit', 'submit', array('label' => 'Learn it now!'));
         ;
     }
     

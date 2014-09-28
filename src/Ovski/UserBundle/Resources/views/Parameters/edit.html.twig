@@ -1,8 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Parameters edit</h2>
+    <div class="parameters">
+        <h2>Settings</h2>
 
-    {{ form(edit_form) }}
+        {{ form(edit_form) }}
 
+        <a href={{ path("learning") }} class="button">
+            Back to the language list
+        </a>
+    </div>
 {% endblock %}

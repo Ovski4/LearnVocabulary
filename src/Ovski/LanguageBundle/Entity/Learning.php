@@ -83,7 +83,7 @@ class Learning
     {
         $array = array($this->getLanguage1()->getName(), $this->getLanguage2()->getName());
         sort($array);
-        return $array[0].' - '.$array[1];
+        return ucfirst($array[0]).' - '.ucfirst($array[1]);
     }
 
     /**

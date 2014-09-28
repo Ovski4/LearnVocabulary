@@ -2,4 +2,13 @@
 
 {% block body %}
     <h2>Welcome!</h2>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href={{ path("learning") }}>
+            My languages being learned
+        </a>
+    {% endif %}
+    <p>
+        New here? Start to <a href={{ path("fos_user_security_login") }}>Log in</a>
+
+    </p>
 {% endblock %}

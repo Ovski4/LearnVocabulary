@@ -47,11 +47,8 @@ class LearningController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Learning();
-        //var_dump($entity); echo("-------------------------------");
         $form = $this->createCreateForm($entity);
-        //var_dump($entity); echo("-------------------------------");
         $form->handleRequest($request);
-        //var_dump($entity); echo("-------------------------------"); die;
         if ($form->isValid()) {
             if (!$this->checkLearningUserExists($entity)) {
                 $error = new FormError("You are already learning those languages");
@@ -168,8 +165,6 @@ class LearningController extends Controller
             'action' => $this->generateUrl('learning_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }

@@ -1,15 +1,13 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Learning creation</h1>
+{% block body %}
+    <div class="new-learning">
+        <h2>Learn a new language</h2>
 
-    {{ form(form) }}
+        {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('learning') }}">
+        <a href="{{ path('learning') }}" class="button">
             Back to the list
         </a>
-    </li>
-</ul>
+    </div>
 {% endblock %}

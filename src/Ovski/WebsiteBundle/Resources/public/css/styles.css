@@ -15,6 +15,19 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#184b6a', GradientType=1 );/* IE6-9 fallback on horizontal gradient */
 }
 
+.table>thead>tr>th {
+    border-bottom: 1px solid #ddd;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -27,6 +40,7 @@ a > i.fa:hover {
     color: #428bca;
 }
 
+.button,
 button,
 input[type="submit"] {
     background: #184b6a;
@@ -41,9 +55,16 @@ input[type="submit"] {
     transition: background .2s;
 }
 
+.button:hover,
 button:hover,h1
 input[type="submit"]:hover {
     background: #2c2c2c;
+    color: #fff;
+}
+
+a.button {
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /*HEADER*/
@@ -97,7 +118,54 @@ section.container {
     padding-bottom: 20px;
 }
 
+/* Learning list page */
+
+ul li span {
+    display: inline-block;
+    padding: 8px;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+ul li:first-child span {
+    border: none;
+}
+
+/* New learning page */
+
+.new-learning form label {
+    padding: 0 10px 10px 0;
+}
+
+.parameters form label {
+    padding: 0 10px 10px 0;
+}
+
 /* Translation page */
+
+.translation h3 {
+    text-align: center;
+}
+
+.translation .add-translation {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-top: 20px;
+}
+
+.translation .add-translation h3 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+#ovski_languagebundle_translation > div:nth-child(4) {
+    text-align: center;
+}
+
+#ovski_languagebundle_translation {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
 
 #ovski_languagebundle_translation > div:nth-child(-n+3) > label {
     text-transform: capitalize;
@@ -275,5 +343,10 @@ table tr td:nth-child(3) {
     /* submit parent div */
     #ovski_languagebundle_translation > div:nth-child(4) {
         clear: left;
+        text-align: left;
+    }
+
+    .translation > h3 {
+        text-align: left;
     }
 }

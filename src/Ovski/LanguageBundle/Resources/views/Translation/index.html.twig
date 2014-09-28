@@ -2,10 +2,16 @@
 
 {% block body %}
     <div class="translation">
-        <h2>Translation list</h2>
-
-        {{ form(form) }}
-
+        {#<span>
+            <a href={{ path("learning") }}>
+                Back to the languages list
+            </a>
+        </span>#}
+        <div class="add-translation">
+            <h3>Add a new translation</h3>
+            {{ form(form) }}
+        </div>
+        <h3>Translation list</h3>
         {% if pager.haveToPaginate %}
             {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
         {% endif %}
