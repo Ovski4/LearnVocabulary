@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Ovski\ToolsBundle\OvskiToolsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Ovski\UserBundle\OvskiUserBundle(),
+            new Ovski\WebsiteBundle\OvskiWebsiteBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/bundles/ovskilanguage/css/styles.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <h1>Vocabulary learner</h1>
-                {% if is_granted("ROLE_USER") %}
-                    <a class="glyphicon glyphicon-cog" href={{ path("parameters_edit") }}>
-
-                    </a>
-                {%  endif %}
-            </div>
-        </header>
-        <div>
-            <section class="container">
-                {% block body %}{% endblock %}
-            </section>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bundles/ovskiwebsite/css/styles.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1><a href={{ path("home") }}>Vocabulary learner</a></h1>
+        <div class="links">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href={{ path("parameters_edit") }}>
+                    <span class="visible-lg-inline">
+                        Settings
+                        <i class="fa fa-cog"></i>
+                    </span>
+                    <i class="hidden-lg fa fa-cog"></i>
+                </a>
+                <a href={{ path("fos_user_security_logout") }}>
+                    <span class="visible-lg-inline">
+                        Log out
+                        <i class="fa fa-sign-out"></i>
+                    </span>
+                    <i class="hidden-lg fa fa-sign-out"></i>
+                </a>
+            {% else %}
+                <a href={{ path("fos_user_security_login") }}>
+                    <span class="visible-lg-inline">
+                        Log in
+                        <i class="fa fa-sign-in"></i>
+                    </span>
+                    <i class="hidden-lg fa fa-sign-in"></i>
+                </a>
+            {%  endif %}
         </div>
-        {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+</header>
+<div>
+    <section class="container">
+        {% block body %}{% endblock %}
+    </section>
+</div>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

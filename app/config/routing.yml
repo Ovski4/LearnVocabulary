@@ -3,6 +3,11 @@ ovski_language:
     type:     annotation
     prefix:   /
 
+ovski_website:
+    resource: "@OvskiWebsiteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ovski_user:
     resource: "@OvskiUserBundle/Controller/"
     type:     annotation

@@ -1,18 +1,29 @@
 /*GENERAL*/
 
-body {
-    background: url('../img/bg.jpg');
-    background-size: cover;
+body, html {
+    height: 100%;
 }
+
+body {
+    background: #499bea;/* Old Browsers */
+    background: -moz-linear-gradient(-45deg, #499bea 0%, #184b6a 100%); /* FF3.6+ */
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, #499bea), color-stop(100%, #184b6a));/* Chrome, Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #499bea 0%, #184b6a 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #499bea 0%, #184b6a 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #499bea 0%, #184b6a 100%); /* IE 10+ */
+    background: linear-gradient(135deg, #499bea 0%, #184b6a 100%);/* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#184b6a', GradientType=1 );/* IE6-9 fallback on horizontal gradient */
+}
+
 a:hover {
     text-decoration: none;
 }
 
-a.glyphicon {
+a > i.fa {
     color: #fff;
 }
 
-a.glyphicon:hover {
+a > i.fa:hover {
     color: #428bca;
 }
 
@@ -30,11 +41,10 @@ input[type="submit"] {
     transition: background .2s;
 }
 
-button:hover,
+button:hover,h1
 input[type="submit"]:hover {
     background: #2c2c2c;
 }
-
 
 /*HEADER*/
 
@@ -44,7 +54,14 @@ header {
     color: #fff;
     border-bottom: 1px solid #000;
     margin-bottom: 10px;
-    overflow: auto;
+}
+
+header .container {
+    height: 100%;
+}
+
+header .links {
+    display: inline-block;
 }
 
 header h1 {
@@ -54,10 +71,20 @@ header h1 {
     line-height: 50px;
 }
 
-header a.glyphicon {
-    font-size: 18px;
-    top: -1px;
-    left: 10px;
+header h1 a {
+    color: #fff;
+}
+header h1 a:hover {
+    color: #fff;
+}
+
+header a > i.fa.fa-cog {
+    padding-left: 10px;
+}
+
+header a > i.fa {
+    font-size: 20px;
+    padding: 0 5px;
 }
 
 /*SECTION*/
@@ -196,6 +223,23 @@ table tr td:nth-child(3) {
 
     header h1 {
         font-size: 36px;
+        padding-right: 30px;
+    }
+
+    header a > i.fa.fa-cog {
+        padding-left: 10px;
+    }
+
+    header .links a {
+        color: #fff;
+        font-size: 20px;
+        padding: 0 5px;
+        top: -1px;
+        left: 10px;
+    }
+
+    header a:hover {
+        color: #428bca;
     }
 
     section.container {
