@@ -14,6 +14,7 @@
  * rename LnguageBundle to VocabularyBundle
  * improve checkLeaningUnicity function, etc..
 ### details ###
+ * crash when bad password or login?
  * Set parameter max_translations_per_page in database
  * DoctrineOrmAdapter instead of arrayAdapter
  * Rename $entity -> $translation in controllers and views

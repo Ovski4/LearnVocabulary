@@ -2,24 +2,19 @@
 
 {% block body %}
     <div class="translation">
-        {#<span>
-            <a href={{ path("learning") }}>
-                Back to the languages list
-            </a>
-        </span>#}
         <div class="add-translation">
             <h3>Add a new translation</h3>
             {{ form(form) }}
         </div>
         <div class="filter-translations">
             <h3>Filter translations</h3>
-            <form method="get" action="{{ path('translation', {'slug': learning.slug}) }}">
+            <form class="filter-form" method="get" action="{{ path('translation', {'slug': learning.slug}) }}">
                 {{ form_rest(filterForm) }}
                 <input type="submit" name="submit-filter" value="Filter" />
             </form>
         </div>
         <h3>Translation list</h3>
-        {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_paginated', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
+        {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
         <table class="table records_list">
             <thead>
                 <tr>
@@ -38,17 +33,22 @@
                         <span class="is-visible">{{ entity.word2 }}</span>
                         {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
                     </td>
-                    <td><a class="starred" href="#"></a></td>
+                    <td>
+                       <a class="star {% if entity.isStarred %}star-yes{% endif %}"
+                          href="{{ path('translation_star', {'slug': learning.slug, 'id': entity.id}) }}">
+                       </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         {% if pager.haveToPaginate %}
-            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
+            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation', 'routeParams': {'slug': learning.slug}}) }}
         {% endif %}
     </div>
 {% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript" src="/bundles/ovskilanguage/js/translation.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/star.js"></script>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace Ovski\LanguageBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,6 +14,7 @@ use Ovski\LanguageBundle\Entity\Translation;
 use Ovski\LanguageBundle\Form\TranslationType;
 use Ovski\LanguageBundle\Form\FilterType\TranslationFilterType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Exception\NotValidCurrentPageException;
@@ -347,5 +349,34 @@ class TranslationController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Star a Translation entity.
+     *
+     * @Route("/{slug}/star/{id}", name="translation_star")
+     * @Method("GET")
+     */
+    public function starAction(Request $request, $slug, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $translation = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
+
+        if (!$translation) {
+            throw $this->createNotFoundException('Unable to find Translation entity.');
+        }
+        if ($translation->getUser() != $this->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        $translation->setIsStarred(!$translation->getIsStarred());
+        $em->persist($translation);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new Response("Starred");
+        } else {
+            return $this->redirect($this->generateUrl('translation', array('slug' => $slug)));
+        }
     }
 }

@@ -198,37 +198,42 @@ ul li:first-child span {
     margin-left: 6px;
 }
 
-table tr td > span.is-invisible {
+/* Filter form */
+.filter-form label {
+    min-width: 100px;
+}
+
+.translation table tr td > span.is-invisible {
     display: none;
 }
 
-table tr td > span.is-visible {
+.translation table tr td > span.is-visible {
     display: inline;
 }
 
-table tr td a.starred {
+.translation table tr td a.star {
     display: block;
     width: 32px;
     height: 32px;
     background: url('../img/stars.png') 0 0;
 }
 
-table tr td a.starred:hover {
+.translation table tr td a.star.star-yes {
     background: url('../img/stars.png') 0 32px;
 }
 
 /*language1*/
-table tr td:nth-child(1) {
+.translation table tr td:nth-child(1) {
     width: 45%;
 }
 
 /*language2*/
-table tr td:nth-child(2) {
+.translation table tr td:nth-child(2) {
     width: 45%;
 }
 
 /*stars*/
-table tr td:nth-child(3) {
+.translation table tr td:nth-child(3) {
     width: 10%;
 }
 
@@ -350,5 +355,9 @@ table tr td:nth-child(3) {
 
     .translation > h3 {
         text-align: left;
+    }
+
+    .translation table tr td a.star:hover {
+        background: url('../img/stars.png') 0 64px;
     }
 }
