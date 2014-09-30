@@ -11,10 +11,15 @@
             <h3>Add a new translation</h3>
             {{ form(form) }}
         </div>
+        <div class="filter-translations">
+            <h3>Filter translations</h3>
+            <form method="get" action="{{ path('translation', {'slug': learning.slug}) }}">
+                {{ form_rest(filterForm) }}
+                <input type="submit" name="submit-filter" value="Filter" />
+            </form>
+        </div>
         <h3>Translation list</h3>
-        {% if pager.haveToPaginate %}
-            {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation_paginated', 'routeParams': {'slug': learning.slug}}) }}
-        {% endif %}
+        {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_paginated', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
         <table class="table records_list">
             <thead>
                 <tr>

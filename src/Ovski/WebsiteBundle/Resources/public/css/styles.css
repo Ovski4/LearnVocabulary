@@ -56,7 +56,7 @@ input[type="submit"] {
 }
 
 .button:hover,
-button:hover,h1
+button:hover,
 input[type="submit"]:hover {
     background: #2c2c2c;
     color: #fff;
@@ -147,24 +147,26 @@ ul li:first-child span {
     text-align: center;
 }
 
+.translation form {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.translation .filter-translations,
 .translation .add-translation {
     border: 1px solid #ddd;
     padding: 8px;
     margin-top: 20px;
 }
 
-.translation .add-translation h3 {
+.translation .add-translation h3,
+.translation .filter-translations h3 {
     margin: 0;
     padding-bottom: 10px;
 }
 
 #ovski_languagebundle_translation > div:nth-child(4) {
     text-align: center;
-}
-
-#ovski_languagebundle_translation {
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
 }
 
 #ovski_languagebundle_translation > div:nth-child(-n+3) > label {

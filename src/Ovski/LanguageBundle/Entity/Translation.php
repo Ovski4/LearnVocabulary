@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Translation
  *
  * @ORM\Table(name="ovski_translation")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\TranslationRepository")
  */
 class Translation
 {

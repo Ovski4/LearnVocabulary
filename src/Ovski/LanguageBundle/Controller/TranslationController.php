@@ -3,6 +3,7 @@
 namespace Ovski\LanguageBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -10,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ovski\LanguageBundle\Entity\Translation;
 use Ovski\LanguageBundle\Form\TranslationType;
+use Ovski\LanguageBundle\Form\FilterType\TranslationFilterType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -25,12 +27,11 @@ class TranslationController extends Controller
     /**
      * Lists all Translation entities.
      *
-     * @Route("/{slug}/", name="translation", defaults={"page" = 1})
-     * @Route("/{slug}/{page}", name="translation_paginated", requirements={"page" = "\d+"})
+     * @Route("/{slug}", name="translation")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction($slug, $page)
+    public function indexAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
@@ -41,16 +42,27 @@ class TranslationController extends Controller
         if (!$learning) {
             throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
         }
-        $entities = $em->getRepository('OvskiLanguageBundle:Translation')->findBy(
+        $translationQueryBuilder = $em->getRepository('OvskiLanguageBundle:Translation')->getQueryBuilder(
             array(
-                "learning" => $learning,
-                "user" => $this->getUser(),
+                "learning" => $learning->getId(),
+                "user" => $this->getUser()->getId(),
             ),
             array("createdAt" => 'DESC')
         );
 
-        $pager = new Pagerfanta(new ArrayAdapter($entities));
+        $filterForm = $this->get('form.factory')->create(new TranslationFilterType());
+
+        if ($this->get('request')->query->has($filterForm->getName())) {
+            $filterForm->submit($this->get('request')->query->get($filterForm->getName()));
+            $this
+                ->get('lexik_form_filter.query_builder_updater')
+                ->addFilterConditions($filterForm, $translationQueryBuilder)
+            ;
+        }
+
+        $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
         $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
+        $page = $request->query->get('page', 1);
 
         try {
             $pager->setCurrentPage($page);
@@ -62,10 +74,11 @@ class TranslationController extends Controller
         $form  = $this->createCreateForm($entity, $slug);
 
         return array(
-            'pager'    => $pager,
-            'slug'     => $slug,
-            'learning' => $learning,
-            'form'     => $form->createView()
+            'pager'      => $pager,
+            'slug'       => $slug,
+            'learning'   => $learning,
+            'filterForm' => $filterForm->createView(),
+            'form'       => $form->createView()
         );
     }
 
