@@ -14,6 +14,49 @@
 <body>
 <header>
     <div class="container">
+        <nav class="navbar" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button"
+                        class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#navbar-collapse"
+                >
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Learn Vocabulary</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li>
+                            <a href={{ path("parameters_edit") }}>
+                                Settings
+                                <i class="fa fa-cog"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href={{ path("fos_user_security_logout") }}>
+                                Log out
+                                <i class="fa fa-sign-out"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href={{ path("fos_user_security_login") }}>
+                                Log in
+                            <i class="fa fa-sign-in"></i>
+                            </a>
+                        </li>
+                    {%  endif %}
+                </ul>
+        </nav>
+    </div>
+    {#<div class="container">
+
         <h1><a href={{ path("home") }}>Vocabulary learner</a></h1>
         <div class="links">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -41,13 +84,15 @@
                 </a>
             {%  endif %}
         </div>
-    </div>
+    </div>#}
 </header>
 <div>
     <section class="container">
         {% block body %}{% endblock %}
     </section>
 </div>
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{% endblock %}
 </body>
 </html>
