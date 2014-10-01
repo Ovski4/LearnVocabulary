@@ -10,6 +10,7 @@
  * rename LnguageBundle to VocabularyBundle
  * improve checkLeaningUnicity function, etc..
 ### details ###
+ * container-fluid
  * crash when bad password or login?
  * Set parameter max_translations_per_page in database
  * Rename $entity -> $translation in controllers and views
