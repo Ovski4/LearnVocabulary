@@ -29,14 +29,32 @@ class LearningController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
+        $learnings = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
             $this->getUser()->getId()
         );
 
         return array(
-            'entities' => $entities,
+            'learnings' => $learnings,
         );
     }
+
+    /**
+     * Render the dropdown learnings
+     *
+     * @Template()
+     */
+    public function dropdownLearningsAction() {
+        $em = $this->getDoctrine()->getManager();
+
+        $learnings = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
+            $this->getUser()->getId()
+        );
+
+        return array(
+            'learnings' => $learnings,
+        );
+    }
+
     /**
      * Creates a new Learning entity.
      *

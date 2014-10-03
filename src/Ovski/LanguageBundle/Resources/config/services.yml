@@ -1,0 +1,4 @@
+services:
+    translation_manager:
+        class: 'Ovski\LanguageBundle\Service\TranslationManager'
+        arguments: ['@doctrine.orm.entity_manager']

@@ -5,9 +5,9 @@
         <h2>List of your languages being learned</h2>
 
         <ul class="records_list">
-            {% for entity in entities %}
+            {% for learning in learnings %}
                 <li>
-                    <span><a href="{{ path('translation', { 'slug': entity.slug }) }}">{{ entity }}</a></span>
+                    <span><a href="{{ path('translation', { 'slug': learning.slug }) }}">{{ learning }}</a></span>
                 </li>
             {% endfor %}
         </ul>

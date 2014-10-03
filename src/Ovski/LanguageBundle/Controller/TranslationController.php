@@ -204,7 +204,7 @@ class TranslationController extends Controller
     /**
      * Finds and displays a Translation entity.
      *
-     * @Route("/{slug}/{id}", name="translation_show")
+     * @Route("/{slug}/{id}", requirements={"id" = "\d+"}, name="translation_show")
      * @Method("GET")
      * @Template()
      */
@@ -378,5 +378,20 @@ class TranslationController extends Controller
         } else {
             return $this->redirect($this->generateUrl('translation', array('slug' => $slug)));
         }
+    }
+
+    /**
+     * Download a csv containing translations
+     *
+     * @Route("/{slug}/csv", name="translation_download_csv")
+     * @Method("GET")
+     */
+    public function downloadCsvAction($slug) {
+        $csv = $this->get('translation_manager')->generateCsv($this->getUser()->getId(), $slug);
+
+        return new Response($csv, 200, array(
+            'Content-Type' => 'application/force-download',
+            'Content-Disposition' => 'attachment; filename="'.$slug.'-vocabulary.csv"'
+        ));
     }
 }
