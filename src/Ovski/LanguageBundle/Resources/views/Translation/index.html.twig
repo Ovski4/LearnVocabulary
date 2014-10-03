@@ -45,6 +45,10 @@
         {% if pager.haveToPaginate %}
             {{ pagerfanta(pager, 'twitter_bootstrap3', {'routeName': 'translation', 'routeParams': {'slug': learning.slug}}) }}
         {% endif %}
+        <a href="{{ path('translation_download_csv', {'slug': learning.slug}) }}">
+            Download as CSV
+        </a>
+        <i class="fa fa-download"></i>
     </div>
 {% endblock %}
 
