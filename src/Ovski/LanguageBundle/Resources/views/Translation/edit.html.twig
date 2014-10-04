@@ -1,16 +1,18 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
+{% block body %}
     <h2>Translation edit</h2>
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('translation_edition', {'slug': slug}) }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{%  block javascripts %}
+    {{  parent() }}
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/hideOrDisplayArticles.js"></script>
 {% endblock %}

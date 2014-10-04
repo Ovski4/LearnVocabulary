@@ -31,7 +31,7 @@ class Article
     /**
      * @var Language
      *
-     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language")
+     * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $language;

@@ -7,7 +7,7 @@
         <ul class="records_list">
             {% for learning in learnings %}
                 <li>
-                    <span><a href="{{ path('translation', { 'slug': learning.slug }) }}">{{ learning }}</a></span>
+                    <span><a href="{{ path('translation_revision', { 'slug': learning.slug }) }}">{{ learning }}</a></span>
                 </li>
             {% endfor %}
         </ul>

@@ -27,13 +27,67 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 class TranslationController extends Controller
 {
     /**
-     * Lists all Translation entities.
+     * Lists all Translation entities for revision
      *
-     * @Route("/{slug}", name="translation")
+     * @Route("/{slug}/revision", name="translation_revision")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request, $slug)
+    public function revisionAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
+            $this->getUser()->getId(),
+            array('slug' => $slug)
+        );
+
+        if (!$learning) {
+            throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
+        }
+        $translationQueryBuilder = $em->getRepository('OvskiLanguageBundle:Translation')->getQueryBuilder(
+            array(
+                "learning" => $learning->getId(),
+                "user" => $this->getUser()->getId(),
+            ),
+            array("createdAt" => 'DESC')
+        );
+
+        $filterForm = $this->get('form.factory')->create(new TranslationFilterType());
+
+        if ($this->get('request')->query->has($filterForm->getName())) {
+            $filterForm->submit($this->get('request')->query->get($filterForm->getName()));
+            $this
+                ->get('lexik_form_filter.query_builder_updater')
+                ->addFilterConditions($filterForm, $translationQueryBuilder)
+            ;
+        }
+
+        $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
+        $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
+        $page = $request->query->get('page', 1);
+
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException();
+        }
+
+        return array(
+            'pager'      => $pager,
+            'slug'       => $slug,
+            'learning'   => $learning,
+            'filterForm' => $filterForm->createView()
+        );
+    }
+
+    /**
+     * Lists all Translation entities for edition
+     *
+     * @Route("/{slug}/edition", name="translation_edition")
+     * @Method("GET")
+     * @Template()
+     */
+    public function editionAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
@@ -103,7 +157,7 @@ class TranslationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('translation', array('slug' => $slug)));
+            return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
         }
 
         return array(
@@ -134,14 +188,14 @@ class TranslationController extends Controller
     /**
      * Check the article value (null or not) for a word
      */
-    private function checkArticles(Translation $entity)
+    private function checkArticles(Translation $translation)
     {
-        $wordArray = array($entity->getWord1(), $entity->getWord2());
+        $wordArray = array($translation->getWord1(), $translation->getWord2());
 
         foreach($wordArray as $word) {
             // if the words have name as wordType,
             // they must have an article except if the language has requiredArticle to false
-            if ($word->getWordType()->getValue() == 'name' && !$word->getArticle()) {
+            if ($word->getWordType()->getValue() == 'name' && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
                 throw new \Exception('You need to specify an article because the type of the word is \'name\'');
             // if the words have not name as wordType,
             // they must not have an article
@@ -233,23 +287,22 @@ class TranslationController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction($slug, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
+        $translation = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
 
-        if (!$entity) {
+        if (!$translation) {
             throw $this->createNotFoundException('Unable to find Translation entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($translation, $slug);
 
         return array(
-            'entity'      => $entity,
+            'translation' => $translation,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'slug'        => $slug
         );
     }
 
@@ -260,12 +313,12 @@ class TranslationController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Translation $entity)
+    private function createEditForm(Translation $translation, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
-        $form = $this->createForm(new TranslationType($learning), $entity, array(
-            'action' => $this->generateUrl('translation_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new TranslationType($learning), $translation, array(
+            'action' => $this->generateUrl('translation_update', array('id' => $translation->getId(), 'slug' => $slug)),
             'method' => 'PUT',
         ));
 
@@ -281,45 +334,44 @@ class TranslationController extends Controller
      * @Method("PUT")
      * @Template("OvskiLanguageBundle:Translation:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $slug, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
+        $translation = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
 
-        if (!$entity) {
+        if (!$translation) {
             throw $this->createNotFoundException('Unable to find Translation entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($translation, $slug);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('translation_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('translation_edit', array('id' => $id, 'slug' => $slug)));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView()
         );
     }
 
     /**
      * Deletes a Translation entity.
      *
-     * @Route("{slug}/{id}", name="translation_delete")
-     * @Method("DELETE")
+     * @Route("{slug}/delete/{id}", name="translation_delete")
+     * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $slug, $id)
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
 
@@ -331,7 +383,33 @@ class TranslationController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('translation'));
+        return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
+    }
+
+    /**
+     * Display Translation deleteForm.
+     *
+     * @Template()
+     */
+    public function deleteFormAction($id, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $translation = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
+
+        if (!$translation) {
+            throw $this->createNotFoundException('Unable to find Translation');
+        }
+        if ($translation->getUser() != $this->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'translation' => $translation,
+            'delete_form' => $deleteForm->createView(),
+            'slug'        => $slug
+        );
     }
 
     /**
@@ -343,10 +421,8 @@ class TranslationController extends Controller
      */
     private function createDeleteForm($id)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('translation_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+        return $this->createFormBuilder(array('id' => $id))
+            ->add('id', 'hidden')
             ->getForm()
         ;
     }

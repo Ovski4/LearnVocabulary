@@ -16,10 +16,6 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
     {
         $articles = array(
             array(
-                'language' => 'english',
-                'value' => 'the'
-            ),
-            array(
                 'language' => 'spanish',
                 'value' => 'el'
             ),

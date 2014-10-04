@@ -31,9 +31,11 @@ class WordType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $attr = $this->getAttr();
+
         $builder
             ->add('article', 'entity', array(
-                'attr' => array('class' => 'ovski-article-selectbox'),
+                'attr' => $attr,
                 'required'  => false,
                 'class' => 'OvskiLanguageBundle:Article',
                 'query_builder' => function(EntityRepository $er) {
@@ -69,5 +71,30 @@ class WordType extends AbstractType
     public function getName()
     {
         return 'ovski_languagebundle_word';
+    }
+
+    /**
+     * Get attributes to set on article selectbox
+     *
+     * @return array
+     * @throws \Exception
+     */
+    private function getAttr() {
+        $class = "ovski-article-selectbox";
+        if (!$this->language->requireArticles()) {
+            $onlyArticle = $this->language->getArticles()[0];
+            if (!$onlyArticle) {
+                throw new \Exception(sprintf("You should have at least on article for language %s", $this->language->getName()));
+            }
+            $class = sprintf("%s empty", $class);
+            $attr = array(
+                'class' => $class,
+                'data-article' => $onlyArticle
+            );
+        } else {
+            $attr = array('class' => $class);
+        }
+
+        return $attr;
     }
 }

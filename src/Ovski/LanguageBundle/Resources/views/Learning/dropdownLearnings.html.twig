@@ -13,7 +13,7 @@
         <ul class="dropdown-menu">
             {% for learning in learnings %}
                 <li>
-                    <a href="{{ path('translation', { 'slug': learning.slug }) }}">{{ learning }}</a>
+                    <a href="{{ path('translation_revision', { 'slug': learning.slug }) }}">{{ learning }}</a>
                 <li>
             {% endfor %}
         </ul>

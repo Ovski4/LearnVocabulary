@@ -3,9 +3,8 @@
 ### View ### 
 
 ### features ###
- * edit a translation
- * delete a translation
- * csv export
+ * add flashbags message when success edit delete etc
+ * improve csv import & export
  * rename LnguageBundle to VocabularyBundle
  * improve checkLeaningUnicity function, etc..
 ### details ###

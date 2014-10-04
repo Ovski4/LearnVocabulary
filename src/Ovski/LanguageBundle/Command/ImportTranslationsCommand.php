@@ -31,7 +31,7 @@ class ImportTranslationsCommand extends ContainerAwareCommand
         }
         $learning = $input->getArgument('learning');
         $csv = $input->getArgument('csv');
-        $this->getContainer()->get('translation_manager')->importCsv($user->getId(), $learning, $csv);
+        $this->getContainer()->get('translation_manager')->importCsv($user, $learning, $csv);
 
         $output->writeln('Done');
     }

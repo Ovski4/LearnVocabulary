@@ -36,6 +36,14 @@ class Language
     private $requireArticles;
 
     /**
+     * @var Article
+     *
+     * @ORM\OneToMany(targetEntity="Ovski\LanguageBundle\Entity\Article", mappedBy="language")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $articles;
+
+    /**
      * Language to string
      *
      * @return string
@@ -96,8 +104,58 @@ class Language
      *
      * @return boolean 
      */
+    public function requireArticles()
+    {
+        return $this->requireArticles;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get requireArticles
+     *
+     * @return boolean 
+     */
     public function getRequireArticles()
     {
         return $this->requireArticles;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \Ovski\LanguageBundle\Entity\Article $articles
+     * @return Language
+     */
+    public function addArticle(\Ovski\LanguageBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \Ovski\LanguageBundle\Entity\Article $articles
+     */
+    public function removeArticle(\Ovski\LanguageBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }
