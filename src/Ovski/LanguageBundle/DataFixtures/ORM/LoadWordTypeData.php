@@ -14,7 +14,7 @@ class LoadWordTypeData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $wordTypes = array('name', 'sentence', 'preposition', 'verb', 'adverb', 'article', 'conjunction', 'pronoun', 'adjective');
+        $wordTypes = array('name', 'sentence', 'preposition', 'verb', 'adverb', 'interjection', 'article', 'conjunction', 'pronoun', 'adjective');
 
         foreach ($wordTypes as $wordType) {
             $wordTypeObj = new WordType();
