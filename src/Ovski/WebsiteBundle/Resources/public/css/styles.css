@@ -32,6 +32,10 @@ a:hover {
     text-decoration: none;
 }
 
+div.error {
+    color: red;
+}
+
 .button,
 button,
 input[type="submit"] {

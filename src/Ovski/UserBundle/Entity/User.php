@@ -41,6 +41,9 @@ class User extends BaseUser
      */
     private $translations;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
