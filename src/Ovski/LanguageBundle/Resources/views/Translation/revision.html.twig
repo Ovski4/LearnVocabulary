@@ -27,19 +27,19 @@
                 </tr>
             </thead>
             <tbody>
-                {% for entity in pager.currentPageResults %}
+                {% for translation in pager.currentPageResults %}
                     <tr>
                         <td>
-                            <span class="is-visible">{{ entity.word1 }}</span>
-                            {% if entity.word1.article %}<span class="is-visible">({{ entity.word1.article }})</span>{% endif %}
+                            <span class="is-visible">{{ translation.word1 }}</span>
+                            {% if translation.word1.article %}<span class="is-visible">({{ translation.word1.article }})</span>{% endif %}
                         </td>
                         <td>
-                            <span class="is-visible">{{ entity.word2 }}</span>
-                            {% if entity.word2.article %}<span class="is-visible">({{ entity.word2.article }})</span>{% endif %}
+                            <span class="is-visible">{{ translation.word2 }}</span>
+                            {% if translation.word2.article %}<span class="is-visible">({{ translation.word2.article }})</span>{% endif %}
                         </td>
                         <td>
-                           <a class="star {% if entity.isStarred %}star-yes{% endif %}"
-                              href="{{ path('translation_star', {'slug': learning.slug, 'id': entity.id}) }}">
+                           <a class="star {% if translation.isStarred %}star-yes{% endif %}"
+                              href="{{ path('translation_star', {'slug': learning.slug, 'id': translation.id}) }}">
                            </a>
                         </td>
                     </tr>

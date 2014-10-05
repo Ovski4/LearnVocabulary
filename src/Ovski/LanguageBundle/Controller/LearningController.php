@@ -2,19 +2,19 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Form\FormError;
 use Ovski\LanguageBundle\Entity\Learning;
 use Ovski\LanguageBundle\Form\LearningType;
 
 /**
  * Learning controller.
  *
- * @Route("/learning")
+ * @Route("/languages")
  */
 class LearningController extends Controller
 {
@@ -33,75 +33,69 @@ class LearningController extends Controller
             $this->getUser()->getId()
         );
 
-        return array(
-            'learnings' => $learnings,
-        );
+        return array('learnings' => $learnings);
     }
 
     /**
-     * Render the dropdown learnings
+     * Render the dropdown learnings for the menu
      *
      * @Template()
      */
-    public function dropdownLearningsAction() {
+    public function dropdownLearningsAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $learnings = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
             $this->getUser()->getId()
         );
 
-        return array(
-            'learnings' => $learnings,
-        );
+        return array('learnings' => $learnings);
     }
 
     /**
      * Creates a new Learning entity.
      *
-     * @Route("/", name="learning_create")
+     * @Route("/new", name="learning_create")
      * @Method("POST")
      * @Template("OvskiLanguageBundle:Learning:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Learning();
-        $form = $this->createCreateForm($entity);
+        $learning = new Learning();
+        $form = $this->createCreateForm($learning);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            if (!$this->checkLearningUserExists($entity)) {
+            if (!$this->checkLearningExistsForUser($learning)) {
                 $error = new FormError("You are already learning those languages");
                 $form->get('language1')->addError($error);
-            } else if (!$this->checkLanguagesNotIdentical($entity)) {
+            } else if (!$this->checkLearningLanguagesAreNotIdentical($learning)) {
                 $error = new FormError("You must choose 2 differents languages");
                 $form->get('language1')->addError($error);
             } else {
-                if ($learning = $this->checkLearningExists($entity)) {
-                    $entity = $learning;
+                if ($existingLearning = $this->checkLearningExists($learning)) {
+                    $learning = $existingLearning;
                 }
                 $em = $this->getDoctrine()->getManager();
-                $entity->addUser($this->getUser());
-                $em->persist($entity);
+                $learning->addUser($this->getUser());
+                $em->persist($learning);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('learning', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('learning'));
             }
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return array('form' => $form->createView());
     }
 
     /**
      * Check that the 2 languages are not identical
      *
-     * @param $entity
+     * @param $learning
      * @return bool
      */
-    private function checkLanguagesNotIdentical($entity)
+    private function checkLearningLanguagesAreNotIdentical($learning)
     {
-        if ($entity->getLanguage1() == $entity->getLanguage2()) {
+        if ($learning->getLanguage1() == $learning->getLanguage2()) {
             return false;
         }
 
@@ -111,24 +105,24 @@ class LearningController extends Controller
     /**
      * Check the unicity of the languages combination
      *
-     * @param $entity
+     * @param $learning
      * @return bool
      */
-    private function checkLearningUserExists($entity)
+    private function checkLearningExistsForUser($learning)
     {
         $em = $this->getDoctrine()->getManager();
         $learning1 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
             $this->getUser()->getId(),
             array(
-                'language1' => $entity->getLanguage1()->getId(),
-                'language2' => $entity->getLanguage2()->getId()
+                'language1' => $learning->getLanguage1()->getId(),
+                'language2' => $learning->getLanguage2()->getId()
             )
         );
         $learning2 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
             $this->getUser()->getId(),
             array(
-                'language1' => $entity->getLanguage2()->getId(),
-                'language2' => $entity->getLanguage1()->getId()
+                'language1' => $learning->getLanguage2()->getId(),
+                'language2' => $learning->getLanguage1()->getId()
             )
         );
 
@@ -142,22 +136,22 @@ class LearningController extends Controller
     /**
      * Check if a learning already exists
      *
-     * @param $entity
+     * @param $learning
      * @return mixed
      */
-    private function checkLearningExists($entity)
+    private function checkLearningExists($learning)
     {
         $em = $this->getDoctrine()->getManager();
         $learning1 = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBy(
             array(
-                'language2' => $entity->getLanguage2(),
-                'language1' => $entity->getLanguage1()
+                'language2' => $learning->getLanguage2(),
+                'language1' => $learning->getLanguage1()
             )
         );
         $learning2 = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBy(
             array(
-                'language1' => $entity->getLanguage2(),
-                'language2' => $entity->getLanguage1()
+                'language1' => $learning->getLanguage2(),
+                'language2' => $learning->getLanguage1()
             )
         );
 
@@ -173,13 +167,13 @@ class LearningController extends Controller
     /**
      * Creates a form to create a Learning entity.
      *
-     * @param Learning $entity The entity
+     * @param Learning $learning
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Learning $entity)
+    private function createCreateForm(Learning $learning)
     {
-        $form = $this->createForm(new LearningType(), $entity, array(
+        $form = $this->createForm(new LearningType(), $learning, array(
             'action' => $this->generateUrl('learning_create'),
             'method' => 'POST',
         ));
@@ -196,12 +190,10 @@ class LearningController extends Controller
      */
     public function newAction()
     {
-        $entity = new Learning();
-
-        $form   = $this->createCreateForm($entity);
+        $learning = new Learning();
+        $form = $this->createCreateForm($learning);
 
         return array(
-            'entity' => $entity,
             'form'   => $form->createView(),
         );
     }
@@ -212,25 +204,27 @@ class LearningController extends Controller
      * @Route("/{id}", name="learning_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    /*public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('OvskiLanguageBundle:Learning')->find($id);
+            $learning = $em->getRepository('OvskiLanguageBundle:Learning')->find($id);
 
-            if (!$entity) {
+            if (!$learning) {
                 throw $this->createNotFoundException('Unable to find Learning entity.');
             }
-
-            $em->remove($entity);
+            if ($learning->getUser() != $this->getUser()) {
+                throw new AccessDeniedException();
+            }
+            $em->remove($learning);
             $em->flush();
         }
 
         return $this->redirect($this->generateUrl('learning'));
-    }
+    }*/
 
     /**
      * Creates a form to delete a Learning entity by id.
@@ -239,7 +233,7 @@ class LearningController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    /*private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('learning_delete', array('id' => $id)))
@@ -247,5 +241,5 @@ class LearningController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
+    }*/
 }

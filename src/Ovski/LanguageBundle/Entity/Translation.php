@@ -25,7 +25,7 @@ class Translation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
@@ -49,7 +49,7 @@ class Translation
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="word_type_id")
      */
     private $wordType;
 

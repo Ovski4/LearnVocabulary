@@ -3,15 +3,18 @@
 ### View ### 
 
 ### features ###
+ * remove createAction in translation and set it in editonAction with if methode = get or if methode = post
+ * link to password forgot
+ * contact page
+ * help page
+ * demo user
+ * front page
+ * Translate the website in en/fr
  * add flashbags message when success edit delete etc
  * improve csv import & export
  * rename LnguageBundle to VocabularyBundle
  * improve checkLeaningUnicity function, etc..
 ### details ###
- * container-fluid
- * crash when bad password or login?
- * Rename $entity -> $translation in controllers and views
- * Edit table name in entites (no capitals) and attributes name (underscores)
  * Unicity constraint in word
  * Unicity constraint in translation
  * Check if there is no article with a non name word

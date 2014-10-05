@@ -2,34 +2,33 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ovski\LanguageBundle\Entity\Translation;
 use Ovski\LanguageBundle\Form\TranslationType;
 use Ovski\LanguageBundle\Form\FilterType\TranslationFilterType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Pagerfanta\Adapter\ArrayAdapter;
+use Doctrine\Common\Persistence\ObjectManager;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 
 /**
  * Translation controller.
  *
- * @Route("/translation")
+ * @Route("/")
  */
 class TranslationController extends Controller
 {
     /**
      * Lists all Translation entities for revision
      *
-     * @Route("/{slug}/revision", name="translation_revision")
+     * @Route("/revision/{slug}", name="translation_revision")
      * @Method("GET")
      * @Template()
      */
@@ -83,7 +82,7 @@ class TranslationController extends Controller
     /**
      * Lists all Translation entities for edition
      *
-     * @Route("/{slug}/edition", name="translation_edition")
+     * @Route("/edition/{slug}", name="translation_edition")
      * @Method("GET")
      * @Template()
      */
@@ -126,8 +125,8 @@ class TranslationController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $entity = new Translation();
-        $form  = $this->createCreateForm($entity, $slug);
+        $translation = new Translation();
+        $form  = $this->createCreateForm($translation, $slug);
 
         return array(
             'pager'      => $pager,
@@ -141,48 +140,44 @@ class TranslationController extends Controller
     /**
      * Creates a new Translation entity.
      *
-     * @Route("/{slug}", name="translation_create")
+     * @Route("/edition/{slug}/create", name="translation_create")
      * @Method("POST")
-     * @Template("OvskiLanguageBundle:Translation:new.html.twig")
      */
     public function createAction(Request $request, $slug)
     {
-        $entity = new Translation();
-        $form = $this->createCreateForm($entity, $slug);
+        $translation = new Translation();
+        $form = $this->createCreateForm($translation, $slug);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $this->prepareTranslation($slug, $entity);
-            $entity->setUser($this->getUser());
+            $this->prepareTranslation($slug, $translation);
+            $translation->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($translation);
             $em->flush();
 
             return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return array('form' => $form->createView());
     }
 
     /**
      * Prepare a translation by setting words attributes
      *
-     * @param Translation $entity The entity
+     * @param Translation $translation The entity
      * @param string $slug
      */
-    private function prepareTranslation($slug, $entity)
+    private function prepareTranslation($slug, $translation)
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
-        $entity->getWord1()->setLanguage($learning->getLanguage1());
-        $entity->getWord2()->setLanguage($learning->getLanguage2());
-        $entity->getWord1()->setWordType($entity->getWordType());
-        $entity->getWord2()->setWordType($entity->getWordType());
-        $this->setWordsIfExist($em, $entity);
-        $this->checkArticles($entity);
-        $entity->setLearning($learning);
+        $translation->getWord1()->setLanguage($learning->getLanguage1());
+        $translation->getWord2()->setLanguage($learning->getLanguage2());
+        $translation->getWord1()->setWordType($translation->getWordType());
+        $translation->getWord2()->setWordType($translation->getWordType());
+        $this->setWordsIfExist($em, $translation);
+        $this->checkArticles($translation);
+        $translation->setLearning($learning);
     }
 
     /**
@@ -211,25 +206,25 @@ class TranslationController extends Controller
      * Get words and set them to the translation instead of creating them if they already exist
      *
      * @param ObjectManager $em
-     * @param Translation $entity
+     * @param Translation $translation
      */
-    private function setWordsIfExist($em, $entity)
+    private function setWordsIfExist($em, $translation)
     {
         $i = 1;
-        $wordArray = array($entity->getWord1(), $entity->getWord2());
+        $wordArray = array($translation->getWord1(), $translation->getWord2());
 
         foreach($wordArray as $word) {
             $existingWord = $em->getRepository('OvskiLanguageBundle:Word')->findOneBy(
                 array(
                     'language' => $word->getLanguage(),
-                    'value' => $word->getValue(),
-                    'article' => $word->getArticle(),
+                    'value'    => $word->getValue(),
+                    'article'  => $word->getArticle(),
                     'wordType' => $word->getWordType()
                 )
             );
             if ($existingWord) {
                 $setter = 'setWord'.$i;
-                $entity->$setter($existingWord);
+                $translation->$setter($existingWord);
             }
             $i++;
         }
@@ -238,16 +233,16 @@ class TranslationController extends Controller
     /**
      * Creates a form to create a Translation entity.
      *
-     * @param Translation $entity
+     * @param Translation $translation
      * @param string $slug
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Translation $entity, $slug)
+    private function createCreateForm(Translation $translation, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
-        $form = $this->createForm(new TranslationType($learning), $entity, array(
+        $form = $this->createForm(new TranslationType($learning), $translation, array(
             'action' => $this->generateUrl('translation_create', array('slug' => $slug)),
             'method' => 'POST',
         ));
@@ -256,34 +251,9 @@ class TranslationController extends Controller
     }
 
     /**
-     * Finds and displays a Translation entity.
-     *
-     * @Route("/{slug}/{id}", requirements={"id" = "\d+"}, name="translation_show")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Translation entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
      * Displays a form to edit an existing Translation entity.
      *
-     * @Route("/{slug}/{id}/edit", name="translation_edit")
+     * @Route("edition/{slug}/{id}/edit", name="translation_edit", requirements={"id" = "\d+"})
      * @Method("GET")
      * @Template()
      */
@@ -309,7 +279,7 @@ class TranslationController extends Controller
     /**
     * Creates a form to edit a Translation entity.
     *
-    * @param Translation $entity The entity
+    * @param Translation $translation
     *
     * @return \Symfony\Component\Form\Form The form
     */
@@ -330,7 +300,7 @@ class TranslationController extends Controller
     /**
      * Edits an existing Translation entity.
      *
-     * @Route("{slug}/{id}", name="translation_update")
+     * @Route("{slug}/{id}", name="translation_update", requirements={"id" = "\d+"})
      * @Method("PUT")
      * @Template("OvskiLanguageBundle:Translation:edit.html.twig")
      */
@@ -351,7 +321,10 @@ class TranslationController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('translation_edit', array('id' => $id, 'slug' => $slug)));
+            return $this->redirect($this->generateUrl('translation_edit', array(
+                'id' => $id,
+                'slug' => $slug
+            )));
         }
 
         return array(
@@ -362,7 +335,7 @@ class TranslationController extends Controller
     /**
      * Deletes a Translation entity.
      *
-     * @Route("{slug}/delete/{id}", name="translation_delete")
+     * @Route("{slug}/delete/{id}", requirements={"id" = "\d+"}, name="translation_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $slug, $id)
@@ -373,13 +346,13 @@ class TranslationController extends Controller
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
+            $translation = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
 
-            if (!$entity) {
+            if (!$translation) {
                 throw $this->createNotFoundException('Unable to find Translation entity.');
             }
 
-            $em->remove($entity);
+            $em->remove($translation);
             $em->flush();
         }
 
@@ -430,7 +403,7 @@ class TranslationController extends Controller
     /**
      * Star a Translation entity.
      *
-     * @Route("/{slug}/star/{id}", name="translation_star")
+     * @Route("/{slug}/star/{id}", name="translation_star", requirements={"id" = "\d+"})
      * @Method("GET")
      */
     public function starAction(Request $request, $slug, $id)

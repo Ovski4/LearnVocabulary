@@ -41,7 +41,7 @@ class Word
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="word_type_id")
      */
     private $wordType;
 
