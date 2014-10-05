@@ -321,6 +321,7 @@ class TranslationController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'Translation successfully updated');
             return $this->redirect($this->generateUrl('translation_edit', array(
                 'id' => $id,
                 'slug' => $slug
@@ -354,6 +355,8 @@ class TranslationController extends Controller
 
             $em->remove($translation);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Translation successfully deleted');
         }
 
         return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));

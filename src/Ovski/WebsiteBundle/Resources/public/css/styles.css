@@ -151,6 +151,32 @@ header a > i.fa {
     padding: 5px 20px;
 }
 
+/*FLASHBAGS MESSAGES*/
+.container.alert {
+    padding: 0;
+    border-radius: 0;
+}
+
+.container.alert button.close {
+    background-color: transparent;
+    padding: 6px;
+    font-size: 27px;
+    opacity: 1;
+}
+
+.container.alert button.close:focus {
+    outline: none;
+}
+
+.container.alert button.close:hover {
+    color: #3c763d;
+}
+
+.container.alert .flash-notice > p {
+    margin: 0;
+    padding: 10px;
+}
+
 /*SECTION*/
 
 section.container {
@@ -327,7 +353,6 @@ ul li:first-child span {
 .translation-revision table tr td:nth-child(1) { width: 45%; }
 .translation-revision table tr td:nth-child(2) { width: 45%; }
 .translation-revision table tr td:nth-child(3) { width: 10%; }
-
 .translation-edition table tr td:nth-child(1) { width: 34%; }
 .translation-edition table tr td:nth-child(2) { width: 34%; }
 .translation-edition table tr td:nth-child(3) { width: 32%; }
