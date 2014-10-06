@@ -3,21 +3,21 @@
 {% block body %}
     <ul class="nav nav-tabs" role="tablist">
         <li class="active">
-            <a href="{{ path('translation_revision', {'slug': learning.slug}) }}">Revision</a>
+            <a href="{{ path('translation_revision', {'slug': learning.slug}) }}">{% trans %}Revision{% endtrans %}</a>
         </li>
         <li>
-            <a href="{{ path('translation_edition', {'slug': learning.slug}) }}">Edition</a>
+            <a href="{{ path('translation_edition', {'slug': learning.slug}) }}">{% trans %}Edition{% endtrans %}</a>
         </li>
     </ul>
     <div class="translation translation-revision">
         <div class="filter-translations">
-            <h3>Filter translations</h3>
+            <h3>{% trans %}Filter translations{% endtrans %}</h3>
             <form class="filter-form" method="get" action="{{ path('translation_revision', {'slug': learning.slug}) }}">
                 {{ form_rest(filterForm) }}
-                <input type="submit" name="submit-filter" value="Filter" />
+                <input type="submit" name="submit-filter" value="{% trans %}Filter{% endtrans %}" />
             </form>
         </div>
-        <h3>Translation list</h3>
+        <h3>{% trans %}Translation list{% endtrans %}</h3>
         {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_revision', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
         <table class="table records_list">
             <thead>

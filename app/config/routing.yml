@@ -1,17 +1,26 @@
 ovski_language:
     resource: "@OvskiLanguageBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr
 
 ovski_website:
     resource: "@OvskiWebsiteBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr
 
 ovski_user:
     resource: "@OvskiUserBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr

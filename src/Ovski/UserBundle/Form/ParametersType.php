@@ -16,7 +16,7 @@ class ParametersType extends AbstractType
     {
         $builder
             ->add('maxItemsPerPage', null, array(
-                'label' => 'Maximum number of items per page'
+                'label' => 'Maximum number of translations per page'
             ))
         ;
     }

@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "white-october/pagerfanta-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "lexik/form-filter-bundle": "2.0.*"
+        "lexik/form-filter-bundle": "2.0.*",
+        "gedmo/doctrine-extensions": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

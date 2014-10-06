@@ -2,12 +2,12 @@
 
 {% block body %}
     <div class="parameters">
-        <h2>Settings</h2>
+        <h2>{% trans %}Settings{% endtrans %}</h2>
 
         {{ form(edit_form) }}
 
         <a href={{ path("learning") }} class="button">
-            Back to the language list
+            {% trans %}Back to the list{% endtrans %}
         </a>
     </div>
 {% endblock %}

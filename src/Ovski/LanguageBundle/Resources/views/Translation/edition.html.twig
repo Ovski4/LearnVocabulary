@@ -3,25 +3,25 @@
 {% block body %}
     <ul class="nav nav-tabs" role="tablist">
         <li>
-            <a href="{{ path('translation_revision', {'slug': learning.slug}) }}">Revision</a>
+            <a href="{{ path('translation_revision', {'slug': learning.slug}) }}">{% trans %}Revision{% endtrans %}</a>
         </li>
         <li class="active">
-            <a href="{{ path('translation_edition', {'slug': learning.slug}) }}">Edition</a>
+            <a href="{{ path('translation_edition', {'slug': learning.slug}) }}">{% trans %}Edition{% endtrans %}</a>
         </li>
     </ul>
     <div class="translation translation-edition">
         <div class="add-translation">
-            <h3>Add a new translation</h3>
+            <h3>{% trans %}Add a new translation{% endtrans %}</h3>
             {{ form(form) }}
         </div>
         <div class="filter-translations">
-            <h3>Filter translations</h3>
+            <h3>{% trans %}Filter translations{% endtrans %}</h3>
             <form class="filter-form" method="get" action="{{ path('translation_edition', {'slug': learning.slug}) }}">
                 {{ form_rest(filterForm) }}
-                <input type="submit" name="submit-filter" value="Filter" />
+                <input type="submit" name="submit-filter" value="{% trans %}Filter{% endtrans %}" />
             </form>
         </div>
-        <h3>Translation list</h3>
+        <h3>{% trans %}Translation list{% endtrans %}</h3>
         {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_edition', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
         <table class="table records_list">
             <thead>
@@ -54,7 +54,7 @@
         {% endif %}
         <div class="download">
             <a href="{{ path('translation_download_csv', {'slug': learning.slug}) }}">
-                Download translations as CSV
+                {% trans %}Download translations as CSV{% endtrans %}
                 <i class="fa fa-download"></i>
             </a>
         </div>
