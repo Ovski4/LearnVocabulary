@@ -1,5 +1,5 @@
 'My Vocabulary': Mon vocabulaire
-'Toggle navigation': Monter/cacher navigation
+'Toggle navigation': Montrer/cacher navigation
 'Settings': Paramètres
 'Log out': Déconnexion
 'Log in': Connexion
@@ -29,8 +29,10 @@
 'Maybe you just wanna see what it is about? Try with this user': Vous souhaitez sans doute simplement voir de quoi il s'agit? Connectez-vous avec l'utilisateur suivant pour essayer
 'Login': Identifiant
 'Password': Mot de passe
-'You are already learning those languages': 'Vous apprenez déjà ces langues'
+'You are already learning those languages': Vous apprenez déjà ces langues
 'You must choose 2 differents languages': Vous devez choisir 2 langues différentes
 'Language': Langue
 'Language 1': Langue 1
 'Language 2': Langue 2
+'Translation successfully deleted': Traduction supprimée avec succès
+'Translation successfully updated': Traduction mise à jour avec succès
