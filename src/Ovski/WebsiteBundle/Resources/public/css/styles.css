@@ -28,6 +28,14 @@ li {
     list-style: none;
 }
 
+h3 {
+    font-size: 17px;
+}
+
+h2 {
+    font-size: 23px;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -109,7 +117,7 @@ header a > i.fa {
 }
 
 .navbar .navbar-brand {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .nav > li > a:hover > i.fa,
@@ -327,6 +335,10 @@ ul li:first-child span {
     min-width: 100px;
 }
 
+.translation table tr th {
+    text-transform: capitalize;
+}
+
 .translation table tr td > span.is-invisible {
     display: none;
 }
@@ -437,8 +449,16 @@ ul li:first-child span {
         padding-right: 30px;
     }
 
+    h3 {
+        font-size: 20px;
+    }
+
     header a:hover {
         color: #428bca;
+    }
+
+    .navbar .navbar-brand {
+        font-size: 25px;
     }
 
     section.container {

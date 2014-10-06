@@ -13,10 +13,10 @@ class TranslationFilterType extends AbstractType
         $builder
             ->add('wordType', 'filter_entity', array(
                 'class' => 'OvskiLanguageBundle:WordType',
-                'label' => 'Word Type'
+                'label' => 'Word type'
             ))
             ->add('isStarred', 'filter_boolean', array(
-                'label' => 'Starred'
+                'label' => 'Favorite'
             ))
         ;
     }

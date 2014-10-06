@@ -17,7 +17,7 @@ class LearningType extends AbstractType
         $builder
             ->add('language1', null, array('label' => 'Language 1'))
             ->add('language2', null, array('label' => 'Language 2'))
-            ->add('submit', 'submit', array('label' => 'Learn it now!'));
+            ->add('submit', 'submit', array('label' => 'Validate'));
         ;
     }
     

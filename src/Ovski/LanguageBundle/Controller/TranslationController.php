@@ -72,11 +72,25 @@ class TranslationController extends Controller
         }
 
         return array(
-            'pager'      => $pager,
-            'slug'       => $slug,
-            'learning'   => $learning,
-            'filterForm' => $filterForm->createView()
+            'pager'       => $pager,
+            'slug'        => $slug,
+            'learning'    => $learning,
+            'filterForm'  => $filterForm->createView(),
+            'buttonTexts' => $this->getButtonTexts()
         );
+    }
+
+    /**
+     * Get button texts according to locale
+     */
+    private function getButtonTexts()
+    {
+        $texts = array();
+        $texts['left'] = $this->get ('translator')->trans('Hide left column');
+        $texts['right'] = $this->get ('translator')->trans('Hide right column');
+        $texts['display'] = $this->get ('translator')->trans('Display everything');
+
+        return $texts;
     }
 
     /**

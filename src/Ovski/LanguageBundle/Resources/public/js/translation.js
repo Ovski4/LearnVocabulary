@@ -5,9 +5,12 @@ jQuery(document).ready(function() {
 
     // hide or display columns
     var $actions = jQuery('<div class="actions"></div>');
-    var $leftHideButton = jQuery('<button class="hide-column-left hide-column">Hide left column</button>');
-    var $rightHideButton = jQuery('<button class="hide-column-right hide-column">Hide right column</button>');
-    var $resetColumns = jQuery('<button class="show-columns">Display everything</button>');
+    var leftButtonText = jQuery('.translation-revision table').attr('data-left-button-text');
+    var rightButtonText = jQuery('.translation-revision table').attr('data-right-button-text');
+    var displayButtonText = jQuery('.translation-revision table').attr('data-display-text');
+    var $leftHideButton = jQuery('<button class="hide-column-left hide-column">'+leftButtonText+'</button>');
+    var $rightHideButton = jQuery('<button class="hide-column-right hide-column">'+rightButtonText+'</button>');
+    var $resetColumns = jQuery('<button class="show-columns">'+displayButtonText+'</button>');
 
     $actions.append($leftHideButton);
     $actions.append($rightHideButton);
