@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="learning">
-        <h2>List of your languages being learned</h2>
+        <h2>{% trans %}List of your languages being learned{% endtrans %}</h2>
 
         <ul class="records_list">
             {% for learning in learnings %}
@@ -13,7 +13,7 @@
         </ul>
 
         <a class="button" href="{{ path('learning_new') }}">
-            Learn a new language
+            {% trans %}Learn a new language{% endtrans %}
         </a>
     </div>
 {% endblock %}

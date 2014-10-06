@@ -1,13 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>Translation edit</h2>
+    <h2>{% trans %}Translation edit{% endtrans %}</h2>
 
     {{ form(edit_form) }}
 
     <ul class="record_actions">
         <li>
-            <a href="{{ path('translation_edition', {'slug': slug}) }}">Back to the list</a>
+            <a href="{{ path('translation_edition', {'slug': slug}) }}">{% trans %}Back to the list{% endtrans %}</a>
         </li>
     </ul>
 {% endblock %}

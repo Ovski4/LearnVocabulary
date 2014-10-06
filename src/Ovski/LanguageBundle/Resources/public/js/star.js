@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
             if (data == "Starred") {
                 $a.toggleClass('star-yes');
             } else {
-                console.log(" WTF")
+                console.log("WTF");
             }
         }).error(function(jqXHR, textStatus, errorThrown) {
             $a.toggleClass('ajax-loader');
