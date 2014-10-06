@@ -2,6 +2,8 @@
 
 namespace Ovski\LanguageBundle\Entity;
 
+use Gedmo\Translatable\Translatable;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +26,7 @@ class WordType
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="value", type="string", length=255)
      */
     private $value;

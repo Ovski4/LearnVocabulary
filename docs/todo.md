@@ -9,7 +9,9 @@
  * link to password forgot
  * contact page
  * help page
- * demo user
+ * demo user cron to reset everything
+ * delete user delete everything
+ * delete translation older than
  * front page
  * Translate the website in en/fr
  * add flashbags message when success edit delete etc
