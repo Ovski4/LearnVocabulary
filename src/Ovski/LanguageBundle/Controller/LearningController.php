@@ -66,10 +66,10 @@ class LearningController extends Controller
         $form->handleRequest($request);
         if ($form->isValid()) {
             if (!$this->checkLearningExistsForUser($learning)) {
-                $error = new FormError("You are already learning those languages");
+                $error = new FormError($this->get('translator')->trans("You are already learning those languages"));
                 $form->get('language1')->addError($error);
             } else if (!$this->checkLearningLanguagesAreNotIdentical($learning)) {
-                $error = new FormError("You must choose 2 differents languages");
+                $error = new FormError($this->get('translator')->trans("You must choose 2 differents languages"));
                 $form->get('language1')->addError($error);
             } else {
                 if ($existingLearning = $this->checkLearningExists($learning)) {
