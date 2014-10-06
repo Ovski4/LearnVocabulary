@@ -2,6 +2,8 @@
 
 namespace Ovski\LanguageBundle\Entity;
 
+use Gedmo\Translatable\Translatable;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +26,7 @@ class Language
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -42,6 +45,13 @@ class Language
      * @ORM\JoinColumn(nullable=false)
      */
     private $articles;
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
     /**
      * Language to string
@@ -157,5 +167,10 @@ class Language
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
