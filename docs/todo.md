@@ -3,6 +3,7 @@
 ### View ### 
 
 ### features ###
+ * validate html5
  * Add titles in pages
  * remove createAction in translation and set it in editonAction with if methode = get or if methode = post
  * link to password forgot

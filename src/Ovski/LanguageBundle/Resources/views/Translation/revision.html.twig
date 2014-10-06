@@ -19,7 +19,10 @@
         </div>
         <h3>{% trans %}Translation list{% endtrans %}</h3>
         {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_revision', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
-        <table class="table records_list">
+        <table class="table records_list"
+            data-left-button-text="{{ buttonTexts.left }}"
+            data-right-button-text="{{ buttonTexts.right }}"
+            data-display-text="{{ buttonTexts.display }}">
             <thead>
                 <tr>
                     <th>{{ learning.language1 }}</th>
