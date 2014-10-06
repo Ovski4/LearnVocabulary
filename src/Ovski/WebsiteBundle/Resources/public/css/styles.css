@@ -106,6 +106,31 @@ header a > i.fa {
     border: none;
 }
 
+.navbar .languages-list {
+    float: left;
+    height: 50px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.navbar .languages-list > a {
+    display: block;
+    padding: 12px;
+    height: 100%;
+    color: #fff;
+}
+
+.navbar .languages-list a:hover {
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+}
+
+.navbar .languages-list img {
+    width: 25px;
+    height: 25px;
+}
+
 .navbar .nav > li > a {
     color: #fff;
 }
@@ -144,6 +169,8 @@ header a > i.fa {
     box-shadow: none;
     background: #2c2c2c;
     color: #fff;
+    border-radius: 0;
+    margin: 0;
 }
 
 .dropdown-menu>li>a {
@@ -155,7 +182,7 @@ header a > i.fa {
     background: #fff;
 }
 
-.dropdown-menu>li>a {
+.dropdown-menu a {
     padding: 5px 20px;
 }
 

@@ -33,4 +33,26 @@ class WebsiteController extends Controller
     {
         return array();
     }
+
+    /**
+     * Render the dropdown languages list for the menu
+     *
+     * @param Request $request
+     * @param $route
+     * @param $routeParams
+     *
+     * @Template()
+     */
+    public function dropdownLanguagesAction(Request $request, $route, $routeParams)
+    {
+        return array(
+            'languages' => array(
+                'en' => 'English',
+                'fr' => 'Français'
+            ),
+            'locale' => $request->getLocale(),
+            'route' => $route,
+            'routeParams' => $routeParams
+        );
+    }
 }

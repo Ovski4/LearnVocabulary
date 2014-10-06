@@ -27,7 +27,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <span class="navbar-brand">{% trans %}Learn Vocabulary{% endtrans %}</span>
+                {{ render(controller('OvskiWebsiteBundle:Website:dropdownLanguages', { 'route': app.request.get('_route'), 'routeParams':app.request.get('_route_params') })) }}
+                <span class="navbar-brand">{% trans %}My Vocabulary{% endtrans %}</span>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">

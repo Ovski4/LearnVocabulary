@@ -1,0 +1,16 @@
+<div class="languages-list">
+    <a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        <img src="/bundles/ovskiwebsite/img/{{ locale }}-flag.png"/>
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        {% for key, language in languages %}
+            <li>{{ app.request.get('_route')}}</li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{{ path(route, routeParams|merge({'_locale': key})) }}">
+                    {{ language }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
