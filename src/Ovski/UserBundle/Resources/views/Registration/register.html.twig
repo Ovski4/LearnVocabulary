@@ -1,5 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}
+    {{ parent() }} |
+    {% trans %}Edition{% endtrans %}
+{% endblock %}
+
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}

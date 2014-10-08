@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    {{ parent() }} |
+    {% trans %}Edition{% endtrans %}
+{% endblock %}
+
 {% block body %}
     <ul class="nav nav-tabs" role="tablist">
         <li>

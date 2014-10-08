@@ -1,7 +1,12 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    {{ parent() }} |
+    {% trans %}Edit a translation{% endtrans %}
+{% endblock %}
+
 {% block body %}
-    <h2>{% trans %}Translation edit{% endtrans %}</h2>
+    <h2>{% trans %}Edit a translation{% endtrans %}</h2>
 
     {{ form(edit_form) }}
 

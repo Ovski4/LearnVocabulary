@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    {{ parent() }} |
+    {% trans %}Settings{% endtrans %}
+{% endblock %}
+
 {% block body %}
     <div class="parameters">
         <h2>{% trans %}Settings{% endtrans %}</h2>

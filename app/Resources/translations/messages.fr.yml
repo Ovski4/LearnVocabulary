@@ -1,4 +1,6 @@
+'Learn Vocabulary': Mon Vocabulaire
 'My Vocabulary': Mon vocabulaire
+'Vocabulary': Vocabulaire
 'Toggle navigation': Montrer/cacher navigation
 'Settings': Paramètres
 'Log out': Déconnexion
@@ -8,7 +10,7 @@
 'Languages': Langues
 'List of your languages being learned': Liste des langues que vous apprenez
 'Back to the list': Revenir à la liste
-'Translation edit': Editer une traduction
+'Edit a translation': Editer une traduction
 'Translation list': Liste des traductions
 'Revision': Révision
 'Edition': Édition
@@ -20,7 +22,7 @@
 'Update': Modifier
 'Filter translations': Filtrer les traductions
 'Favorite': Favori
-'Translaton list': Liste des traductions
+'Translation list': Liste des traductions
 'Validate': Valider
 'Word type': Type de mot
 'Hide left column': Cacher à gauche
@@ -36,3 +38,4 @@
 'Language 2': Langue 2
 'Translation successfully deleted': Traduction supprimée avec succès
 'Translation successfully updated': Traduction mise à jour avec succès
+'My languages': Mes langues

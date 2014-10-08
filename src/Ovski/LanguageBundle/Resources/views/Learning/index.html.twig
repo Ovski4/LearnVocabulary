@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    {{ parent() }} |
+    {% trans %}My languages{% endtrans %}
+{% endblock %}
+
 {% block body %}
     <div class="learning">
         <h2>{% trans %}List of your languages being learned{% endtrans %}</h2>
