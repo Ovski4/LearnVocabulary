@@ -23,6 +23,7 @@ jQuery(document).ready(function() {
         jQuery('.hide-column').remove();
         jQuery($actions).append($resetColumns);
         jQuery('table > tbody > tr > td:first-child > span').each(function() {
+            jQuery(this).parent().addClass('hidden-children');
             jQuery(this).attr('class', 'is-invisible');
         });
     });
@@ -34,6 +35,7 @@ jQuery(document).ready(function() {
         jQuery('.hide-column').remove();
         jQuery($actions).append($resetColumns);
         jQuery('table > tbody > tr > td:nth-child(2) > span').each(function() {
+            jQuery(this).parent().addClass('hidden-children');
             jQuery(this).attr('class', 'is-invisible');
         });
     });
@@ -46,6 +48,7 @@ jQuery(document).ready(function() {
         $resetColumns.remove();
         jQuery('table > tbody > tr > td > span').each(function() {
             jQuery(this).attr('class', 'is-visible');
+            jQuery(this).parent().removeClass();
         });
     });
 
@@ -53,6 +56,7 @@ jQuery(document).ready(function() {
     jQuery(document).on('click', 'table tr td', function() {
         if (jQuery(this).find('span').hasClass('is-invisible')) {
             jQuery(this).find('span').attr('class', 'is-visible');
+            jQuery(this).removeClass();
             hiddenWordCount--;
             if (hiddenColumn == 'left') {
                 jQuery('div.actions').prepend($leftHideButton);

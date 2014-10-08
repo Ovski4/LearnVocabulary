@@ -366,7 +366,11 @@ ul li:first-child span {
     text-transform: capitalize;
 }
 
-.translation table tr td > span.is-invisible {
+.translation table tr td.hidden-children {
+    cursor: pointer;
+}
+
+.translation table tr td.hidden-children > span.is-invisible {
     display: none;
 }
 
