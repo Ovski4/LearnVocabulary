@@ -368,6 +368,7 @@ ul li:first-child span {
 
 .translation table tr td.hidden-children {
     cursor: pointer;
+    background-color: #f9f9f9;
 }
 
 .translation table tr td.hidden-children > span.is-invisible {
