@@ -314,7 +314,7 @@ class TranslationController extends Controller
     /**
      * Edits an existing Translation entity.
      *
-     * @Route("{slug}/{id}", name="translation_update", requirements={"id" = "\d+"})
+     * @Route("{slug}/edit/{id}", name="translation_update", requirements={"id" = "\d+"})
      * @Method("PUT")
      * @Template("OvskiLanguageBundle:Translation:edit.html.twig")
      */

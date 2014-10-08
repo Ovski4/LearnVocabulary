@@ -30,9 +30,4 @@ security:
             anonymous: true
 
     access_control:
-        - { path: ^/learning, role: ROLE_USER }
-        - { path: ^/settings, role: ROLE_USER }
-        - { path: ^/translation, role: ROLE_USER }
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /revision|edition|languages|edit|delete|settings|star, role: ROLE_USER }
