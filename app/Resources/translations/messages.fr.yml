@@ -6,6 +6,7 @@
 'Log out': Déconnexion
 'Log in': Connexion
 'Welcome': Bienvenue
+'Ready to learn': Prêt à apprendre
 'Learn a new language': Apprendre une nouvelle langue
 'Languages': Langues
 'List of your languages being learned': Liste des langues que vous apprenez
@@ -39,3 +40,8 @@
 'Translation successfully deleted': Traduction supprimée avec succès
 'Translation successfully updated': Traduction mise à jour avec succès
 'My languages': Mes langues
+'Welcome on': Bienvenue sur
+'a tool to help you learn new words everyday': "un outil pour s'enrichir en vocabulaire chaque jour"
+'This web site does not aim to be a dictionary, but is meant to help you learning words': "Ce site n'a pas pour vocation à constituer un dictionnaire, mais a pour but de vous aider à apprendre"
+'by yourself': par vous même
+"It's very simple: from your computer or your smartphone, add your own translations, then revise them": "Le principe est on ne peut plus simple: depuis votre ordinateur ou smartphone, ajouter vos traductions, puis révisez les"
