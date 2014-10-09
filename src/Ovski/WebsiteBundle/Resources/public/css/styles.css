@@ -543,8 +543,4 @@ ul li:first-child span {
     .translation > h3 {
         text-align: left;
     }
-
-    .translation table tr td a.star:hover {
-        background: url('../img/stars.png') 0 64px;
-    }
 }
