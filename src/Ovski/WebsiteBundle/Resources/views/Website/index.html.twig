@@ -2,21 +2,29 @@
 
 {% block body %}
     <h2>{% trans %}Welcome{% endtrans %}!</h2>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a href={{ path("learning") }}>
-            {% trans %}My languages being learned{% endtrans %}
-        </a>
-    {%  else  %}
-        <p>
-            <a href={{ path("fos_user_security_login") }}>{% trans %}Start to log in{% endtrans %}</a>
-        </p>
-        <p>
-            {% trans %}Maybe you just wanna see what it is about? Try with this user{% endtrans %} :
-            <ul>
-                <li>{% trans %}Login{% endtrans %}: <strong>demo</strong></li>
-                <li>{% trans %}Password{% endtrans %}: <strong>demo</strong></li>
-            </ul>
-        </p>
-    {% endif %}
-
+    <div class="row home">
+        <div class="col-md-6">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href={{ path("learning") }}>
+                    {% trans %}My languages being learned{% endtrans %}
+                </a>
+            {%  else  %}
+                <p>
+                    <a href={{ path("fos_user_security_login") }}>{% trans %}Start to log in{% endtrans %}</a>
+                </p>
+                <p>
+                    {% trans %}Maybe you just wanna see what it is about? Try with this user{% endtrans %} :
+                <ul>
+                    <li>{% trans %}Login{% endtrans %}: <strong>demo</strong></li>
+                    <li>{% trans %}Password{% endtrans %}: <strong>demo</strong></li>
+                </ul>
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-md-6 picture">
+            <img src="/bundles/ovskiwebsite/img/ovski.net.png">
+        </div>
+    </div>
 {% endblock %}
+
+

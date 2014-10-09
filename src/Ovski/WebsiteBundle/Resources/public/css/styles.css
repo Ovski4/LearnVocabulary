@@ -222,6 +222,17 @@ section.container {
     padding-bottom: 20px;
 }
 
+/*home*/
+
+.home .picture {
+    text-align: center;
+}
+
+.home .picture img {
+    width: 70%;
+
+}
+
 /* translation revision/edition */
 .nav-tabs > li,
 .nav-tabs > li a {
