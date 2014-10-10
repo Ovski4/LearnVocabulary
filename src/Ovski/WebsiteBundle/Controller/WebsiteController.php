@@ -35,6 +35,18 @@ class WebsiteController extends Controller
     }
 
     /**
+     * Old school guidelines
+     *
+     * @Route("/old-school", name="oldschool")
+     * @Method("GET")
+     * @Template()
+     */
+    public function oldSchoolAction()
+    {
+        return array();
+    }
+
+    /**
      * Render the dropdown languages list for the menu
      *
      * @param Request $request

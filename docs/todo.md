@@ -6,7 +6,9 @@
  * use local storage to let left column hidden on next page
 	Si la page n'est pas /page/2 ou + > clean local storage
 	Si la page est page 1 > set values
-
+ * email with mailgun? > test send email and domain name used
+ * google analytics
+ * learn how to use assetic
  * validate html5
  * Add titles in pages
  * remove createAction in translation and set it in editonAction with if methode = get or if methode = post

@@ -19,6 +19,10 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
+p {
+    text-align: justify;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -34,6 +38,10 @@ h3 {
 
 h2 {
     font-size: 23px;
+}
+
+.fa-check {
+    color: #184b6a;
 }
 
 a:hover {
@@ -131,7 +139,8 @@ header a > i.fa {
     height: 25px;
 }
 
-.navbar .nav > li > a {
+.navbar .nav > li > a,
+.navbar .navbar-brand a {
     color: #fff;
 }
 
@@ -220,6 +229,50 @@ section.container {
     border: solid 1px rgba(0,0,0,0.3);
     margin-bottom: 20px;
     padding-bottom: 20px;
+}
+
+/*home*/
+
+.home div {
+    position: inherit; /* bootstrap fix (navbar problem)*/
+    text-align: justify;
+}
+
+.home ul,
+.oldschool ul {
+    margin: 10px 20px;
+}
+
+.home div > ul > li,
+.oldschool div > ul > li {
+    padding: 5px 0;
+    list-style-type: square;
+}
+
+.home div > ul > li > ul > li:last-child {
+    padding: 5px 0;
+}
+
+.home div > ul > li > ul > li:last-child > a {
+    height: 100%;
+    display: inline-block;
+}
+
+.home .picture,
+.oldschool .picture{
+    padding: 10px 0 20px;
+    text-align: center;
+}
+
+.home .picture img {
+    width: 70%;
+}
+
+/*oldschool*/
+
+.oldschool .picture img {
+    border: 2px solid #2c2c2c;
+    width: 100%;
 }
 
 /* translation revision/edition */
@@ -366,7 +419,12 @@ ul li:first-child span {
     text-transform: capitalize;
 }
 
-.translation table tr td > span.is-invisible {
+.translation table tr td.hidden-children {
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.translation table tr td.hidden-children > span.is-invisible {
     display: none;
 }
 
@@ -528,7 +586,11 @@ ul li:first-child span {
         text-align: left;
     }
 
-    .translation table tr td a.star:hover {
-        background: url('../img/stars.png') 0 64px;
+    .home .picture img {
+        width: 100%;
+    }
+
+    .oldschool .picture img {
+        width: 50%;
     }
 }

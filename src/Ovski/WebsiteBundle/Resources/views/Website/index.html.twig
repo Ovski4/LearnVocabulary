@@ -1,22 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>{% trans %}Welcome{% endtrans %}!</h2>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a href={{ path("learning") }}>
-            {% trans %}My languages being learned{% endtrans %}
-        </a>
-    {%  else  %}
-        <p>
-            <a href={{ path("fos_user_security_login") }}>{% trans %}Start to log in{% endtrans %}</a>
-        </p>
-        <p>
-            {% trans %}Maybe you just wanna see what it is about? Try with this user{% endtrans %} :
-            <ul>
-                <li>{% trans %}Login{% endtrans %}: <strong>demo</strong></li>
-                <li>{% trans %}Password{% endtrans %}: <strong>demo</strong></li>
-            </ul>
-        </p>
-    {% endif %}
+    <h2>{% trans %}Ready to learn{% endtrans %}?</h2>
+    <div class="row home">
+        <div class="col-md-8">
+            <p>
+                {% trans %}Welcome on{% endtrans %} <strong>learn-vocabulary.com</strong>,
+                {% trans %}a tool to help you learn new words everyday{% endtrans %}.
+                {% trans %}This web site does not aim to be a dictionary, but is meant to help you learning words{% endtrans %}
+                <strong>{% trans %}by yourself{% endtrans %}</strong>.
+                {% trans %}It's very simple: add your own translations from your computer or your smartphone, then revise them{% endtrans %}!
+            </p>
+            {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div>
+                    <ul>
+                        <li>
+                            {% trans %}Your prefer to learn the old school way?{% endtrans %}
+                            <a href="{{ path('oldschool') }}">{% trans %}Follow these guidelines</a>{% endtrans %}!
+                        </li>
+                        <li>
+                            {% trans %}To get started immediately{% endtrans %},
+                            <a href="{{ path('fos_user_registration_register') }}">{% trans %}create an account{% endtrans %}!</a>
+                        </li>
+                        <li>
+                            {% trans %}Maybe you just wanna see what it is about? Log in with this user{% endtrans %} :
+                            <ul>
+                                <li>{% trans %}Login{% endtrans %}: <strong>demo</strong></li>
+                                <li>{% trans %}Password{% endtrans %}: <strong>demo</strong></li>
+                                <li><a href="{{ path('fos_user_security_login') }}"><strong>{% trans %}Log in{% endtrans %}</strong></a></li>
+                            </ul>
 
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4 picture">
+            <img src="/bundles/ovskiwebsite/img/ovski.net.png">
+        </div>
+    </div>
 {% endblock %}
+
+

@@ -37,11 +37,11 @@
             <tbody>
                 {% for translation in pager.currentPageResults %}
                     <tr>
-                        <td>
+                        <td onclick="">
                             <span class="is-visible">{{ translation.word1 }}</span>
                             {% if translation.word1.article %}<span class="is-visible">({{ translation.word1.article }})</span>{% endif %}
                         </td>
-                        <td>
+                        <td onclick="">
                             <span class="is-visible">{{ translation.word2 }}</span>
                             {% if translation.word2.article %}<span class="is-visible">({{ translation.word2.article }})</span>{% endif %}
                         </td>

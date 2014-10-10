@@ -1,5 +1,6 @@
 jQuery(document).ready(function() {
-    if (jQuery('#ovski_languagebundle_translation_wordType').find('option:selected').text() != 'name') {
+    if (jQuery('#ovski_languagebundle_translation_wordType').find('option:selected').val() !=
+        jQuery("#ovski_languagebundle_translation_wordType option:first").val()) {
         jQuery('.ovski-word div:nth-child(1)').css('display', 'none');
         jQuery('#ovski_languagebundle_translation > div:nth-child(2) > label').css('padding-top', '3px');
         jQuery('#ovski_languagebundle_translation > div:nth-child(3) > label').css('padding-top', '3px');
