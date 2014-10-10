@@ -165,18 +165,27 @@ class TranslationController extends Controller
         $translation = new Translation();
         $form = $this->createCreateForm($translation, $slug);
         $form->handleRequest($request);
-        $this->checkArticles($translation);
-        if ($form->isValid()) {
-            $this->prepareTranslation($slug, $translation);
+        $this->prepareTranslation($slug, $translation);
+        if ($this->checkArticles($translation) && $form->isValid()) {
             $translation->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($translation);
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
+            try {
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
+            } catch (\Exception $e) {
+                // TODO real constraint
+                if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                    $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('You already entered this translation'));
+                } else {
+                    die($e->getMessage());
+                }
+            }
         }
 
-        return array('form' => $form->createView());
+        return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
     }
 
     /**
@@ -220,15 +229,17 @@ class TranslationController extends Controller
             // if the words have name as wordType,
             // they must have an article except if the language has requiredArticle to false
             if ($translation->getWordType()->getValue() == $nameArticle && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
-                throw new \Exception('You need to specify an article because the type of the word is \'name\'');
+                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('You need to specify an article because the type of the word is \'name\''));
+                return false;
             // if the words have not name as wordType,
             // they must not have an article
             } else if ($translation->getWordType()->getValue() != $nameArticle && $word->getArticle()) {
-                throw new \Exception('A word which is not a \'name\' should not have an article');
+                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('A word which is not a \'name\' should not have an article'));
+                return false;
             }
         }
 
-
+        return true;
     }
 
     /**

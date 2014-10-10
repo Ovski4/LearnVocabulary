@@ -7,7 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Article
  *
- * @ORM\Table(name="ovski_article")
+ * @ORM\Table(name="ovski_article", uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *         name="unique_article_idx",
+ *         columns={"value", "language_id"}
+ *     )
+ * })
  * @ORM\Entity
  */
 class Article
@@ -19,14 +24,14 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="value", type="string", length=255)
      */
-    private $value;
+    protected $value;
 
     /**
      * @var Language
@@ -34,7 +39,7 @@ class Article
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $language;
+    protected $language;
 
     /**
      * Article to string

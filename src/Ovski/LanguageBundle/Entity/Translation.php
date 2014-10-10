@@ -3,12 +3,16 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Translation
  *
- * @ORM\Table(name="ovski_translation")
+ * @ORM\Table(name="ovski_translation", uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *         name="unique_translation_idx",
+ *         columns={"word1_id", "word2_id", "learning_id", "user_id", "word_type_id"}
+ *     )
+ * })
  * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\TranslationRepository")
  */
 class Translation
@@ -20,14 +24,14 @@ class Translation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var Word
@@ -35,7 +39,7 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $word1;
+    protected $word1;
 
     /**
      * @var Word
@@ -43,7 +47,7 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Word", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $word2;
+    protected $word2;
 
     /**
      * @var
@@ -51,7 +55,7 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
      * @ORM\JoinColumn(nullable=false, name="word_type_id")
      */
-    private $wordType;
+    protected $wordType;
 
     /**
      * @var Learning
@@ -59,7 +63,7 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Learning")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $learning;
+    protected $learning;
 
     /**
      * @var Learning
@@ -67,14 +71,14 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="translations")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     /**
      * @var string
      *
      * @ORM\Column(name="is_starred", type="boolean", nullable=false)
      */
-    private $isStarred;
+    protected $isStarred;
 
     /**
      * Constructor

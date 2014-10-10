@@ -9,7 +9,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Learning
  *
- * @ORM\Table(name="ovski_learning")
+ * @ORM\Table(name="ovski_learning", uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *         name="unique_language_idx",
+ *         columns={"language1_id", "language2_id"}
+ *     )
+ * })
  * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\LearningRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -22,7 +27,7 @@ class Learning
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Language
@@ -30,7 +35,7 @@ class Learning
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $language1;
+    protected $language1;
 
     /**
      * @var Language
@@ -38,20 +43,20 @@ class Learning
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $language2;
+    protected $language2;
 
     /**
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="learnings", cascade={"persist"})
      * @ORM\JoinTable(name="ovski_user_learning")
      */
-    private $users;
+    protected $users;
 
     /**
      * Constructor

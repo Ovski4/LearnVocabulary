@@ -8,7 +8,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Word
  *
- * @ORM\Table(name="ovski_word")
+ * @ORM\Table(name="ovski_word", uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *         name="unique_word_idx",
+ *         columns={"article_id", "word_type_id", "language_id", "value"}
+ *     )
+ * })
  * @ORM\Entity
  */
 class Word
@@ -20,14 +25,14 @@ class Word
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="value", type="string", length=255)
      */
-    private $value;
+    protected $value;
 
     /**
      * @var Article
@@ -35,7 +40,7 @@ class Word
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Article")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $article;
+    protected $article;
 
     /**
      * @var
@@ -43,7 +48,7 @@ class Word
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
      * @ORM\JoinColumn(nullable=false, name="word_type_id")
      */
-    private $wordType;
+    protected $wordType;
 
     /**
      * @var Language
@@ -51,13 +56,13 @@ class Word
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\Language")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $language;
+    protected $language;
 
     /**
      * @ORM\ManyToMany(targetEntity="Ovski\UserBundle\Entity\User", inversedBy="words")
      * @ORM\JoinTable(name="ovski_user_word")
      */
-    private $users;
+    protected $users;
 
     /**
      * Constructor
