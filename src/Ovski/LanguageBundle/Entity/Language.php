@@ -9,7 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Language
  *
- * @ORM\Table(name="ovski_language")
+ * @ORM\Table(name="ovski_language", uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *         name="unique_language_idx",
+ *         columns={"name"}
+ *     )
+ * })
  * @ORM\Entity
  */
 class Language
@@ -21,7 +26,7 @@ class Language
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -29,14 +34,14 @@ class Language
      * @Gedmo\Translatable
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="require_articles", type="boolean")
      */
-    private $requireArticles;
+    protected $requireArticles;
 
     /**
      * @var Article
@@ -44,14 +49,14 @@ class Language
      * @ORM\OneToMany(targetEntity="Ovski\LanguageBundle\Entity\Article", mappedBy="language")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $articles;
+    protected $articles;
 
     /**
      * @Gedmo\Locale
      * Used locale to override Translation listener`s locale
      * this is not a mapped field of entity metadata, just a simple property
      */
-    private $locale;
+    protected $locale;
 
     /**
      * Language to string

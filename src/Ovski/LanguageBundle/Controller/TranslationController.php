@@ -2,6 +2,7 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -162,17 +163,27 @@ class TranslationController extends Controller
         $translation = new Translation();
         $form = $this->createCreateForm($translation, $slug);
         $form->handleRequest($request);
+        $this->prepareTranslation($slug, $translation);
         if ($form->isValid()) {
-            $this->prepareTranslation($slug, $translation);
             $translation->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($translation);
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
+            try {
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
+            } catch (\Exception $e) {
+                // TODO real constraint
+                if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                    $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('You already entered this translation'));
+                } else {
+                    die($e->getMessage());
+                }
+            }
         }
 
-        return array('form' => $form->createView());
+        return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
     }
 
     /**
