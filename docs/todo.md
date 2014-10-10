@@ -1,5 +1,7 @@
 ## Todo ##
 
+Updat translation change from name to other -> error checkArticles!
+
 ### features ###
  * tooltip system for first time
  * larger input and selectboxes

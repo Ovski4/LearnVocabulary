@@ -399,7 +399,7 @@ ul li:first-child span {
 #ovski_languagebundle_translation > div:nth-child(2) > label,
 #ovski_languagebundle_translation > div:nth-child(3) > label {
     display: block;
-    min-width: 20%;
+    min-width: 25%;
 }
 
 #ovski_languagebundle_translation label {
@@ -569,11 +569,11 @@ ul li:first-child span {
     }
 
     #ovski_languagebundle_translation > div:nth-child(2) {
-        width: 290px;
+        width: 295px;
     }
 
     #ovski_languagebundle_translation > div:nth-child(3) {
-        width: 290px;
+        width: 295px;
     }
 
     /* submit parent div */

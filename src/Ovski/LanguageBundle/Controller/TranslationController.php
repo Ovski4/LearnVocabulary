@@ -228,13 +228,13 @@ class TranslationController extends Controller
 
             // if the words have name as wordType,
             // they must have an article except if the language has requiredArticle to false
-            if ($translation->getWordType()->getValue() == $nameArticle && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
-                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('You need to specify an article because the type of the word is \'name\''));
+            if ($translation->getWordType()->getValue() == 'name' && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
+                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans("You need to specify an article because the type of the word is 'name'"));
                 return false;
             // if the words have not name as wordType,
             // they must not have an article
-            } else if ($translation->getWordType()->getValue() != $nameArticle && $word->getArticle()) {
-                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('A word which is not a \'name\' should not have an article'));
+            } else if ($translation->getWordType()->getValue() != 'name' && $word->getArticle()) {
+                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans("A word which is not a 'name' should not have an article"));
                 return false;
             }
         }
@@ -358,7 +358,7 @@ class TranslationController extends Controller
         $editForm = $this->createEditForm($translation, $slug);
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        if ($this->checkArticles($translation) && $editForm->isValid()) {
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Translation successfully updated'));
@@ -369,7 +369,8 @@ class TranslationController extends Controller
         }
 
         return array(
-            'edit_form'   => $editForm->createView()
+            'edit_form' => $editForm->createView(),
+            'slug' => $slug
         );
     }
 

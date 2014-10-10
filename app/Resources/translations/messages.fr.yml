@@ -34,6 +34,8 @@
 'Password': Mot de passe
 'You are already learning those languages': Vous apprenez déjà ces langues
 'You must choose 2 differents languages': Vous devez choisir 2 langues différentes
+"You need to specify an article because the type of the word is 'name'": "Vous devez préciser le type du mot puisqu'il s'agit d'un nom"
+"A word which is not a 'name' should not have an article": "Un mot qui n'est pas un nom ne devrait pas avoir d'article"
 'Language': Langue
 'Language 1': Langue 1
 'Language 2': Langue 2
