@@ -1,8 +1,10 @@
 ## Todo ##
 
- 
-
 ### features ###
+ * dropdown language li size
+ * helvetica neue light
+ * constraints unicity translations
+ * load his own js
  * use local storage to let left column hidden on next page
 	Si la page n'est pas /page/2 ou + > clean local storage
 	Si la page est page 1 > set values
@@ -17,10 +19,6 @@
  * help page
  * demo user cron to reset everything
  * delete user delete everything
- * delete translation older than
- * front page
- * Translate the website in en/fr
- * add flashbags message when success edit delete etc
  * improve csv import & export
  * rename LnguageBundle to VocabularyBundle
  * improve checkLeaningUnicity function, etc..
