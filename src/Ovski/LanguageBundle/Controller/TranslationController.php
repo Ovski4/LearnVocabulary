@@ -2,6 +2,9 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
+use Gedmo\Translatable\TranslatableListener;
+use Doctrine\ORM\Query;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -162,6 +165,7 @@ class TranslationController extends Controller
         $translation = new Translation();
         $form = $this->createCreateForm($translation, $slug);
         $form->handleRequest($request);
+        $this->checkArticles($translation);
         if ($form->isValid()) {
             $this->prepareTranslation($slug, $translation);
             $translation->setUser($this->getUser());
@@ -190,7 +194,6 @@ class TranslationController extends Controller
         $translation->getWord1()->setWordType($translation->getWordType());
         $translation->getWord2()->setWordType($translation->getWordType());
         $this->setWordsIfExist($em, $translation);
-        $this->checkArticles($translation);
         $translation->setLearning($learning);
     }
 
@@ -200,15 +203,27 @@ class TranslationController extends Controller
     private function checkArticles(Translation $translation)
     {
         $wordArray = array($translation->getWord1(), $translation->getWord2());
-
+        $em = $this->getDoctrine()->getManager();
         foreach($wordArray as $word) {
+            $qb = $em->getRepository('OvskiLanguageBundle:WordType')
+                ->createQueryBuilder('wt')
+                ->where('wt.id=:id')
+                ->setParameter('id', $translation->getWordType()->getId());
+            $query = $qb->getQuery();
+            $query->setHint(
+                Query::HINT_CUSTOM_OUTPUT_WALKER,
+                'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+            );
+            $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, 'en');
+            $nameArticle = $query->getSingleResult()->getValue();
+
             // if the words have name as wordType,
             // they must have an article except if the language has requiredArticle to false
-            if ($word->getWordType()->getValue() == 'name' && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
+            if ($translation->getWordType()->getValue() == $nameArticle && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
                 throw new \Exception('You need to specify an article because the type of the word is \'name\'');
             // if the words have not name as wordType,
             // they must not have an article
-            } else if ($word->getWordType()->getValue() != 'name' && $word->getArticle()) {
+            } else if ($translation->getWordType()->getValue() != $nameArticle && $word->getArticle()) {
                 throw new \Exception('A word which is not a \'name\' should not have an article');
             }
         }
