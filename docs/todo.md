@@ -3,6 +3,10 @@
 ### View ### 
 
 ### features ###
+ * tooltip system for first time
+ * larger input and selectboxes
+ * align form input and selectboxes
+ * reduce size of main image in height (bottom)
  * email with mailgun? > test send email and domain name used
  * google analytics
  * learn how to use assetic
