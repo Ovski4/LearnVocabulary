@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * WordType
  *
  * @ORM\Table(name="ovski_word_type")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\WordTypeRepository")
  */
 class WordType
 {

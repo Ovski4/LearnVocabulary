@@ -3,6 +3,7 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Ovski\LanguageBundle\Validator\Constraints as OvskiAssert;
 
 /**
@@ -15,8 +16,9 @@ use Ovski\LanguageBundle\Validator\Constraints as OvskiAssert;
  *     )
  * })
  * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\TranslationRepository")
- * @OvskiAssert\TranslationRequireArticles
- * @OvskiAssert\TranslationUnique
+ * @Assert\GroupSequence({"First", "Second", "Translation"})
+ * @OvskiAssert\TranslationRequireArticles(groups={"First"})
+ * @OvskiAssert\TranslationUnique(groups={"Second"})
  */
 class Translation
 {

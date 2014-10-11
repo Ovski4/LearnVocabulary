@@ -17,7 +17,11 @@
     <div class="translation translation-edition">
         <div class="add-translation">
             <h3>{% trans %}Add a new translation{% endtrans %}</h3>
-            {{ form(form) }}
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+                {{ form_rest(form) }}
+            {{ form_end(form) }}
         </div>
         <div class="filter-translations">
             <h3>{% trans %}Filter translations{% endtrans %}</h3>

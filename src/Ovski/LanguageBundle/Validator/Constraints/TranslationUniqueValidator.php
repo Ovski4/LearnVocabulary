@@ -25,17 +25,27 @@ class TranslationUniqueValidator extends ConstraintValidator
 
     public function validate($translation, Constraint $constraint)
     {
-        // if the first word does not exist, the translation will be unique
-        $article1 = $this->em->getRepository('OvskiLanguageBundle:Article')->findBy(
-            array(
-                'language' => $translation->getLearning()->getLanguage1(),
-                'value'    => $translation->getWord1()->getArticle()->getValue()
-            )
+        $nameArticle = $this->em->getRepository('OvskiLanguageBundle:WordType')->getDefaultWordTypeValue(
+            $translation->getWordType()->getId()
         );
+
+        // if the first word does not exist, the translation will be unique
+
+        if ($nameArticle == 'name') {
+            $article1 = $this->em->getRepository('OvskiLanguageBundle:Article')->findBy(
+                array(
+                    'language' => $translation->getLearning()->getLanguage1(),
+                    'value'    => $translation->getWord1()->getArticle()->getValue()
+                )
+            );
+        } else {
+            $article1 = null;
+        }
         $word1 = $this->em->getRepository('OvskiLanguageBundle:Word')->findBy(
             array(
                 'article'  => $article1,
-                'wordType' => $translation->getWordType()
+                'wordType' => $translation->getWordType(),
+                'value'    => $translation->getWord1()->getValue()
             )
         );
         if (!$word1) {
@@ -43,16 +53,21 @@ class TranslationUniqueValidator extends ConstraintValidator
         }
 
         // if the second word does not exist, the translation will be unique
-        $article2 = $this->em->getRepository('OvskiLanguageBundle:Article')->findBy(
-            array(
-                'language' => $translation->getLearning()->getLanguage2(),
-                'value'    => $translation->getWord2()->getArticle()->getValue()
-            )
-        );
+        if ($nameArticle == 'name') {
+            $article2 = $this->em->getRepository('OvskiLanguageBundle:Article')->findBy(
+                array(
+                    'language' => $translation->getLearning()->getLanguage2(),
+                    'value'    => $translation->getWord2()->getArticle()->getValue(),
+                )
+            );
+        } else {
+            $article2 = null;
+        }
         $word2 = $this->em->getRepository('OvskiLanguageBundle:Word')->findBy(
             array(
                 'article'  => $article2,
-                'wordType' => $translation->getWordType()
+                'wordType' => $translation->getWordType(),
+                'value'    => $translation->getWord2()->getValue()
             )
         );
         if (!$word2) {
