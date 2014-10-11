@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class TranslationRequireArticlesValidator extends ConstraintValidator
+class TranslationRequiresArticlesValidator extends ConstraintValidator
 {
     private $em;
 
@@ -32,11 +32,21 @@ class TranslationRequireArticlesValidator extends ConstraintValidator
         if ($nameArticle == 'name') {
             if (!$translation->getWord1()->getArticle() && $translation->getLearning()->getLanguage1()->requireArticles())
             {
-                $this->context->addViolationAt('word1', $constraint->message, array(), null);
+                $this->context->addViolationAt(
+                    'word1',
+                    $constraint->message,
+                    array('%language%' => $translation->getLearning()->getLanguage1()->getName()),
+                    null
+                );
             }
             if (!$translation->getWord2()->getArticle() && $translation->getLearning()->getLanguage2()->requireArticles())
             {
-                $this->context->addViolationAt('word2', $constraint->message, array(), null);
+                $this->context->addViolationAt(
+                    'word2',
+                    $constraint->message,
+                    array('%language%' => $translation->getLearning()->getLanguage2()->getName()),
+                    null
+                );
             }
         }
     }

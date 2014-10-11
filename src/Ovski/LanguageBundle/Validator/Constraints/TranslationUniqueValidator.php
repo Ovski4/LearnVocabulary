@@ -86,7 +86,12 @@ class TranslationUniqueValidator extends ConstraintValidator
 
         if (!empty($translations))
         {
-            $this->context->addViolationAt('wordType', $constraint->message, array(), null);
+            $this->context->addViolationAt(
+                'wordType',
+                $constraint->message,
+                array(),
+                null
+            );
         }
     }
 }

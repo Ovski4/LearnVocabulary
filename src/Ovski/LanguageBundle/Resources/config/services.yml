@@ -2,13 +2,24 @@ services:
     ovski.translation_manager:
         class: 'Ovski\LanguageBundle\Service\TranslationManager'
         arguments: ['@doctrine.orm.entity_manager']
-    ovski.translation_require_articles_validator:
-        class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationRequireArticlesValidator'
+    ovski.translation_requires_articles_validator:
+        class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationRequiresArticlesValidator'
         arguments: ['@doctrine.orm.entity_manager']
         tags:
-            - { name: validator.constraint_validator, alias: translation_require_article_validator }
+            - { name: validator.constraint_validator, alias: translation_requires_articles_validator }
     ovski.translation_unique_validator:
         class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationUniqueValidator'
         arguments: ['@doctrine.orm.entity_manager', '@security.context']
         tags:
             - { name: validator.constraint_validator, alias: translation_unique_validator }
+
+
+#            services:
+#                ovski.translation_manager:
+#                    class: 'Ovski\LanguageBundle\Service\TranslationManager'
+#                    arguments: ['@doctrine.orm.entity_manager']
+#                ovski.translation_require_articled_and_is_unique_validator:
+#                    class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationRequiresArticlesAndIsUniqueValidator'
+#                    arguments: ['@doctrine.orm.entity_manager', '@security.context']
+#                    tags:
+#                        - { name: validator.constraint_validator, alias: translation_require_articled_and_is_unique_validator }
