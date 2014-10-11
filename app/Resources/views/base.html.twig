@@ -69,15 +69,6 @@
                 </div>
             {% endfor %}
         </div>
-    {% elseif app.session.flashbag.has('error') %}
-        <div class="container alert alert-danger fade in">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {% for flashMessage in app.session.flashbag.get('error') %}
-                <div class="flash-notice">
-                    <p>{% autoescape false %}{{ flashMessage }}{% endautoescape %}</p>
-                </div>
-            {% endfor %}
-        </div>
     {% endif %}
     <section class="container">
         {% block body %}{% endblock %}

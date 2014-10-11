@@ -193,42 +193,6 @@ class TranslationController extends Controller
     }
 
     /**
-     * Check the article value (null or not) for a word
-     */
-    /*private function checkArticles(Translation $translation)
-    {
-        $wordArray = array($translation->getWord1(), $translation->getWord2());
-        $em = $this->getDoctrine()->getManager();
-        foreach($wordArray as $word) {
-            $qb = $em->getRepository('OvskiLanguageBundle:WordType')
-                ->createQueryBuilder('wt')
-                ->where('wt.id=:id')
-                ->setParameter('id', $translation->getWordType()->getId());
-            $query = $qb->getQuery();
-            $query->setHint(
-                Query::HINT_CUSTOM_OUTPUT_WALKER,
-                'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-            );
-            $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, 'en');
-            $nameArticle = $query->getSingleResult()->getValue();
-
-            // if the words have name as wordType,
-            // they must have an article except if the language has requiredArticle to false
-            if ($translation->getWordType()->getValue() == 'name' && !$word->getArticle() && $word->getLanguage()->requireArticles()) {
-                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans("You need to specify an article because the type of the word is 'name'"));
-                return false;
-            // if the words have not name as wordType,
-            // they must not have an article
-            } else if ($translation->getWordType()->getValue() != 'name' && $word->getArticle()) {
-                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans("A word which is not a 'name' should not have an article"));
-                return false;
-            }
-        }
-
-        return true;
-    }*/
-
-    /**
      * Get words and set them to the translation instead of creating them if they already exist
      *
      * @param ObjectManager $em

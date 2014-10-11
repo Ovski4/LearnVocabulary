@@ -206,6 +206,7 @@ header a > i.fa {
     padding: 6px;
     font-size: 27px;
     opacity: 1;
+    color: #3c763d;
 }
 
 .container.alert button.close:focus {
@@ -213,7 +214,7 @@ header a > i.fa {
 }
 
 .container.alert button.close:hover {
-    color: #3c763d;
+    color: #000;
 }
 
 .container.alert .flash-notice > p {
