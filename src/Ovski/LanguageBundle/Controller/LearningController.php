@@ -65,72 +65,18 @@ class LearningController extends Controller
         $form = $this->createCreateForm($learning);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            if (!$this->checkLearningExistsForUser($learning)) {
-                $error = new FormError($this->get('translator')->trans("You are already learning those languages"));
-                $form->get('language1')->addError($error);
-            } else if (!$this->checkLearningLanguagesAreNotIdentical($learning)) {
-                $error = new FormError($this->get('translator')->trans("You must choose 2 differents languages"));
-                $form->get('language1')->addError($error);
-            } else {
-                if ($existingLearning = $this->checkLearningExists($learning)) {
-                    $learning = $existingLearning;
-                }
-                $em = $this->getDoctrine()->getManager();
-                $learning->addUser($this->getUser());
-                $em->persist($learning);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('learning'));
+            if ($existingLearning = $this->checkLearningExists($learning)) {
+                $learning = $existingLearning;
             }
+            $em = $this->getDoctrine()->getManager();
+            $learning->addUser($this->getUser());
+            $em->persist($learning);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('learning'));
         }
 
         return array('form' => $form->createView());
-    }
-
-    /**
-     * Check that the 2 languages are not identical
-     *
-     * @param $learning
-     * @return bool
-     */
-    private function checkLearningLanguagesAreNotIdentical($learning)
-    {
-        if ($learning->getLanguage1() == $learning->getLanguage2()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Check the unicity of the languages combination
-     *
-     * @param $learning
-     * @return bool
-     */
-    private function checkLearningExistsForUser($learning)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $learning1 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
-            $this->getUser()->getId(),
-            array(
-                'language1' => $learning->getLanguage1()->getId(),
-                'language2' => $learning->getLanguage2()->getId()
-            )
-        );
-        $learning2 = $em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
-            $this->getUser()->getId(),
-            array(
-                'language1' => $learning->getLanguage2()->getId(),
-                'language2' => $learning->getLanguage1()->getId()
-            )
-        );
-
-        if ($learning1 || $learning2) {
-            return false;
-        }
-
-        return true;
     }
 
     /**

@@ -12,14 +12,13 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.context']
         tags:
             - { name: validator.constraint_validator, alias: translation_unique_validator }
-
-
-#            services:
-#                ovski.translation_manager:
-#                    class: 'Ovski\LanguageBundle\Service\TranslationManager'
-#                    arguments: ['@doctrine.orm.entity_manager']
-#                ovski.translation_require_articled_and_is_unique_validator:
-#                    class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationRequiresArticlesAndIsUniqueValidator'
-#                    arguments: ['@doctrine.orm.entity_manager', '@security.context']
-#                    tags:
-#                        - { name: validator.constraint_validator, alias: translation_require_articled_and_is_unique_validator }
+    ovski.learning_unique_validator:
+        class: 'Ovski\LanguageBundle\Validator\Constraints\LearningUniqueValidator'
+        arguments: ['@doctrine.orm.entity_manager', '@security.context']
+        tags:
+            - { name: validator.constraint_validator, alias: learning_unique_validator }
+    ovski.learning_languages_not_identical_validator:
+        class: 'Ovski\LanguageBundle\Validator\Constraints\LearningLanguagesNotIdenticalValidator'
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: validator.constraint_validator, alias: learning_languages_not_identical_validator }

@@ -3,8 +3,9 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ovski\ToolsBundle\Tools\Utils;
 use Doctrine\Common\Collections\ArrayCollection;
+use Ovski\ToolsBundle\Tools\Utils;
+use Ovski\LanguageBundle\Validator\Constraints as OvskiAssert;
 
 /**
  * Learning
@@ -17,6 +18,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * })
  * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\LearningRepository")
  * @ORM\HasLifecycleCallbacks
+ * @OvskiAssert\LearningUnique
+ * @OvskiAssert\LearningLanguagesNotIdentical
  */
 class Learning
 {
