@@ -3,6 +3,7 @@
 namespace Ovski\LanguageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ovski\LanguageBundle\Validator\Constraints as OvskiAssert;
 
 /**
  * Translation
@@ -14,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  *     )
  * })
  * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\TranslationRepository")
+ * @OvskiAssert\TranslationRequireArticles
+ * @OvskiAssert\TranslationUnique
  */
 class Translation
 {

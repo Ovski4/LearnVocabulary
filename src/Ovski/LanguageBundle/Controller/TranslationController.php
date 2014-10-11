@@ -2,8 +2,6 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
-use Gedmo\Translatable\TranslatableListener;
-use Doctrine\ORM\Query;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +35,7 @@ class TranslationController extends Controller
      */
     public function revisionAction(Request $request, $slug)
     {
+        // Get learning from slug
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
             $this->getUser()->getId(),
@@ -46,6 +45,8 @@ class TranslationController extends Controller
         if (!$learning) {
             throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
         }
+
+        // get translations query builder from learning and user
         $translationQueryBuilder = $em->getRepository('OvskiLanguageBundle:Translation')->getQueryBuilder(
             array(
                 "learning" => $learning->getId(),
@@ -54,8 +55,8 @@ class TranslationController extends Controller
             array("createdAt" => 'DESC')
         );
 
+        // create filter form and add filters to query builder if in request
         $filterForm = $this->get('form.factory')->create(new TranslationFilterType());
-
         if ($this->get('request')->query->has($filterForm->getName())) {
             $filterForm->submit($this->get('request')->query->get($filterForm->getName()));
             $this
@@ -64,10 +65,10 @@ class TranslationController extends Controller
             ;
         }
 
+        // paginate the query builder with a doctrine orm adapter
         $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
         $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
         $page = $request->query->get('page', 1);
-
         try {
             $pager->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
@@ -84,7 +85,8 @@ class TranslationController extends Controller
     }
 
     /**
-     * Get button texts according to locale
+     * Get button texts according to the current locale
+     * It will be used as data-X in the translations.js script so js buttons are translated
      */
     private function getButtonTexts()
     {
@@ -100,11 +102,12 @@ class TranslationController extends Controller
      * Lists all Translation entities for edition
      *
      * @Route("/edition/{slug}", name="translation_edition")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @Template()
      */
     public function editionAction(Request $request, $slug)
     {
+        // Get learning from slug
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
             $this->getUser()->getId(),
@@ -114,6 +117,8 @@ class TranslationController extends Controller
         if (!$learning) {
             throw new NotFoundHttpException(sprintf("Learning %s could not be found", $slug));
         }
+
+        // get translations query builder from learning and user
         $translationQueryBuilder = $em->getRepository('OvskiLanguageBundle:Translation')->getQueryBuilder(
             array(
                 "learning" => $learning->getId(),
@@ -122,8 +127,8 @@ class TranslationController extends Controller
             array("createdAt" => 'DESC')
         );
 
+        // create filter form and add filters to query builder if in request
         $filterForm = $this->get('form.factory')->create(new TranslationFilterType());
-
         if ($this->get('request')->query->has($filterForm->getName())) {
             $filterForm->submit($this->get('request')->query->get($filterForm->getName()));
             $this
@@ -132,18 +137,35 @@ class TranslationController extends Controller
             ;
         }
 
+        // paginate the query builder with a doctrine orm adapter
         $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
         $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
         $page = $request->query->get('page', 1);
-
         try {
             $pager->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
             throw new NotFoundHttpException();
         }
 
-        $translation = new Translation();
-        $form  = $this->createCreateForm($translation, $slug);
+        // Handle the add translation form
+        if ($request->getMethod() == 'POST') { // add a new translation
+            $translation = new Translation();
+            $translation->setLearning($learning);
+            $form = $this->createCreateForm($translation, $slug);
+            $form->handleRequest($request);
+            $this->prepareTranslation($slug, $translation); // set words and article on translations
+            if ($form->isValid()) {
+                $translation->setUser($this->getUser());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($translation);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
+            }
+        } else { // display the form
+            $translation = new Translation();
+            $form  = $this->createCreateForm($translation, $slug);
+        }
 
         return array(
             'pager'      => $pager,
@@ -155,40 +177,6 @@ class TranslationController extends Controller
     }
 
     /**
-     * Creates a new Translation entity.
-     *
-     * @Route("/edition/{slug}/create", name="translation_create")
-     * @Method("POST")
-     */
-    public function createAction(Request $request, $slug)
-    {
-        $translation = new Translation();
-        $form = $this->createCreateForm($translation, $slug);
-        $form->handleRequest($request);
-        $this->prepareTranslation($slug, $translation);
-        if ($this->checkArticles($translation) && $form->isValid()) {
-            $translation->setUser($this->getUser());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($translation);
-
-            try {
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
-            } catch (\Exception $e) {
-                // TODO real constraint
-                if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                    $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('You already entered this translation'));
-                } else {
-                    die($e->getMessage());
-                }
-            }
-        }
-
-        return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
-    }
-
-    /**
      * Prepare a translation by setting words attributes
      *
      * @param Translation $translation The entity
@@ -197,19 +185,17 @@ class TranslationController extends Controller
     private function prepareTranslation($slug, $translation)
     {
         $em = $this->getDoctrine()->getManager();
-        $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
-        $translation->getWord1()->setLanguage($learning->getLanguage1());
-        $translation->getWord2()->setLanguage($learning->getLanguage2());
+        $translation->getWord1()->setLanguage($translation->getLearning()->getLanguage1());
+        $translation->getWord2()->setLanguage($translation->getLearning()->getLanguage2());
         $translation->getWord1()->setWordType($translation->getWordType());
         $translation->getWord2()->setWordType($translation->getWordType());
         $this->setWordsIfExist($em, $translation);
-        $translation->setLearning($learning);
     }
 
     /**
      * Check the article value (null or not) for a word
      */
-    private function checkArticles(Translation $translation)
+    /*private function checkArticles(Translation $translation)
     {
         $wordArray = array($translation->getWord1(), $translation->getWord2());
         $em = $this->getDoctrine()->getManager();
@@ -240,7 +226,7 @@ class TranslationController extends Controller
         }
 
         return true;
-    }
+    }*/
 
     /**
      * Get words and set them to the translation instead of creating them if they already exist
@@ -283,7 +269,7 @@ class TranslationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
         $form = $this->createForm(new TranslationType($learning), $translation, array(
-            'action' => $this->generateUrl('translation_create', array('slug' => $slug)),
+            'action' => $this->generateUrl('translation_edition', array('slug' => $slug)),
             'method' => 'POST',
         ));
 
@@ -358,7 +344,7 @@ class TranslationController extends Controller
         $editForm = $this->createEditForm($translation, $slug);
         $editForm->handleRequest($request);
 
-        if ($this->checkArticles($translation) && $editForm->isValid()) {
+        if ($editForm->isValid()) {
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Translation successfully updated'));
@@ -480,7 +466,7 @@ class TranslationController extends Controller
      * @Method("GET")
      */
     public function downloadCsvAction($slug) {
-        $csv = $this->get('translation_manager')->generateCsv($this->getUser()->getId(), $slug);
+        $csv = $this->get('ovski.translation_manager')->generateCsv($this->getUser()->getId(), $slug);
 
         return new Response($csv, 200, array(
             'Content-Type' => 'application/force-download',
