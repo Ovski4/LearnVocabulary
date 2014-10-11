@@ -25,9 +25,13 @@ class TranslationUniqueValidator extends ConstraintValidator
 
     public function validate($translation, Constraint $constraint)
     {
-        $nameArticle = $this->em->getRepository('OvskiLanguageBundle:WordType')->getDefaultWordTypeValue(
-            $translation->getWordType()->getId()
-        );
+        if ($translation->getWordType() != null) {
+            $nameArticle = $this->em->getRepository('OvskiLanguageBundle:WordType')->getDefaultWordTypeValueById(
+                $translation->getWordType()->getId()
+            );
+        } else {
+            $nameArticle = null;
+        }
 
         // if the first word does not exist, the translation will be unique
 

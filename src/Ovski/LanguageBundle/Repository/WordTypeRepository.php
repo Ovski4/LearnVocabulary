@@ -17,7 +17,7 @@ class WordTypeRepository extends EntityRepository
      * @param int : the word type id
      * @return WordType
      */
-    public function getDefaultWordTypeValue($id)
+    public function getDefaultWordTypeValueById($id)
     {
         $qb = $this
             ->createQueryBuilder('wt')

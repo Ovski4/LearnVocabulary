@@ -58,7 +58,7 @@ class Translation
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Ovski\LanguageBundle\Entity\WordType")
-     * @ORM\JoinColumn(nullable=false, name="word_type_id")
+     * @ORM\JoinColumn(nullable=true, name="word_type_id")
      */
     protected $wordType;
 

@@ -23,7 +23,12 @@ class TranslationRequiresArticlesValidator extends ConstraintValidator
 
     public function validate($translation, Constraint $constraint)
     {
-        $nameArticle = $this->em->getRepository('OvskiLanguageBundle:WordType')->getDefaultWordTypeValue(
+        // nothing to check if no word type was given
+        if (!$translation->getWordType()) {
+            return;
+        }
+
+        $nameArticle = $this->em->getRepository('OvskiLanguageBundle:WordType')->getDefaultWordTypeValueById(
             $translation->getWordType()->getId()
         );
 

@@ -187,8 +187,10 @@ class TranslationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $translation->getWord1()->setLanguage($translation->getLearning()->getLanguage1());
         $translation->getWord2()->setLanguage($translation->getLearning()->getLanguage2());
-        $translation->getWord1()->setWordType($translation->getWordType());
-        $translation->getWord2()->setWordType($translation->getWordType());
+        if ($translation->getWordType()) {
+            $translation->getWord1()->setWordType($translation->getWordType());
+            $translation->getWord2()->setWordType($translation->getWordType());
+        }
         $this->setWordsIfExist($em, $translation);
     }
 
