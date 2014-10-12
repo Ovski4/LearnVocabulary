@@ -11,7 +11,7 @@ class TranslationWordsNotBlankValidator extends ConstraintValidator
 {
     public function validate($translation, Constraint $constraint)
     {
-        $word1Value = $translation->getWord1()->getValue()
+        $word1Value = $translation->getWord1()->getValue();
         if (empty($word1Value)) {
             $this->context->addViolationAt(
                 null,
