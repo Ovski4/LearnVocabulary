@@ -20,11 +20,9 @@ jQuery(document).ready(function() {
     if (displayValue != null) {
         if (displayValue == 'hide-left') {
             hideLeftColumn();
-            $actions.append($rightHideButton);
             $actions.append($resetColumns);
         } else if (displayValue == 'hide-right') {
             hideRightColumn();
-            $actions.append($leftHideButton);
             $actions.append($resetColumns);
         }
     } else {
