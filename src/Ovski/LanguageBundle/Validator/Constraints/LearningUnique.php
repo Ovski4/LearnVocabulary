@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class LearningUnique extends Constraint
 {
-    public $message = "You are already learning those languages";
+    public $message = "learning.already";
 
     public function validatedBy()
     {

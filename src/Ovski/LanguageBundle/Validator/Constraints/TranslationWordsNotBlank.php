@@ -7,13 +7,13 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class TranslationRequiresArticles extends Constraint
+class TranslationWordsNotBlank extends Constraint
 {
-    public $message = "%language%.article.missing";
+    public $message = "%language%.word.blank";
 
     public function validatedBy()
     {
-        return 'translation_requires_articles_validator';
+        return 'translation_words_not_blank_validator';
     }
 
     public function getTargets()

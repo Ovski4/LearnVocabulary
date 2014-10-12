@@ -9,7 +9,25 @@
     <div class="new-learning">
         <h2>{% trans %}Learn a new language{% endtrans %}</h2>
 
-        {{ form(form) }}
+        {{ form_start(form) }}
+        <div class="error">
+            {{ form_errors(form) }}
+        </div>
+        <div class="language1">
+            {{ form_label(form.language1) }}
+            {{ form_errors(form.language1) }}
+            {{ form_widget(form.language1) }}
+        </div>
+        <div class="language2">
+            {{ form_label(form.language2) }}
+            {{ form_errors(form.language2) }}
+            {{ form_widget(form.language2) }}
+        </div>
+
+        <div class="submit-button">
+            {{ form_rest(form) }}
+        </div>
+        {{ form_end(form) }}
 
         <a href="{{ path('learning') }}" class="button">
             {% trans %}Back to the list{% endtrans %}

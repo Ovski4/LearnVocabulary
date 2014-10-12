@@ -43,8 +43,8 @@ class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterfac
             $languageObj->setName($language['default_name']);
             $languageObj->setRequireArticles($language['require_articles']);
             $repository->translate($languageObj, 'name', 'fr', $language['french_name']);
+            $this->addReference($language['default_name'], $languageObj);
             $manager->persist($languageObj);
-            $this->addReference($languageObj->getName(), $languageObj);
         }
 
         $manager->flush();

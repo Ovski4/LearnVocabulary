@@ -16,6 +16,7 @@ class TranslationUniqueValidator extends ConstraintValidator
      * Constructor
      *
      * @param EntityManager $em
+     * @param SecurityContext $securityContext
      */
     public function __construct(EntityManager $em, SecurityContext $securityContext)
     {
@@ -91,6 +92,7 @@ class TranslationUniqueValidator extends ConstraintValidator
         if (!empty($translations))
         {
             $this->context->addViolationAt(
+                null,
                 $constraint->message,
                 array(),
                 null

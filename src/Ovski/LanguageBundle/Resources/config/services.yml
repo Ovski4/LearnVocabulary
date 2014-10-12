@@ -24,3 +24,7 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: validator.constraint_validator, alias: learning_languages_not_identical_validator }
+    ovski.translation_words_not_blank_validator:
+        class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationWordsNotBlankValidator'
+        tags:
+            - { name: validator.constraint_validator, alias: translation_words_not_blank_validator }

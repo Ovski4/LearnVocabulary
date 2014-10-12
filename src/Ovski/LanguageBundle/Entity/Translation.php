@@ -18,6 +18,7 @@ use Ovski\LanguageBundle\Validator\Constraints as OvskiAssert;
  * @ORM\Entity(repositoryClass="Ovski\LanguageBundle\Repository\TranslationRepository")
  * @Assert\GroupSequence({"First", "Second", "Translation"})
  * @OvskiAssert\TranslationRequiresArticles(groups={"First"})
+ * @OvskiAssert\TranslationWordsNotBlank(groups={"First"})
  * @OvskiAssert\TranslationUnique(groups={"Second"})
  */
 class Translation

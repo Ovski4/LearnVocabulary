@@ -15,6 +15,11 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#184b6a', GradientType=1 );/* IE6-9 fallback on horizontal gradient */
 }
 
+select, input[type="text"] {
+    min-height: 30px;
+}
+
+
 .table>thead>tr>th {
     border-bottom: 1px solid #ddd;
 }
@@ -50,6 +55,7 @@ a:hover {
 
 div.error {
     color: red;
+    padding-bottom: 10px;
 }
 
 .button,
@@ -345,6 +351,10 @@ ul li:first-child span {
     text-align: center;
 }
 
+.add-translation form input {
+    max-width: 150px;
+}
+
 .add-translation form,
 .filter-translations form {
     border-top: 1px solid #ddd;
@@ -422,14 +432,6 @@ form[name="ovski_languagebundle_translation"] .ovski-word label {
 select#ovski_languagebundle_translation_wordType {
 
     margin-left: 57px;
-}
-
-select, input {
-    height: 30px;
-}
-
-form input {
-    max-width: 150px;
 }
 
 /* Filter form */
@@ -554,6 +556,25 @@ form[name="ovski_languagebundle_translation"] button[type="submit"] {
   ***********/
 
 @media (min-width: 768px) {
+
+    .beta-version {
+        position: absolute;
+        top: 15px;
+        right: -40px;
+        z-index: 99999;
+        background: #CB0303;
+        -moz-transform: rotate(30deg);
+        -webkit-transform: rotate(30deg);
+        -o-transform: rotate(30deg);
+        height: 50px;
+        line-height: 50px;
+        font-size: 23px;
+        font-weight: bold;
+        padding-left: 125px;
+        padding-right: 85px;
+        color: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
 
     form div.submit-button {
         text-align: left;

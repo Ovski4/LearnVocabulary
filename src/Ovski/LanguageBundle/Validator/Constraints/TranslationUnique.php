@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class TranslationUnique extends Constraint
 {
-    public $message = "You already entered this translation";
+    public $message = "translation.already.entered";
 
     public function validatedBy()
     {

@@ -18,7 +18,9 @@
         <div class="add-translation">
             <h3>{% trans %}Add a new translation{% endtrans %}</h3>
             {{ form_start(form) }}
-            {{ form_errors(form) }}
+            <div class="error">
+                {{ form_errors(form) }}
+            </div>
             <div class="word-type">
                 {{ form_label(form.wordType) }}
                 {{ form_errors(form.wordType) }}

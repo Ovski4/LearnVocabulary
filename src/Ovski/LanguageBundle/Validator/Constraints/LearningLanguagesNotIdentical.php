@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class LearningLanguagesNotIdentical extends Constraint
 {
-    public $message = 'You must choose 2 distinct languages';
+    public $message = 'learning.languages.not.identical';
 
     public function validatedBy()
     {

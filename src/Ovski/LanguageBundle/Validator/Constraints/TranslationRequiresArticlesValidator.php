@@ -47,7 +47,7 @@ class TranslationRequiresArticlesValidator extends ConstraintValidator
             if (!$translation->getWord2()->getArticle() && $translation->getLearning()->getLanguage2()->requireArticles())
             {
                 $this->context->addViolationAt(
-                    'word2',
+                    null,
                     $constraint->message,
                     array('%language%' => $translation->getLearning()->getLanguage2()->getName()),
                     null

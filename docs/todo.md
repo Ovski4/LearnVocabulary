@@ -1,12 +1,16 @@
 ## Todo ##
 
+ * button delete and update on small screens
+
 -> before to prod
-  - command import csv do not create duplicated words
   - translate texts
-  - create in dev not in prod!
   - test everything!
 
 
+ -> update
+ -> fixtures with prod directory
+ -> create accounts
+ -> import csv
 
 ### features ###
  * tooltip system for first time

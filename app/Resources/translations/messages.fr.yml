@@ -15,6 +15,7 @@
 'Translation list': Liste des traductions
 'Revision': Révision
 'Edition': Édition
+'Add': Ajouter
 'Add a new translation': Ajouter une traduction
 'Filter': Filtrer
 'Download translations as CSV': Télécharger les traductions au format CSV
@@ -29,7 +30,7 @@
 'Hide left column': Cacher à gauche
 'Hide right column' : Cacher à droite
 'Display everything': Afficher tout
-'Maybe you just wanna see what it is about? Try with this user': Vous souhaitez sans doute simplement voir de quoi il s'agit? Connectez-vous avec l'utilisateur suivant pour essayer
+'Maybe you just wanna see what it is about? Log in with this user': Vous souhaitez sans doute simplement voir de quoi il s'agit? Connectez-vous avec l'utilisateur suivant pour essayer
 'Login': Identifiant
 'Password': Mot de passe
 'You are already learning those languages': Vous apprenez déjà ces langues
@@ -47,4 +48,6 @@
 'a tool to help you learn new words everyday': "un outil pour s'enrichir en vocabulaire chaque jour"
 'This web site does not aim to be a dictionary, but is meant to help you learning words': "Ce site n'a pas pour vocation à constituer un dictionnaire, mais a pour but de vous aider à apprendre"
 'by yourself': par vous même
-"It's very simple: from your computer or your smartphone, add your own translations, then revise them": "Le principe est on ne peut plus simple: depuis votre ordinateur ou smartphone, ajouter vos traductions, puis révisez les"
+"It's very simple: add your own translations from your computer or your smartphone, then revise them": "Le principe est on ne peut plus simple: ajoutez vos traductions depuis votre ordinateur ou smartphone, puis révisez les"
+"To get started immediately": Pour commencer immédiatement
+"create an account": créez un compte
