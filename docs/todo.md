@@ -1,14 +1,16 @@
 ## Todo ##
 
-Updat translation change from name to other -> error checkArticles!
+-> before to prod
+  - command import csv do not create duplicated words
+  - translate texts
+  - create in dev not in prod!
+  - test everything!
+
+
 
 ### features ###
- * Add a validator for learning (unique)
  * tooltip system for first time
- * larger input and selectboxes
- * align form input and selectboxes
  * reduce size of main image in height (bottom)
- * helvetica neue light
  * load his own js
  * use local storage to let left column hidden on next page
 	Si la page n'est pas /page/2 ou + > clean local storage
