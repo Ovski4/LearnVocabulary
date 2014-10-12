@@ -123,6 +123,7 @@ class TranslationManager
                     $word1->setValue($data[3]);
                     $word1->setArticle($article1);
                     $word1->setLanguage($language1);
+                    $word1 = $this->getWordIfExists($word1);
                     $article2 = $this->em->getRepository('OvskiLanguageBundle:Article')->findOneBy(array(
                         'language' => $language2,
                         'value'    => $data[4]
@@ -132,6 +133,7 @@ class TranslationManager
                     $word2->setValue($data[5]);
                     $word2->setArticle($article2);
                     $word2->setLanguage($language2);
+                    $word2 = $this->getWordIfExists($word2);
                     $translation = new Translation();
                     $translation->setWordType($wordType);
                     $translation->setLearning($learning);
@@ -143,7 +145,30 @@ class TranslationManager
             }
             fclose($handle);
         }
-
+echo "FLUSH";
         $this->em->flush();
+    }
+
+    /**
+     * Check whether or not a word already exists
+     *
+     * @param Word $word
+     * @return mixed
+     */
+    private function getWordIfExists(Word $word) {
+
+        $existingWord = $this->em->getRepository('OvskiLanguageBundle:Word')->findOneBy(
+            array(
+                'article'  => $word->getArticle(),
+                'wordType' => $word->getWordType(),
+                'language' => $word->getLanguage(),
+                'value'    => $word->getValue()
+            )
+        );
+
+        if (!$existingWord) {
+            return $word;
+        }
+        return $existingWord;
     }
 } 
