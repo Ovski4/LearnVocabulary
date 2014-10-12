@@ -98,7 +98,7 @@ class TranslationManager
         if (($handle = fopen($csv, "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000)) !== FALSE) {
                 $language1Name = substr($data[3], 0, strpos($data[3], ' word'));
-                $language2Name = substr($data[5], 0, strpos($data[3], ' word'));
+                $language2Name = substr($data[5], 0, strpos($data[5], ' word'));
                 break;
             }
             fclose($handle);
@@ -145,7 +145,7 @@ class TranslationManager
             }
             fclose($handle);
         }
-echo "FLUSH";
+
         $this->em->flush();
     }
 
