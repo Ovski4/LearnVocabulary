@@ -14,10 +14,10 @@
             {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <div>
                     <ul>
-                        <li>
+                        {#<li>
                             {% trans %}Your prefer to learn the old school way?{% endtrans %}
                             <a href="{{ path('oldschool') }}">{% trans %}Follow these guidelines</a>{% endtrans %}!
-                        </li>
+                        </li>#}
                         <li>
                             {% trans %}To get started immediately{% endtrans %},
                             <a href="{{ path('fos_user_registration_register') }}">{% trans %}create an account{% endtrans %}!</a>
