@@ -482,9 +482,14 @@ select#ovski_languagebundle_translation_wordType {
 .translation-edition table tr td:nth-child(2) { width: 34%; }
 .translation-edition table tr td:nth-child(3) { width: 32%; }
 
-.translation-revision div.actions button:nth-child(2) {
-    margin-left: 7px;
+.translation-revision button.hide-column-right {
+    margin-left: 2%;
 }
+
+.translation-revision button.hide-column {
+    max-width: 48%;
+}
+
 
 form[name="ovski_languagebundle_translation"] button[type="submit"] {
     margin-top: 10px;
@@ -502,8 +507,9 @@ form[name="ovski_languagebundle_translation"] button[type="submit"] {
     float: right;
 }
 
-.translation-edition table td.actions > a {
-    margin-right: 5px;
+.translation-edition table td.actions button {
+    min-width: 40px;
+    margin-left: 5px;
 }
 
 /* FOSUser forms */
