@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\UserBundle\DataFixtures\ORM;
+namespace Ovski\UserBundle\DataFixtures\ORM\Dev;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -57,6 +57,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 1;
+        return 4;
     }
 }

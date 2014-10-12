@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\LanguageBundle\DataFixtures\ORM;
+namespace Ovski\LanguageBundle\DataFixtures\ORM\Prod;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

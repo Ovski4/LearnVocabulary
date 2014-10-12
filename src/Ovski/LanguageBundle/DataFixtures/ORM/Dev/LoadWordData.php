@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\LanguageBundle\DataFixtures\ORM;
+namespace Ovski\LanguageBundle\DataFixtures\ORM\Dev;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -83,10 +83,10 @@ class LoadWordData extends AbstractFixture implements OrderedFixtureInterface
             $wordObj->setWordType($this->getReference($word['word_type']));
             if ($word['word_type'] == 'name') {
                 $wordObj->setArticle($this->getReference(sprintf('%s-%s', $word['language'], $word['article'])));
-                $this->setReference(sprintf('%s-%s', $word['article'], $word['value']), $wordObj);
+                $this->addReference(sprintf('%s-%s', $word['article'], $word['value']), $wordObj);
             }
             $wordObj->addUser($this->getReference('baptiste'));
-            $this->setReference($word['value'], $wordObj);
+            $this->addReference($word['value'], $wordObj);
             $manager->persist($wordObj);
         }
 
