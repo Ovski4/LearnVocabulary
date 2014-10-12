@@ -1,4 +1,5 @@
 jQuery(document).ready(function() {
+
     var hiddenColumn = null;
     var tableSize = jQuery('table > tbody > tr').length;
     var hiddenWordCount = 0;
@@ -12,44 +13,40 @@ jQuery(document).ready(function() {
     var $rightHideButton = jQuery('<button class="hide-column-right hide-column">'+rightButtonText+'</button>');
     var $resetColumns = jQuery('<button class="show-columns">'+displayButtonText+'</button>');
 
-    $actions.append($leftHideButton);
-    $actions.append($rightHideButton);
+    var displayValue = localStorage.getItem('displayValue');
+    if (displayValue != null) {
+        if (displayValue == 'hide-left') {
+            hideLeftColumn();
+            $actions.append($rightHideButton);
+            $actions.append($resetColumns);
+        } else if (displayValue == 'hide-right') {
+            hideRightColumn();
+            $actions.append($leftHideButton);
+            $actions.append($resetColumns);
+        }
+    } else {
+        $actions.append($leftHideButton);
+        $actions.append($rightHideButton);
+    }
+
     $actions.insertBefore('table');
 
     // hide left column on click
     jQuery(document).on('click', '.hide-column-left', function() {
-        hiddenWordCount = tableSize;
-        hiddenColumn = 'left';
-        jQuery('.hide-column').remove();
-        jQuery($actions).append($resetColumns);
-        jQuery('table > tbody > tr > td:first-child > span').each(function() {
-            jQuery(this).parent().addClass('hidden-children');
-            jQuery(this).attr('class', 'is-invisible');
-        });
+        localStorage.setItem('displayValue', 'hide-left');
+        hideLeftColumn();
     });
 
     // hide right column on click
     jQuery(document).on('click', '.hide-column-right', function() {
-        hiddenWordCount = tableSize;
-        hiddenColumn = 'right';
-        jQuery('.hide-column').remove();
-        jQuery($actions).append($resetColumns);
-        jQuery('table > tbody > tr > td:nth-child(2) > span').each(function() {
-            jQuery(this).parent().addClass('hidden-children');
-            jQuery(this).attr('class', 'is-invisible');
-        });
+        localStorage.setItem('displayValue', 'hide-right');
+        hideRightColumn();
     });
 
     // display all columns on click on reset button
     jQuery(document).on('click', '.show-columns', function() {
-        hiddenColumn = null;
-        $actions.append($leftHideButton);
-        $actions.append($rightHideButton);
-        $resetColumns.remove();
-        jQuery('table > tbody > tr > td > span').each(function() {
-            jQuery(this).attr('class', 'is-visible');
-            jQuery(this).parent().removeClass();
-        });
+        localStorage.clear();
+        displayAllColumn();
     });
 
     // on click on span
@@ -73,4 +70,37 @@ jQuery(document).ready(function() {
             }
         }
     });
+
+    function hideLeftColumn() {
+        hiddenWordCount = tableSize;
+        hiddenColumn = 'left';
+        jQuery('.hide-column').remove();
+        jQuery($actions).append($resetColumns);
+        jQuery('table > tbody > tr > td:first-child > span').each(function() {
+            jQuery(this).parent().addClass('hidden-children');
+            jQuery(this).attr('class', 'is-invisible');
+        });
+    }
+
+    function hideRightColumn() {
+        hiddenWordCount = tableSize;
+        hiddenColumn = 'right';
+        jQuery('.hide-column').remove();
+        jQuery($actions).append($resetColumns);
+        jQuery('table > tbody > tr > td:nth-child(2) > span').each(function() {
+            jQuery(this).parent().addClass('hidden-children');
+            jQuery(this).attr('class', 'is-invisible');
+        });
+    }
+
+    function displayAllColumn() {
+        hiddenColumn = null;
+        $actions.append($leftHideButton);
+        $actions.append($rightHideButton);
+        $resetColumns.remove();
+        jQuery('table > tbody > tr > td > span').each(function() {
+            jQuery(this).attr('class', 'is-visible');
+            jQuery(this).parent().removeClass();
+        });
+    }
 });

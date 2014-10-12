@@ -482,7 +482,7 @@ select#ovski_languagebundle_translation_wordType {
 .translation-edition table tr td:nth-child(2) { width: 34%; }
 .translation-edition table tr td:nth-child(3) { width: 32%; }
 
-.translation-revision button.hide-column-right {
+.translation-revision button:nth-child(2) {
     margin-left: 2%;
 }
 
