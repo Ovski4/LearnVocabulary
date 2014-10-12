@@ -1,17 +1,5 @@
 ## Todo ##
 
- * button delete and update on small screens
-
--> before to prod
-  - translate texts
-  - test everything!
-
-
- -> update
- -> fixtures with prod directory
- -> create accounts
- -> import csv
-
 ### features ###
  * tooltip system for first time
  * reduce size of main image in height (bottom)
