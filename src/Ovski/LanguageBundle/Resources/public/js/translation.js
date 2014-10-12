@@ -1,5 +1,7 @@
 jQuery(document).ready(function() {
 
+    localStorage.setItem('current_revision_path', window.location.pathname);
+
     var hiddenColumn = null;
     var tableSize = jQuery('table > tbody > tr').length;
     var hiddenWordCount = 0;
@@ -14,6 +16,7 @@ jQuery(document).ready(function() {
     var $resetColumns = jQuery('<button class="show-columns">'+displayButtonText+'</button>');
 
     var displayValue = localStorage.getItem('displayValue');
+
     if (displayValue != null) {
         if (displayValue == 'hide-left') {
             hideLeftColumn();
