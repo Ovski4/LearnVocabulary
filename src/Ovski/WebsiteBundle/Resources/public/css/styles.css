@@ -282,7 +282,7 @@ section.container {
 /* translation revision/edition */
 .nav-tabs > li,
 .nav-tabs > li a {
-    position: initial;
+    position: inherit;
 }
 
 .nav-tabs {
@@ -381,42 +381,64 @@ ul li:first-child span {
     background-color: #2c2c2c;
 }
 
-#ovski_languagebundle_translation > div:nth-child(4) {
+form[name="ovski_languagebundle_translation"] {
+    overflow: hidden;
+}
+
+form div.submit-button {
     text-align: center;
 }
 
-#ovski_languagebundle_translation > div:nth-child(-n+3) > label {
+form[name="ovski_languagebundle_translation"] > div.word1,
+form[name="ovski_languagebundle_translation"] > div.word2 {
+    overflow: hidden;
+}
+
+form[name="ovski_languagebundle_translation"] > div > label:first-letter {
     text-transform: capitalize;
 }
 
-#ovski_languagebundle_translation > div:nth-child(2),
-#ovski_languagebundle_translation > div:nth-child(3) {
-    width: 100%;
-    overflow: auto;
-}
-
-#ovski_languagebundle_translation > div:nth-child(2) > *,
-#ovski_languagebundle_translation > div:nth-child(3) > * {
+form[name="ovski_languagebundle_translation"] > div.word1 > *,
+form[name="ovski_languagebundle_translation"] > div.word2 > * {
     float: left;
 }
 
-#ovski_languagebundle_translation > div:nth-child(2) > label,
-#ovski_languagebundle_translation > div:nth-child(3) > label {
+form[name="ovski_languagebundle_translation"] > div.word1 > label,
+form[name="ovski_languagebundle_translation"] > div.word2 > label {
     display: block;
-    min-width: 25%;
 }
 
-#ovski_languagebundle_translation label {
+form[name="ovski_languagebundle_translation"] label {
     padding-right: 5px;
+    min-height: 35px;
+    line-height: 35px;
+    min-width: 90px;
 }
 
-#ovski_languagebundle_translation .ovski-word input[type="text"] {
-    margin-left: 6px;
+form[name="ovski_languagebundle_translation"] .ovski-word label {
+    min-width: 60px;
+}
+
+select#ovski_languagebundle_translation_wordType {
+
+    margin-left: 57px;
+}
+
+select, input {
+    height: 30px;
+}
+
+form input {
+    max-width: 150px;
 }
 
 /* Filter form */
 .filter-form label {
     min-width: 100px;
+}
+
+.filter-form > div {
+    padding: 5px 0;
 }
 
 .translation table tr th {
@@ -462,7 +484,7 @@ ul li:first-child span {
     margin-left: 7px;
 }
 
-#ovski_languagebundle_translation button[type="submit"] {
+form[name="ovski_languagebundle_translation"] button[type="submit"] {
     margin-top: 10px;
 }
 
@@ -533,6 +555,17 @@ ul li:first-child span {
 
 @media (min-width: 768px) {
 
+    form div.submit-button {
+        text-align: left;
+    }
+
+    /*form[name="ovski_languagebundle_translation"] > div.word1,
+    form[name="ovski_languagebundle_translation"] > div.word2,
+    form[name="ovski_languagebundle_translation"] > div.word-type {
+        display: inline-block;
+        float: left;
+    }*/
+
     header h1 {
         font-size: 36px;
         padding-right: 30px;
@@ -554,36 +587,6 @@ ul li:first-child span {
         background: #fff;
         box-shadow: inset 0 1px 0 0 #f5f5f5;
         border: solid 1px rgba(0,0,0,0.3);
-    }
-
-    label[for="ovski_languagebundle_translation_wordType"] {
-        display: block;
-    }
-
-    #ovski_languagebundle_translation > div:nth-child(-n+3) {
-        float: left;
-        padding: 0 5px;
-        min-height: 55px;
-    }
-
-    #ovski_languagebundle_translation > div:nth-child(1) {
-        width: 120px;
-        float: left;
-        padding: 0 5px;
-    }
-
-    #ovski_languagebundle_translation > div:nth-child(2) {
-        width: 295px;
-    }
-
-    #ovski_languagebundle_translation > div:nth-child(3) {
-        width: 295px;
-    }
-
-    /* submit parent div */
-    #ovski_languagebundle_translation > div:nth-child(4) {
-        clear: left;
-        text-align: left;
     }
 
     .translation > h3 {

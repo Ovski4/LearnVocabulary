@@ -18,15 +18,32 @@
         <div class="add-translation">
             <h3>{% trans %}Add a new translation{% endtrans %}</h3>
             {{ form_start(form) }}
-                {{ form_errors(form) }}
+            {{ form_errors(form) }}
+            <div class="word-type">
+                {{ form_label(form.wordType) }}
+                {{ form_errors(form.wordType) }}
+                {{ form_widget(form.wordType) }}
+            </div>
+            <div class="word1">
+                {{ form_label(form.word1) }}
+                {{ form_errors(form.word1) }}
+                {{ form_widget(form.word1) }}
+            </div>
+            <div class="word2">
+                {{ form_label(form.word2) }}
+                {{ form_errors(form.word2) }}
+                {{ form_widget(form.word2) }}
+            </div>
+            <div class="submit-button">
                 {{ form_rest(form) }}
+            </div>
             {{ form_end(form) }}
         </div>
         <div class="filter-translations">
             <h3>{% trans %}Filter translations{% endtrans %}</h3>
             <form class="filter-form" method="get" action="{{ path('translation_edition', {'slug': learning.slug}) }}">
                 {{ form_rest(filterForm) }}
-                <input type="submit" name="submit-filter" value="{% trans %}Filter{% endtrans %}" />
+                <div class="submit-button"><input type="submit" name="submit-filter" value="{% trans %}Filter{% endtrans %}" /></div>
             </form>
         </div>
         <h3>{% trans %}Translation list{% endtrans %}</h3>
