@@ -5,7 +5,21 @@
     {% trans %}Error{% endtrans %}
 {% endblock %}
 
+
+{% block menu %}
+    <li>
+        <a href={{ path("home") }}>
+            {% trans %}Come back to the web site{% endtrans %}
+            <i class="fa fa-backward"></i>
+        </a>
+    </li>
+{% endblock %}
+
 {% block body %}
     <h1>{% trans %}Oups! An error occured{% endtrans %}</h1>
     <h2>{% trans %}The server returned an error{% endtrans %} "{{ status_code }} {{ status_text }}".</h2>
+    <a href={{ path("home") }}>
+        <i class="fa fa-play"></i>
+        {% trans %}Come back to the web site{% endtrans %}
+    </a>
 {% endblock %}
