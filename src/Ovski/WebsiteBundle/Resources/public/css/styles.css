@@ -586,13 +586,6 @@ form[name="ovski_languagebundle_translation"] button[type="submit"] {
         text-align: left;
     }
 
-    /*form[name="ovski_languagebundle_translation"] > div.word1,
-    form[name="ovski_languagebundle_translation"] > div.word2,
-    form[name="ovski_languagebundle_translation"] > div.word-type {
-        display: inline-block;
-        float: left;
-    }*/
-
     header h1 {
         font-size: 36px;
         padding-right: 30px;

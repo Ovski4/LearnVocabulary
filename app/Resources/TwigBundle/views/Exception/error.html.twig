@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} |
+    {% trans %}Error{% endtrans %}
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans %}Oups! An error occured{% endtrans %}</h1>
+    <h2>{% trans %}The server returned an error{% endtrans %} "{{ status_code }} {{ status_text }}".</h2>
+{% endblock %}
