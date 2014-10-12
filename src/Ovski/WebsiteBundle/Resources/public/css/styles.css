@@ -352,7 +352,7 @@ ul li:first-child span {
 }
 
 .add-translation form input {
-    max-width: 150px;
+    max-width: 125px;
 }
 
 .add-translation form,
@@ -568,7 +568,7 @@ form[name="ovski_languagebundle_translation"] button[type="submit"] {
         top: 15px;
         right: -40px;
         z-index: 99999;
-        background: #CB0303;
+        background: #c9302c;
         -moz-transform: rotate(30deg);
         -webkit-transform: rotate(30deg);
         -o-transform: rotate(30deg);
@@ -626,5 +626,9 @@ form[name="ovski_languagebundle_translation"] button[type="submit"] {
 
     .oldschool .picture img {
         width: 50%;
+    }
+
+    .add-translation form input {
+        max-width: inherit;
     }
 }
