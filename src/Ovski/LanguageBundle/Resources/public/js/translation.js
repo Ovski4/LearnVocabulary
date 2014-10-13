@@ -1,5 +1,4 @@
-jQuery(document).ready(function() {
-
+function handleRevisionTable() {
     localStorage.setItem('current_revision_path', window.location.pathname);
 
     var hiddenColumn = null;
@@ -104,4 +103,8 @@ jQuery(document).ready(function() {
             jQuery(this).parent().removeClass();
         });
     }
+}
+
+jQuery(document).ready(function() {
+    handleRevisionTable();
 });

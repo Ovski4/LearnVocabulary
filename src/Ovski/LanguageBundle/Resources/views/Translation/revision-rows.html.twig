@@ -1,0 +1,32 @@
+{{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_revision', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
+<table class="table records_list"
+       data-left-button-text="{{ buttonTexts.left }}"
+       data-right-button-text="{{ buttonTexts.right }}"
+       data-display-text="{{ buttonTexts.display }}">
+    <thead>
+    <tr>
+        <th>{{ learning.language1 }}</th>
+        <th colspan=2>{{ learning.language2 }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for translation in pager.currentPageResults %}
+        <tr>
+            <td onclick="">
+                <span class="is-visible">{{ translation.word1 }}</span>
+                {% if translation.word1.article %}<span class="is-visible">({{ translation.word1.article }})</span>{% endif %}
+            </td>
+            <td onclick="">
+                <span class="is-visible">{{ translation.word2 }}</span>
+                {% if translation.word2.article %}<span class="is-visible">({{ translation.word2.article }})</span>{% endif %}
+            </td>
+            <td>
+                <a class="star {% if translation.isStarred %}star-yes{% endif %}"
+                   href="{{ path('translation_star', {'slug': learning.slug, 'id': translation.id}) }}">
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_revision', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}

@@ -75,13 +75,23 @@ class TranslationController extends Controller
             throw new NotFoundHttpException();
         }
 
-        return array(
-            'pager'       => $pager,
-            'slug'        => $slug,
-            'learning'    => $learning,
-            'filterForm'  => $filterForm->createView(),
-            'buttonTexts' => $this->getButtonTexts()
-        );
+        if ($request->isXmlHttpRequest()) {
+            sleep(1);
+            return $this->render('OvskiLanguageBundle:Translation:revision-rows.html.twig',
+                array(
+                    'pager'    => $pager,
+                    'learning' => $learning,
+                    'buttonTexts' => $this->getButtonTexts()
+                )
+            );
+        } else {
+            return array(
+                'pager'       => $pager,
+                'learning'    => $learning,
+                'filterForm'  => $filterForm->createView(),
+                'buttonTexts' => $this->getButtonTexts()
+            );
+        }
     }
 
     /**
