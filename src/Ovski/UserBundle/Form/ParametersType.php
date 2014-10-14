@@ -15,7 +15,7 @@ class ParametersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('maxItemsPerPage', null, array(
+            ->add('maxItemsPerPage', 'integer', array(
                 'label' => 'Maximum number of translations per page'
             ))
         ;

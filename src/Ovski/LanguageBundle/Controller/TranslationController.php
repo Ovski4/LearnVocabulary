@@ -412,7 +412,7 @@ class TranslationController extends Controller
      * @Method("GET")
      */
     public function starAction(Request $request, $slug, $id)
-    {
+    {sleep(2);
         $em = $this->getDoctrine()->getManager();
         $translation = $em->getRepository('OvskiLanguageBundle:Translation')->find($id);
 

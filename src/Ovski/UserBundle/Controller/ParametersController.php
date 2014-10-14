@@ -21,13 +21,21 @@ class ParametersController extends Controller
      * Displays a form to edit the maxItemsPerPage parameter.
      *
      * @Route("/", name="parameters_edit")
-     * @Method("GET")
+     * @Method({"GET", "PUT"})
      * @Template()
      */
-    public function editAction()
+    public function editAction(Request $request)
     {
         $editForm = $this->createEditForm();
 
+        if ($request->getMethod() == 'PUT') { // add a new translation
+            $editForm->handleRequest($request);
+            if ($editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('Settings successfully updated'));
+                return $this->redirect($this->generateUrl('parameters_edit'));
+            }
+        }
         return array(
             'edit_form' => $editForm->createView()
         );
@@ -41,35 +49,12 @@ class ParametersController extends Controller
     private function createEditForm()
     {
         $form = $this->createForm(new ParametersType(), $this->getUser(), array(
-            'action' => $this->generateUrl('parameters_update'),
+            'action' => $this->generateUrl('parameters_edit'),
             'method' => 'PUT',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
-    }
-
-    /**
-     * Edits an existing parameters user
-     *
-     * @Route("/", name="parameters_update")
-     * @Method("PUT")
-     * @Template("OvskiUserBundle:User:edit.html.twig")
-     */
-    public function updateAction(Request $request)
-    {
-        $editForm = $this->createEditForm();
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirect($this->generateUrl('parameters_edit'));
-        }
-
-        return array(
-            'edit_form' => $editForm->createView(),
-        );
     }
 }
