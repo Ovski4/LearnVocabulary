@@ -8,13 +8,32 @@
 {% block body %}
     <h2>{% trans %}Edit a translation{% endtrans %}</h2>
 
-    {{ form(edit_form) }}
+    {{ form_start(edit_form) }}
+    <div class="error">
+        {{ form_errors(edit_form) }}
+    </div>
+    <div class="word-type">
+        {{ form_label(edit_form.wordType) }}
+        {{ form_widget(edit_form.wordType) }}
+    </div>
+    <div class="word1">
+        {{ form_label(edit_form.word1) }}
+        {{ form_widget(edit_form.word1) }}
+    </div>
+    <div class="word2">
+        {{ form_label(edit_form.word2) }}
+        {{ form_widget(edit_form.word2) }}
+    </div>
+    <div class="submit-button">
+        {{ form_rest(edit_form) }}
+    </div>
+    {{ form_end(edit_form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('translation_edition', {'slug': slug}) }}">{% trans %}Back to the list{% endtrans %}</a>
-        </li>
-    </ul>
+    <br/>
+    <a href="{{ path('translation_edition', {'slug': slug}) }}">
+        <i class="fa fa-backward"></i>
+        {% trans %}Back to the list{% endtrans %}
+    </a>
 {% endblock %}
 
 {%  block javascripts %}
