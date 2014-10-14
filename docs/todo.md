@@ -2,7 +2,8 @@
 
 ### features ###
  * shuffle rows
- * translation for settings update and constraints 
+ * translation for settings update
+ * numeric constraint for settings 
  * tooltip system for first time
  * email with mailgun? > test send email and domain name used
  * google analytics
