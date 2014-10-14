@@ -76,7 +76,6 @@ class TranslationController extends Controller
         }
 
         if ($request->isXmlHttpRequest()) {
-            sleep(1);
             return $this->render('OvskiLanguageBundle:Translation:revision-rows.html.twig',
                 array(
                     'pager'    => $pager,

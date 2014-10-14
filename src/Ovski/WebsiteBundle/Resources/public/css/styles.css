@@ -485,6 +485,7 @@ select#ovski_languagebundle_translation_wordType {
     background: url('../img/stars.png') 0 32px;
 }
 
+.translation table tr td a.star.ajax-loader,
 .ajax-loader {
     background: url('../img/ajax-loader.gif') 0 0 no-repeat;
 }
