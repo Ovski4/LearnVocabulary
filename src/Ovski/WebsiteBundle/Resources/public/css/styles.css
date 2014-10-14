@@ -215,7 +215,15 @@ header a > i.fa {
     padding: 6px;
     font-size: 27px;
     opacity: 1;
+
+}
+
+.container.alert-success button.close {
     color: #3c763d;
+}
+
+.container.alert-info button.close {
+    color: #31708f;
 }
 
 .container.alert button.close:focus {
