@@ -404,7 +404,7 @@ form[name="ovski_languagebundle_translation"] > div.word2 {
     overflow: hidden;
 }
 
-form[name="ovski_languagebundle_translation"] > div > label:first-letter {
+form label:first-letter {
     text-transform: capitalize;
 }
 
@@ -568,6 +568,12 @@ form[name="ovski_languagebundle_translation"] button[type="submit"] {
 
 .fos-user-form div.submit {
     border-bottom: 1px solid #ccc;
+}
+
+/* Registration confirmed */
+
+.registration-confirmed {
+    padding-top: 25px;
 }
 
 /* Login form */

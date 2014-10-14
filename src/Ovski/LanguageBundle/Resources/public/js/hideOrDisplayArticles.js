@@ -1,16 +1,15 @@
 jQuery(document).ready(function() {
-    if (jQuery('#ovski_languagebundle_translation_wordType').find('option:selected').val() !=
-        jQuery("#ovski_languagebundle_translation_wordType option:nth-child(2)").val()) {
-        jQuery('.ovski-word div:nth-child(1)').css('display', 'none');
-    }
-
-    jQuery('select.ovski-article-selectbox.empty').replaceWith(
+    $selectToHide = jQuery('select.ovski-article-selectbox.empty');
+    $selectToHide.hide();
+    $selectToHide.parent().append(
         '<span>('+jQuery('select.ovski-article-selectbox.empty').attr('data-article')+')</span>'
-    );
+    )
+
+    hideOrDisplayArticle(jQuery('#ovski_languagebundle_translation_wordType'));
+
     // reset article select box on word type change
     // and hide select box on word type 'name'
     jQuery('#ovski_languagebundle_translation_wordType').change(function() {
-        jQuery('.ovski-article-selectbox').prop('selectedIndex', 0);
         hideOrDisplayArticle(this);
     });
 });
@@ -25,6 +24,10 @@ function hideOrDisplayArticle(selectBox) {
         jQuery("#ovski_languagebundle_translation_wordType option:nth-child(2)").val()) {
         jQuery('.ovski-word div:nth-child(1)').css('display', 'block');
     } else {
-        jQuery('.ovski-word div:nth-child(1)').css('display', 'none');;
+        jQuery('.ovski-word div:nth-child(1)').css('display', 'none');
+        jQuery('.ovski-article-selectbox').prop('selectedIndex', 0);
+        if ($selectToHide.length) {
+            $selectToHide.prop('selectedIndex', 1);
+        }
     }
 }

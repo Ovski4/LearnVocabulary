@@ -43,11 +43,11 @@
                         <tr>
                             <td onclick="">
                                 <span class="is-visible">{{ translation.word1 }}</span>
-                                {% if translation.word1.article %}<span class="is-visible">({{ translation.word1.article }})</span>{% endif %}
+                                {% if translation.word1.article and learning.language1.requireArticles %}<span class="is-visible">({{ translation.word1.article }})</span>{% endif %}
                             </td>
                             <td onclick="">
                                 <span class="is-visible">{{ translation.word2 }}</span>
-                                {% if translation.word2.article %}<span class="is-visible">({{ translation.word2.article }})</span>{% endif %}
+                                {% if translation.word2.article and learning.language2.requireArticles %}<span class="is-visible">({{ translation.word2.article }})</span>{% endif %}
                             </td>
                             <td>
                                <a class="star {% if translation.isStarred %}star-yes{% endif %}"

@@ -206,7 +206,6 @@ class TranslationController extends Controller
         }
         $this->setWordsIfExist($em, $translation);
     }
-
     /**
      * Get words and set them to the translation instead of creating them if they already exist
      *
