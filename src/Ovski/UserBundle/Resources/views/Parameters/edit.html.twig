@@ -7,7 +7,10 @@
 
 {% block body %}
     <div class="parameters">
-        <h2>{% trans %}Settings{% endtrans %}</h2>
+        <h2>
+            <i class="fa fa-cog"></i>
+            {% trans %}Settings{% endtrans %}
+        </h2>
 
         {{ form_start(edit_form) }}
         <div class="error">

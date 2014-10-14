@@ -7,7 +7,10 @@
 
 {% block body %}
     <div class="new-learning">
-        <h2>{% trans %}Learn a new language{% endtrans %}</h2>
+        <h2>
+            <i class="fa fa-graduation-cap"></i>
+            {% trans %}Learn a new language{% endtrans %}
+        </h2>
 
         {{ form_start(form) }}
         <div class="error">
