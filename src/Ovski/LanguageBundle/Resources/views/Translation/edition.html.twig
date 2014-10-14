@@ -58,12 +58,12 @@
                 {% for translation in pager.currentPageResults %}
                     <tr>
                         <td>
+                            {% if translation.word1.article and learning.language1.requireArticles  %}<span class="is-visible">{{ translation.word1.article }}</span>{% endif %}
                             <span class="is-visible">{{ translation.word1 }}</span>
-                            {% if translation.word1.article and learning.language1.requireArticles  %}<span class="is-visible">({{ translation.word1.article }})</span>{% endif %}
                         </td>
                         <td>
+                            {% if translation.word2.article and learning.language2.requireArticles  %}<span class="is-visible">{{ translation.word2.article }}</span>{% endif %}
                             <span class="is-visible">{{ translation.word2 }}</span>
-                            {% if translation.word2.article and learning.language2.requireArticles  %}<span class="is-visible">({{ translation.word2.article }})</span>{% endif %}
                         </td>
                         <td class="actions">
                             {{ render(controller('OvskiLanguageBundle:Translation:deleteForm', { 'id': translation.id, 'slug': learning.slug })) }}
