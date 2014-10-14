@@ -35,10 +35,6 @@ class TranslationController extends Controller
      */
     public function revisionAction(Request $request, $slug)
     {
-        if ($this->getUser()->getUsername() == 'demo') {
-            $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Click on the Edition button to add translations'));
-        }
-
         // Get learning from slug
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
@@ -88,6 +84,10 @@ class TranslationController extends Controller
                 )
             );
         } else {
+            if ($this->getUser()->getUsername() == 'demo') {
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Click on the Edition button to add translations'));
+            }
+
             return array(
                 'pager'       => $pager,
                 'learning'    => $learning,
