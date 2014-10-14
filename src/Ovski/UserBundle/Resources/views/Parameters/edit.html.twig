@@ -9,7 +9,18 @@
     <div class="parameters">
         <h2>{% trans %}Settings{% endtrans %}</h2>
 
-        {{ form(edit_form) }}
+        {{ form_start(edit_form) }}
+        <div class="error">
+            {{ form_errors(edit_form) }}
+        </div>
+        <div class="max-items-per-page">
+            {{ form_label(edit_form.maxItemsPerPage) }}
+            {{ form_widget(edit_form.maxItemsPerPage) }}
+        </div>
+        <div class="submit-button">
+            {{ form_rest(edit_form) }}
+        </div>
+        {{ form_end(edit_form) }}
 
         <a href={{ path("learning") }} class="button">
             {% trans %}Back to the list{% endtrans %}

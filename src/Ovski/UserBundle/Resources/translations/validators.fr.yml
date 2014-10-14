@@ -1,4 +1,2 @@
 The minimum is {{ limit }}: "Le minimum est {{ limit }}"
 The maximum is {{ limit }}: "Le maximum {{ limit }}"
-minMessage: "Le minimum est {{ limit }}"
-maxMessage: "Le maximum {{ limit }}"

@@ -71,7 +71,7 @@ class TranslationController extends Controller
 
         // paginate the query builder with a doctrine orm adapter
         $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
-        $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
+        $pager->setMaxPerPage($this->getMaxPerPage());
         $page = $request->query->get('page', 1);
         try {
             $pager->setCurrentPage($page);
@@ -152,7 +152,7 @@ class TranslationController extends Controller
 
         // paginate the query builder with a doctrine orm adapter
         $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
-        $pager->setMaxPerPage($this->getUser()->getMaxitemsPerPage());
+        $pager->setMaxPerPage($this->getMaxPerPage());
         $page = $request->query->get('page', 1);
         try {
             $pager->setCurrentPage($page);
@@ -285,6 +285,7 @@ class TranslationController extends Controller
     * Creates a form to edit a Translation entity.
     *
     * @param Translation $translation
+    * @param string $slug
     *
     * @return \Symfony\Component\Form\Form The form
     */
@@ -451,5 +452,17 @@ class TranslationController extends Controller
             'Content-Type' => 'application/force-download',
             'Content-Disposition' => 'attachment; filename="'.$slug.'-vocabulary.csv"'
         ));
+    }
+
+    /**
+     * Get the max per page
+     *
+     * // TODO add functionnal type constraint
+     */
+    private function getMaxPerPage()
+    {
+        $maxPerPage = $this->getUser()->getMaxitemsPerPage();
+
+        return ($maxPerPage < 5) ? 5 : $maxPerPage;
     }
 }

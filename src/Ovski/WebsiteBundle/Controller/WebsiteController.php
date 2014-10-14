@@ -47,11 +47,19 @@ class WebsiteController extends Controller
     }
 
     /**
-     * Render the dropdown languages list for the menu
+     * Tips
      *
-     * @param Request $request
-     * @param $route
-     * @param $routeParams
+     * @Route("/tips", name="tips")
+     * @Method("GET")
+     * @Template()
+     */
+    public function tipsAction()
+    {
+        return array();
+    }
+
+    /**
+     * Render the dropdown languages list for the menu
      *
      * @Template()
      */

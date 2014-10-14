@@ -23,6 +23,12 @@ class User extends BaseUser
     /**
      * @var integer
      *
+     * @Assert\Range(
+     *      min = 5,
+     *      max = 500,
+     *      minMessage = "The minimum is {{ limit }}",
+     *      maxMessage = "The maximum is {{ limit }}"
+     * )
      * @ORM\Column(name="max_items_per_page", type="integer")
      */
     private $maxitemsPerPage;
@@ -81,12 +87,6 @@ class User extends BaseUser
      * Get maxitemsPerPage
      *
      * @return integer
-     * @Assert\Range(
-     *      min = 5,
-     *      max = 500,
-     *      minMessage = "The minimum is {{ limit }}",
-     *      maxMessage = "The maximum is {{ limit }}"
-     * )
      */
     public function getMaxitemsPerPage()
     {
