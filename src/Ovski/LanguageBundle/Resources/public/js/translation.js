@@ -88,7 +88,7 @@ function handleRevisionTable() {
     jQuery(document).on('click', 'table tr td', function() {
         if (jQuery(this).find('span').hasClass('is-invisible')) {
             jQuery(this).find('span').attr('class', 'is-visible');
-            jQuery(this).removeClass();
+            jQuery(this).removeClass('is-invisible');
             hiddenWordCount--;
             if (hiddenColumn == 'left') {
                 setActivity($leftHideButton, true);
@@ -96,7 +96,7 @@ function handleRevisionTable() {
                 setActivity($rightHideButton, true);
             }
             if (hiddenWordCount == 0) {
-                $resetColumnsButton.remove();
+                setActivity($resetColumnsButton, false);
                 if (hiddenColumn == 'left') {
                     setActivity($rightHideButton, true);
                 } else {
