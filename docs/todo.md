@@ -1,14 +1,13 @@
 ## Todo ##
 
 ### features ###
- * shuffle rows
  * email with mailgun? > test send email and domain name used
  * google analytics
  * delete user delete everything
  * link to password forgot
 
 ### details ###
- * tooltip system for first time
+ * (tooltip system for first time)
  * contact page
  * demo user cron to reset everything
  * rename LnguageBundle to VocabularyBundle

@@ -5,7 +5,6 @@ jQuery(document).ready(function() {
         $ajaxLoaderSpan = jQuery('.ajax-ready > span');
         $ajaxLoaderSpan.toggleClass('ajax-loader');
         var url = $a.attr('href');
-        console.log(url);
         jQuery.ajax({
            url: url
         }).success(function(data) {

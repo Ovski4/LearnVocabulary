@@ -58,6 +58,12 @@ div.error {
     padding-bottom: 10px;
 }
 
+.fa-stack {
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+}
+
 .button,
 button,
 input[type="submit"] {
@@ -527,14 +533,23 @@ h3.ajax-ready {
 .translation-edition table tr td:nth-child(2) { width: 34%; }
 .translation-edition table tr td:nth-child(3) { width: 32%; }
 
-.translation-revision button:nth-child(2) {
-    margin-left: 2%;
+.translation-revision button {
+    margin-right: 8px;
 }
 
-.translation-revision button.hide-column {
-    max-width: 48%;
+.translation-revision div.actions button {
+    margin-bottom: 8px;
 }
 
+.translation-revision div.actions button.undo-shuffle {
+    overflow: hidden;
+}
+
+.translation-revision div.actions button.undo-shuffle .fa.text-danger {
+    left: -6px;
+    bottom: -7px;
+    position: absolute;
+}
 
 form[name="ovski_languagebundle_translation"] button[type="submit"] {
     margin-top: 10px;

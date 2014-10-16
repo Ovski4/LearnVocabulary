@@ -1,3 +1,6 @@
+/**
+ * Display buttons, trigger events to hide and display translations
+ */
 function handleRevisionTable() {
     localStorage.setItem('current_revision_path', window.location.pathname);
 
@@ -14,6 +17,11 @@ function handleRevisionTable() {
     var $rightHideButton = jQuery('<button class="hide-column-right hide-column">'+rightButtonText+'</button>');
     var $resetColumns = jQuery('<button class="show-columns">'+displayButtonText+'</button>');
 
+    var shuffleButtonText = '<i class="fa fa-random"></i>'
+    var $shuffle = jQuery('<button class="shuffle">'+shuffleButtonText+'</button>');
+    var undoShuffleButtonText = '<span class="fa-stack"><i class="fa fa-random"></i><i class="fa fa-ban fa-2x text-danger"></i></span>'
+    var $undoShuffle = jQuery('<button class="undo-shuffle">'+undoShuffleButtonText+'</button>');
+
     var displayValue = localStorage.getItem('displayValue');
 
     if (displayValue != null) {
@@ -28,25 +36,44 @@ function handleRevisionTable() {
         $actions.append($leftHideButton);
         $actions.append($rightHideButton);
     }
+    $actions.append($shuffle);
+    if (localStorage.getItem('shuffle') == 'yes') {
+        shuffleTranslations();
+    }
 
     $actions.insertBefore('table');
+
+    jQuery(document).on('click', 'button.undo-shuffle', function() {
+        localStorage.setItem('shuffle', 'no');
+        sortTranslations();
+        this.remove();
+    });
+
+    jQuery(document).on('click', 'button.shuffle', function() {
+        localStorage.setItem('shuffle', 'yes');
+        shuffleTranslations();
+        $actions.append($undoShuffle);
+    });
 
     // hide left column on click
     jQuery(document).on('click', '.hide-column-left', function() {
         localStorage.setItem('displayValue', 'hide-left');
         hideLeftColumn();
+        appendShuffleButtons();
     });
 
     // hide right column on click
     jQuery(document).on('click', '.hide-column-right', function() {
         localStorage.setItem('displayValue', 'hide-right');
         hideRightColumn();
+        appendShuffleButtons();
     });
 
     // display all columns on click on reset button
     jQuery(document).on('click', '.show-columns', function() {
-        localStorage.clear();
+        localStorage.removeItem('displayValue');
         displayAllColumn();
+        appendShuffleButtons();
     });
 
     // on click on span
@@ -71,6 +98,41 @@ function handleRevisionTable() {
         }
     });
 
+    /**
+     * Append the shuffle and undo-shuffle buttons
+     */
+    function appendShuffleButtons() {
+        $actions.append($shuffle);
+        $undoShuffle.remove();
+        console.log(localStorage.getItem('shuffle'));
+        if (localStorage.getItem('shuffle') == 'yes') {
+            $actions.append($undoShuffle);
+        }
+    }
+
+    /**
+     * Shuffle table rows
+     */
+    function shuffleTranslations() {
+        var rows = document.querySelector('.translation-revision table tbody');
+        for (var i = rows.children.length; i >= 0; i--) {
+            rows.appendChild(rows.children[Math.random() * i | 0]);
+        }
+    }
+
+    /**
+     * Sort table rows
+     */
+    function sortTranslations() {
+        jQuery("table tbody tr").sort(sortRows).appendTo('table tbody');
+        function sortRows(a, b){
+            return (jQuery(b).data('position')) < ($(a).data('position')) ? 1 : -1;
+        }
+    }
+
+    /**
+     * Hide left td of rows
+     */
     function hideLeftColumn() {
         hiddenWordCount = tableSize;
         hiddenColumn = 'left';
@@ -82,6 +144,9 @@ function handleRevisionTable() {
         });
     }
 
+    /**
+     * Hide right td of rows
+     */
     function hideRightColumn() {
         hiddenWordCount = tableSize;
         hiddenColumn = 'right';
@@ -93,6 +158,9 @@ function handleRevisionTable() {
         });
     }
 
+    /**
+     * Display every td of columns
+     */
     function displayAllColumn() {
         hiddenColumn = null;
         $actions.append($leftHideButton);

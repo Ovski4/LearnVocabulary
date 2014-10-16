@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     {% for translation in pager.currentPageResults %}
-                        <tr>
+                        <tr data-position="{{ loop.index }}">
                             <td onclick="">
                                 {% if translation.word1.article and learning.language1.requireArticles %}<span class="is-visible">{{ translation.word1.article }}</span>{% endif %}
                                 <span class="is-visible">{{ translation.word1 }}</span>
