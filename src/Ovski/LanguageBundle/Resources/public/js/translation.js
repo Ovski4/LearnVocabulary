@@ -37,8 +37,10 @@ function handleRevisionTable() {
         $actions.append($rightHideButton);
     }
     $actions.append($shuffle);
+    console.log(localStorage.getItem('shuffle'));
     if (localStorage.getItem('shuffle') == 'yes') {
         shuffleTranslations();
+        $actions.append($undoShuffle);
     }
 
     $actions.insertBefore('table');
@@ -71,7 +73,7 @@ function handleRevisionTable() {
 
     // display all columns on click on reset button
     jQuery(document).on('click', '.show-columns', function() {
-        localStorage.removeItem('displayValue');
+        localStorage.clear();
         displayAllColumn();
         appendShuffleButtons();
     });
@@ -104,7 +106,6 @@ function handleRevisionTable() {
     function appendShuffleButtons() {
         $actions.append($shuffle);
         $undoShuffle.remove();
-        console.log(localStorage.getItem('shuffle'));
         if (localStorage.getItem('shuffle') == 'yes') {
             $actions.append($undoShuffle);
         }
@@ -124,10 +125,7 @@ function handleRevisionTable() {
      * Sort table rows
      */
     function sortTranslations() {
-        jQuery("table tbody tr").sort(sortRows).appendTo('table tbody');
-        function sortRows(a, b){
-            return (jQuery(b).data('position')) < ($(a).data('position')) ? 1 : -1;
-        }
+        console.log("todo!");
     }
 
     /**
