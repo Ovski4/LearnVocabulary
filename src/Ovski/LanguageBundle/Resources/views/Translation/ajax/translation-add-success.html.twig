@@ -1,0 +1,15 @@
+{% set translation = pager.currentPageResults[0] %}
+<tr>
+    <td>
+        {% if translation.word1.article and learning.language1.requireArticles  %}<span class="is-visible">{{ translation.word1.article }}</span>{% endif %}
+        <span class="is-visible">{{ translation.word1 }}</span>
+    </td>
+    <td>
+        {% if translation.word2.article and learning.language2.requireArticles  %}<span class="is-visible">{{ translation.word2.article }}</span>{% endif %}
+        <span class="is-visible">{{ translation.word2 }}</span>
+    </td>
+    <td class="actions">
+        {{ render(controller('OvskiLanguageBundle:Translation:deleteForm', { 'id': translation.id, 'slug': learning.slug })) }}
+        <a class="confirm-delete btn btn-primary" href="{{ path('translation_edit', {'id': translation.id, 'slug': learning.slug}) }}"><i class="fa fa-edit"></i></a>
+    </td>
+</tr>

@@ -344,14 +344,14 @@ section.container {
 
 /* Learning list page */
 
-ul li span {
+.learning ul li span {
     display: inline-block;
     padding: 8px;
     vertical-align: top;
     border-top: 1px solid #ddd;
 }
 
-ul li:first-child span {
+.learning ul li:first-child span {
     border: none;
 }
 
@@ -468,6 +468,7 @@ select#ovski_languagebundle_translation_wordType {
 .translation .pagination a,
 .translation .pagination span{
     margin-bottom: 5px;
+    padding: 10px 17px;
 }
 
 /* Filter form */
@@ -519,6 +520,19 @@ select#ovski_languagebundle_translation_wordType {
     background: url('../img/ajax-loader.gif') 0 0 no-repeat;
 }
 
+.add-translation form .submit-button .ajax-ready {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+
+form[name="ovski_languagebundle_translation"] .ajax-ready {
+    position: absolute;
+    height: 34px;
+    width: 34px;
+    margin-left: 10px;
+}
+
 .ajax-ready {
     text-align: center;
 }
@@ -552,6 +566,7 @@ h3.ajax-ready {
 
 .translation-revision div.actions button {
     margin-bottom: 8px;
+    height: 42px;
 }
 
 .translation-revision div.actions button.undo-shuffle {
@@ -562,10 +577,6 @@ h3.ajax-ready {
     left: -6px;
     bottom: -7px;
     position: absolute;
-}
-
-form[name="ovski_languagebundle_translation"] button[type="submit"] {
-    margin-top: 10px;
 }
 
 /* Edition page */

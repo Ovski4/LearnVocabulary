@@ -76,7 +76,7 @@ class TranslationController extends Controller
         }
 
         if ($request->isXmlHttpRequest()) {
-            return $this->render('OvskiLanguageBundle:Translation:revision-rows.html.twig',
+            return $this->render('OvskiLanguageBundle:Translation:ajax/revision-rows.html.twig',
                 array(
                     'pager'    => $pager,
                     'learning' => $learning,
@@ -149,7 +149,7 @@ class TranslationController extends Controller
                 ->addFilterConditions($filterForm, $translationQueryBuilder)
             ;
         }
-
+sleep(2);
         // paginate the query builder with a doctrine orm adapter
         $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
         $pager->setMaxPerPage($this->getMaxPerPage());
@@ -173,20 +173,36 @@ class TranslationController extends Controller
                 $em->persist($translation);
                 $em->flush();
 
+                if ($request->isXmlHttpRequest()) {
+                    return $this->render('OvskiLanguageBundle:Translation:ajax/translation-add-success.html.twig',
+                        array(
+                            'pager'    => $pager,
+                            'learning' => $learning,
+                        )
+                    );
+                }
                 return $this->redirect($this->generateUrl('translation_edition', array('slug' => $slug)));
             }
         } else { // display the form
             $translation = new Translation();
             $form  = $this->createCreateForm($translation, $slug);
         }
-
-        return array(
-            'pager'      => $pager,
-            'slug'       => $slug,
-            'learning'   => $learning,
-            'filterForm' => $filterForm->createView(),
-            'form'       => $form->createView()
-        );
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('OvskiLanguageBundle:Translation:ajax/translation-add-error.html.twig',
+                array(
+                    'form' => $form->createView()
+                )
+            );
+        }
+        else {
+            return array(
+                'pager'      => $pager,
+                'slug'       => $slug,
+                'learning'   => $learning,
+                'filterForm' => $filterForm->createView(),
+                'form'       => $form->createView()
+            );
+        }
     }
 
     /**

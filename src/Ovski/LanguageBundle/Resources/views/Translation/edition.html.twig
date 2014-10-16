@@ -34,6 +34,8 @@
                 {{ form_widget(form.word2) }}
             </div>
             <div class="submit-button">
+                {{ form_widget(form.submit) }}
+                <div class="ajax-ready"></div>
                 {{ form_rest(form) }}
             </div>
             {{ form_end(form) }}
@@ -87,4 +89,5 @@
     {{ parent() }}
     <script type="text/javascript" src="/bundles/ovskilanguage/js/hideOrDisplayArticles.js"></script>
     <script type="text/javascript" src="/bundles/ovskilanguage/js/confirmDelete.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/ajax/add-translation.js"></script>
 {% endblock %}
