@@ -91,6 +91,19 @@ a.button {
     margin-top: 10px;
 }
 
+.is-inactive {
+    background-color: #ccc;
+}
+
+.is-inactive:hover {
+    cursor: default;
+    background-color: #ccc;
+}
+
+.undo-shuffle.is-inactive .text-danger {
+    color: #fff;
+}
+
 /*HEADER*/
 
 header {
