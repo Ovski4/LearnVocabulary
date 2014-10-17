@@ -75,7 +75,10 @@
                 {% endfor %}
             </tbody>
         </table>
-        {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_revision', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
+        {{ include('OvskiLanguageBundle::pagination.html.twig', {'routeName': 'translation_edition', 'routeParams':{'pager': pager, 'slug': learning.slug}}) }}
+        <div class="ajax-ready">
+            <span></span>
+        </div>
         {#<div class="download">
             <a href="{{ path('translation_download_csv', {'slug': learning.slug}) }}">
                 {% trans %}Download translations as CSV{% endtrans %}
