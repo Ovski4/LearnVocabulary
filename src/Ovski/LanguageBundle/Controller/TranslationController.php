@@ -188,11 +188,20 @@ class TranslationController extends Controller
             $form  = $this->createCreateForm($translation, $slug);
         }
         if ($request->isXmlHttpRequest()) {
-            return $this->render('OvskiLanguageBundle:Translation:ajax/translation-add-error.html.twig',
-                array(
-                    'form' => $form->createView()
-                )
-            );
+            if ($request->getMethod() == 'POST') {
+                return $this->render('OvskiLanguageBundle:Translation:ajax/translation-add-error.html.twig',
+                    array(
+                        'form' => $form->createView()
+                    )
+                );
+            } else {
+                return $this->render('OvskiLanguageBundle:Translation:ajax/edition-rows.html.twig',
+                    array(
+                        'pager'    => $pager,
+                        'learning' => $learning,
+                    )
+                );
+            }
         }
         else {
             return array(
