@@ -1,3 +1,5 @@
+hiddenWordCount = null;
+
 /**
  * Display buttons, trigger events to hide and display translations
  */
@@ -6,25 +8,26 @@ function handleRevisionTable() {
 
     var hiddenColumn = null;
     var tableSize = jQuery('table > tbody > tr').length;
-    var hiddenWordCount = 0;
 
     // hide or display columns
     var $actions = jQuery('<div class="actions"></div>');
     var leftButtonText = jQuery('.translation-revision table').attr('data-left-button-text');
     var rightButtonText = jQuery('.translation-revision table').attr('data-right-button-text');
     var displayButtonText = jQuery('.translation-revision table').attr('data-display-text');
-    var $leftHideButton = jQuery('<button class="hide-column-left hide-column is-active">'+leftButtonText+'</button>');
-    var $rightHideButton = jQuery('<button class="hide-column-right hide-column is-active">'+rightButtonText+'</button>');
-    var $resetColumnsButton = jQuery('<button class="show-columns is-active">'+displayButtonText+'</button>');
+    var $leftHideButton = jQuery('<button class="hide-column-left hide-column">'+leftButtonText+'</button>');
+    var $rightHideButton = jQuery('<button class="hide-column-right hide-column">'+rightButtonText+'</button>');
+    var $resetColumnsButton = jQuery('<button class="show-columns">'+displayButtonText+'</button>');
 
     var shuffleButtonText = '<i class="fa fa-random"></i>'
     var $shuffle = jQuery('<button class="shuffle is-active">'+shuffleButtonText+'</button>');
     var undoShuffleButtonText = '<span class="fa-stack"><i class="fa fa-random"></i><i class="fa fa-ban fa-2x text-danger"></i></span>'
-    var $undoShuffle = jQuery('<button class="undo-shuffle is-active">'+undoShuffleButtonText+'</button>');
+    var $undoShuffle = jQuery('<button class="undo-shuffle">'+undoShuffleButtonText+'</button>');
 
     var displayValue = localStorage.getItem('displayValue');
 
     if (displayValue != null) {
+        hiddenWordCount = tableSize;
+        setActivity($resetColumnsButton, true);
         if (displayValue == 'hide-left') {
             setActivity($rightHideButton, false);
             setActivity($leftHideButton, false);
@@ -36,9 +39,11 @@ function handleRevisionTable() {
             hideRightColumn();
         }
     } else {
+        hiddenWordCount = 0;
         setActivity($resetColumnsButton, false);
+        setActivity($leftHideButton, true);
+        setActivity($rightHideButton, true);
     }
-
     if (localStorage.getItem('shuffle') == 'yes') {
         shuffleTranslations();
     } else {
@@ -91,17 +96,16 @@ function handleRevisionTable() {
             jQuery(this).removeClass('is-invisible');
             hiddenWordCount--;
             if (hiddenColumn == 'left') {
-                setActivity($leftHideButton, true);
+                //setActivity($leftHideButton, true);
+                jQuery('.hide-column-left').removeClass('is-inactive').addClass('is-active');
             } else {
-                setActivity($rightHideButton, true);
+                //setActivity($rightHideButton, true);
+                jQuery('.hide-column-right').removeClass('is-inactive').addClass('is-active');
             }
             if (hiddenWordCount == 0) {
-                setActivity($resetColumnsButton, false);
-                if (hiddenColumn == 'left') {
-                    setActivity($rightHideButton, true);
-                } else {
-                    setActivity($leftHideButton, true);
-                }
+                jQuery('.show-columns').removeClass('is-active').addClass('is-inactive');
+                jQuery('.hide-column-left').removeClass('is-inactive').addClass('is-active');
+                jQuery('.hide-column-right').removeClass('is-inactive').addClass('is-active');
             }
         }
     });
@@ -111,11 +115,9 @@ function handleRevisionTable() {
      */
     function setActivity($button, boolean) {
         if (boolean) {
-            $button.addClass('is-active');
-            $button.removeClass('is-inactive');
+            $button.removeClass('is-inactive').addClass('is-active');
         } else {
-            $button.addClass('is-inactive');
-            $button.removeClass('is-active');
+            $button.removeClass('is-active').addClass('is-inactive');
         }
     }
 

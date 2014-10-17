@@ -149,7 +149,7 @@ class TranslationController extends Controller
                 ->addFilterConditions($filterForm, $translationQueryBuilder)
             ;
         }
-sleep(2);
+
         // paginate the query builder with a doctrine orm adapter
         $pager = new Pagerfanta(new DoctrineORMAdapter($translationQueryBuilder));
         $pager->setMaxPerPage($this->getMaxPerPage());
