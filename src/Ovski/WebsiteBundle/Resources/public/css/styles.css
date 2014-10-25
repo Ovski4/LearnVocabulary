@@ -377,7 +377,7 @@ section.container {
     text-align: center;
 }
 
-.add-translation form input {
+form[name="ovski_languagebundle_translation"] input {
     max-width: 125px;
 }
 
