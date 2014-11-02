@@ -61,7 +61,18 @@ gulp.task('clean', function() {
 
 // Move files in prod
 gulp.task('move', ['clean'], function() {
-    return gulp.src([dev_directory+'web/**/*.*', dev_directory+'src/**/*.*'], {base:'./'+dev_directory})
+    return gulp.src(
+            [
+                dev_directory+'/**/.htaccess',
+                dev_directory+'web/**/*.*',
+                dev_directory+'src/**/*',
+                dev_directory+'app/**/*',
+                dev_directory+'vendor/**/*',
+                '!'+dev_directory+'app/cache/**/*',
+                '!'+dev_directory+'app/logs/**/*'
+            ],
+            {base:'./'+dev_directory}
+        )
         .pipe(gulp.dest(prod_directory))
     ;
 });
