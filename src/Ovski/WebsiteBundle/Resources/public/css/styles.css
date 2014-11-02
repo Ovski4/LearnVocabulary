@@ -647,6 +647,11 @@ h3.ajax-ready {
     margin: 0;
 }
 
+.home img {
+    padding-bottom: 5%;
+    width: 100%;
+}
+
 /***********
   * DESKTOP *
   ***********/
@@ -699,8 +704,9 @@ h3.ajax-ready {
         border: solid 1px rgba(0,0,0,0.3);
     }
 
-    .home .picture img {
-        width: 100%;
+    .home img {
+        padding: 0 10% 5%;
+        width: 80%;
     }
 
     .oldschool .picture img {
