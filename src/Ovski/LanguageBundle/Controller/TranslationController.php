@@ -459,7 +459,7 @@ class TranslationController extends Controller
         if ($request->isXmlHttpRequest()) {
             return new Response("Starred");
         } else {
-            return $this->redirect($this->generateUrl('translation', array('slug' => $slug)));
+            return $this->redirect($this->generateUrl('translation_revision', array('slug' => $slug)));
         }
     }
 

@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
     $selectToHide.hide();
     $selectToHide.parent().append(
         '<span>('+jQuery('select.ovski-article-selectbox.empty').attr('data-article')+')</span>'
-    )
+    );
 
     hideOrDisplayArticle(jQuery('#ovski_languagebundle_translation_wordType'));
 

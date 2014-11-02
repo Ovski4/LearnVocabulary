@@ -18,14 +18,14 @@ function handleRevisionTable() {
     var $rightHideButton = jQuery('<button class="hide-column-right hide-column">'+rightButtonText+'</button>');
     var $resetColumnsButton = jQuery('<button class="show-columns">'+displayButtonText+'</button>');
 
-    var shuffleButtonText = '<i class="fa fa-random"></i>'
+    var shuffleButtonText = '<i class="fa fa-random"></i>';
     var $shuffle = jQuery('<button class="shuffle is-active">'+shuffleButtonText+'</button>');
-    var undoShuffleButtonText = '<span class="fa-stack"><i class="fa fa-random"></i><i class="fa fa-ban fa-2x text-danger"></i></span>'
+    var undoShuffleButtonText = '<span class="fa-stack"><i class="fa fa-random"></i><i class="fa fa-ban fa-2x text-danger"></i></span>';
     var $undoShuffle = jQuery('<button class="undo-shuffle">'+undoShuffleButtonText+'</button>');
 
     var displayValue = localStorage.getItem('displayValue');
 
-    if (displayValue != null) {
+    if (displayValue !== null) {
         hiddenWordCount = tableSize;
         setActivity($resetColumnsButton, true);
         if (displayValue == 'hide-left') {
@@ -102,7 +102,7 @@ function handleRevisionTable() {
                 //setActivity($rightHideButton, true);
                 jQuery('.hide-column-right').removeClass('is-inactive').addClass('is-active');
             }
-            if (hiddenWordCount == 0) {
+            if (hiddenWordCount === 0) {
                 jQuery('.show-columns').removeClass('is-active').addClass('is-inactive');
                 jQuery('.hide-column-left').removeClass('is-inactive').addClass('is-active');
                 jQuery('.hide-column-right').removeClass('is-inactive').addClass('is-active');

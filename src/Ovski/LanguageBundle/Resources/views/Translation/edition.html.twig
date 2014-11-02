@@ -95,8 +95,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/hideOrDisplayArticles.js"></script>
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/confirmDelete.js"></script>
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/ajax/edition-rows.js"></script>
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/ajax/add-translation.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/common/hide-or-display-articles.js"></script>
+    {# startscript edition.min.js #}
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/edition/confirm-delete.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/edition/ajax-edition-rows.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/edition/add-translation.js"></script>
+    {# endscript #}
 {% endblock %}

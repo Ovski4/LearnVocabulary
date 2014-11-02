@@ -74,7 +74,9 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/translation.js"></script>
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/ajax/star.js"></script>
-    <script type="text/javascript" src="/bundles/ovskilanguage/js/ajax/revision-rows.js"></script>
+    {# startscript revision.min.js #}
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/revision/manage-translation-table.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/revision/ajax-star.js"></script>
+    <script type="text/javascript" src="/bundles/ovskilanguage/js/revision/ajax-revision-rows.js"></script>
+    {# endscript #}
 {% endblock %}
