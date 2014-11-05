@@ -27,12 +27,13 @@ var gulp = require('gulp');
 
 // Include plugins
 var del = require('del');
-var replace = require('gulp-replace');
-var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
+var shell = require('gulp-shell')
+var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var replace = require('gulp-replace');
 
 /******************/
 /*** DEV TASKS ****/
@@ -82,6 +83,11 @@ gulp.task('move', ['clean'], function() {
 gulp.task('delete-useless-files', ['move'], function() {
     del([prod_directory+'src/**/public/js'], function (err) {});
 });
+
+gulp.task('rights', ['move'], shell.task([
+  'php '+prod_directory+'app/console cache:clear --env=prod',
+  'chown www-data -R '+prod_directory+'app/cache/ '+prod_directory+'app/logs/ && chmod 775 -R '+prod_directory+'app/cache/ '+prod_directory+'app/logs'
+]))
 
 /**
  * Informations to minimify scripts
@@ -158,4 +164,4 @@ gulp.task('scripts', ['scripts-format', 'scripts-include']);
 gulp.task('dev', ['lint', 'watch']);
 
 // Production tasks (package a prod directory)
-gulp.task('prod', ['clean', 'move'/*, 'delete-useless-files', 'scripts'*/]);
+gulp.task('prod', ['clean', 'move', 'rights'/*, 'delete-useless-files', 'scripts'*/]);
