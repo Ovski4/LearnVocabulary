@@ -1,5 +1,7 @@
-//TODO remove useless js files
+//TODO minimize and include all js files
 //TODO minimize img
+//TODO try with (dev) and prod directory as arguments
+
 
 /**
  * Here is the process of the different tasks
@@ -78,7 +80,7 @@ gulp.task('move', ['clean'], function() {
 });
 
 gulp.task('delete-useless-files', ['move'], function() {
-    del([prod_directory+'**/*.js', prod_directory+'src/**/public/js'], function (err) {});
+    del([prod_directory+'src/**/public/js'], function (err) {});
 });
 
 /**
@@ -156,4 +158,4 @@ gulp.task('scripts', ['scripts-format', 'scripts-include']);
 gulp.task('dev', ['lint', 'watch']);
 
 // Production tasks (package a prod directory)
-gulp.task('prod', ['clean', 'move', 'delete-useless-files', 'scripts']);
+gulp.task('prod', ['clean', 'move'/*, 'delete-useless-files', 'scripts'*/]);
