@@ -269,7 +269,7 @@ section.container {
 
 /*home*/
 
-.home div {
+section.container > .row > div {
     position: inherit; /* bootstrap fix (navbar problem)*/
     text-align: justify;
 }
