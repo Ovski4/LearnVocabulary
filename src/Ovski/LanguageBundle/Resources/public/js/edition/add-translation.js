@@ -32,10 +32,5 @@ jQuery(document).ready(function() {
  */
 function resetForm(formSlector)
 {
-    jQuery(':input', formSlector)
-        .not(':button, :submit, :reset, :hidden')
-        .val('')
-        .removeAttr('checked')
-        .removeAttr('selected')
-    ;
+    jQuery('input', formSlector).val('');
 }
