@@ -107,7 +107,7 @@ a.button {
 /*HEADER*/
 
 header {
-    height: 50px;
+    min-height: 50px;
     background: #2c2c2c;
     color: #fff;
     margin-bottom: 10px;
@@ -137,6 +137,7 @@ header a > i.fa {
 
 .navbar {
     border: none;
+    margin-bottom: 0;
 }
 
 .navbar .languages-list {
