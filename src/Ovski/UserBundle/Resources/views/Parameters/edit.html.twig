@@ -5,6 +5,10 @@
     {% trans %}Settings{% endtrans %}
 {% endblock %}
 
+{% block menu %}
+    {% include "OvskiWebsiteBundle::menu.html.twig" with {'active': 'parameters'} %}
+{% endblock %}
+
 {% block body %}
     <div class="parameters">
         <h2>

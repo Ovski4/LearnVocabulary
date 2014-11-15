@@ -1,5 +1,9 @@
 {% extends '::base.html.twig' %}
 
+{% block menu %}
+    {% include "OvskiWebsiteBundle::menu.html.twig" with {'active': 'tips'} %}
+{% endblock %}
+
 {% block body %}
     <h2>
         <i class="fa fa-question-circle"></i>

@@ -41,7 +41,7 @@ class LearningController extends Controller
      *
      * @Template()
      */
-    public function dropdownLearningsAction()
+    public function dropdownLearningsAction($active)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -49,7 +49,10 @@ class LearningController extends Controller
             $this->getUser()->getId()
         );
 
-        return array('learnings' => $learnings);
+        return array(
+            'learnings' => $learnings,
+            'active'    => $active
+        );
     }
 
     /**

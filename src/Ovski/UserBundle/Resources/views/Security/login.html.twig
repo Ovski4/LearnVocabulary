@@ -7,6 +7,10 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block menu %}
+    {% include "OvskiWebsiteBundle::menu.html.twig" with {'active': 'login'} %}
+{% endblock %}
+
 {% block fos_user_content %}
     <div class="login-form fos-user-form">
         <h2>{{ 'security.login.submit'|trans }}</h2>

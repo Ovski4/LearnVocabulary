@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block menu %}
+    {% include "OvskiWebsiteBundle::menu.html.twig" with {'active': 'contact'} %}
+{% endblock %}
+
+{% block body %}
+    <h2>{% trans %}Old school guidelines{% endtrans %}</h2>
+    <div class="row oldschool">
+        <div class="col-md-12">
+            You want a few guidelines to learn how to learn vocabulary the old school way? Follow these instructions!
+            <p>
+                If you are not afraid of trashing your books, write annotations on the edge of pages!
+                It's not easy to read, not easy to learn, and it's very boring!
+            </p>
+            <div class="picture">
+                <img src="/bundles/ovskiwebsite/img/scbook.jpg">
+            </div>
+            <p>
+                If you are not afraid to add dozens sheets of peper amongst every other lessons, write your translations by hand!
+                You will lost your sheets sooner or later, waste paper and do not want to learn something ever again.
+            </p>
+            <p>
+                Well, yes it's a little extreme, but just think about what this app can do for you:
+            <ul>
+                <li>Usable anywhere as long as you have an internet connection <i class="fa fa-check"></i></li>
+                <li>Never get crumpled or torn <i class="fa fa-check"></i></li>
+                <li>You actively participate in the fight against deforestation <i class="fa fa-check"></i></li>
+                <li>You will finally have a good excuse to use your smartphone in language courses <i class="fa fa-check"></i></li>
+            </ul>
+            Seriously, I use those methods to learn what I know today. But if you want something new, just log in and have a try!
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -59,6 +59,18 @@ class WebsiteController extends Controller
     }
 
     /**
+     * Contact
+     *
+     * @Route("/contact", name="contact")
+     * @Method("GET")
+     * @Template()
+     */
+    public function contactAction()
+    {
+        return array();
+    }
+
+    /**
      * Render the dropdown languages list for the menu
      *
      * @Template()

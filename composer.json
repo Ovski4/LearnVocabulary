@@ -22,7 +22,8 @@
         "white-october/pagerfanta-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "lexik/form-filter-bundle": "2.0.*",
-        "gedmo/doctrine-extensions": "dev-master"
+        "gedmo/doctrine-extensions": "dev-master",
+        "mailgun/mailgun-php": "~1.7.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

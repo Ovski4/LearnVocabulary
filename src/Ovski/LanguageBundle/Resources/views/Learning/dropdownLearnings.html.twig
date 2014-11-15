@@ -1,4 +1,7 @@
-<li>
+{% if active is not defined %}
+    {% set active = null %}
+{% endif %}
+<li {% if active == 'new_language' %} class="current" {% endif %}>
     <a href="{{ path('learning_new') }}">
         {% trans %}Learn a new language{% endtrans %}
         <i class="fa fa-graduation-cap"></i>

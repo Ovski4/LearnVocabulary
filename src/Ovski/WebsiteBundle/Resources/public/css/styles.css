@@ -171,7 +171,9 @@ header a > i.fa {
 }
 
 .navbar .nav > li > a:hover,
-.navbar .nav > li > a:focus {
+.navbar .nav > li > a:focus,
+.navbar .nav > li.current > a
+{
     background-color: #fff;
     color: #000;
 }
@@ -181,7 +183,8 @@ header a > i.fa {
 }
 
 .nav > li > a:hover > i.fa,
-.nav > li > a:focus > i.fa {
+.nav > li > a:focus > i.fa,
+.nav > li.current > a > i.fa {
     color: #000;
 }
 
