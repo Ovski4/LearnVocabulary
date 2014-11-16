@@ -5,6 +5,7 @@ body, html {
 }
 
 body {
+    overflow-x: hidden;
     background: #499bea;/* Old Browsers */
     background: -moz-linear-gradient(-45deg, #499bea 0%, #184b6a 100%); /* FF3.6+ */
     background: -webkit-gradient(left top, right bottom, color-stop(0%, #499bea), color-stop(100%, #184b6a));/* Chrome, Safari4+ */
@@ -261,9 +262,9 @@ header a > i.fa {
     padding: 10px;
 }
 
-/*SECTION*/
+/*MAIN*/
 
-section.container {
+#main.container {
     background-color: #fff;
     box-shadow: inset 0 1px 0 0 #f5f5f5;
     border: solid 1px rgba(0,0,0,0.3);
@@ -273,7 +274,14 @@ section.container {
 
 /*home*/
 
-section.container > .row > div {
+#main.container {
+    background: #fff;
+    box-shadow: inset 0 1px 0 0 #f5f5f5;
+    border: solid 1px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+}
+
+#main.container > .row > div {
     position: inherit; /* bootstrap fix (navbar problem)*/
     text-align: justify;
 }
@@ -658,6 +666,14 @@ h3.ajax-ready {
     width: 100%;
 }
 
+footer {
+    text-align: center;
+    color: #fff;
+    background-color: #2c2c2c;
+    line-height: 50px;
+    height: 50px
+}
+
 /***********
   * DESKTOP *
   ***********/
@@ -702,12 +718,6 @@ h3.ajax-ready {
 
     .navbar .navbar-brand {
         font-size: 25px;
-    }
-
-    section.container {
-        background: #fff;
-        box-shadow: inset 0 1px 0 0 #f5f5f5;
-        border: solid 1px rgba(0,0,0,0.3);
     }
 
     .home img {

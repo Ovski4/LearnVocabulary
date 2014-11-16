@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="google" value="notranslate" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% trans %}Learn Vocabulary{% endtrans %}{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bundles/ovskiwebsite/css/styles.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-</head>
-<body>
-<div class="hidden-xs beta-version">
-    Beta
-</div>
-<header>
-    <div class="container">
-        <nav class="navbar" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button"
-                        class="navbar-toggle collapsed"
-                        data-toggle="collapse"
-                        data-target="#navbar-collapse"
-                >
-                    <span class="sr-only">{% trans %}Toggle navigation{% endtrans %}</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                {{ render(controller('OvskiWebsiteBundle:Website:dropdownLanguages', { 'route': app.request.get('_route'), 'routeParams':app.request.get('_route_params') })) }}
-                <h1 class="navbar-brand"><a href="{{ path('home') }}">{% trans %}My Vocabulary{% endtrans %}</a></h1>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                {% block menu %}
-                    {% include "OvskiWebsiteBundle::menu.html.twig" %}
-                {% endblock %}
-            </div>
-        </nav>
-    </div>
-</header>
-<div>
-    {% if app.session.flashbag.has('success') %}
-        <div class="container alert alert-success fade in">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="flash-notice">
-                    <p>{% autoescape false %}{{ flashMessage }}{% endautoescape %}</p>
-                </div>
-            {% endfor %}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="google" value="notranslate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% trans %}Learn Vocabulary{% endtrans %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bundles/ovskiwebsite/css/styles.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="hidden-xs beta-version">
+            Beta
         </div>
-    {% endif %}
-    {% if app.session.flashbag.has('info') %}
-        <div class="container alert alert-info fade in">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {% for flashMessage in app.session.flashbag.get('info') %}
-                <div class="flash-notice">
-                    <p>{% autoescape false %}{{ flashMessage }}{% endautoescape %}</p>
-                </div>
-            {% endfor %}
+        <header>
+            <div class="container">
+                <nav class="navbar" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button"
+                                class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target="#navbar-collapse"
+                        >
+                            <span class="sr-only">{% trans %}Toggle navigation{% endtrans %}</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        {{ render(controller('OvskiWebsiteBundle:Website:dropdownLanguages', { 'route': app.request.get('_route'), 'routeParams':app.request.get('_route_params') })) }}
+                        <h1 class="navbar-brand"><a href="{{ path('home') }}">{% trans %}My Vocabulary{% endtrans %}</a></h1>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        {% block menu %}
+                            {% include "OvskiWebsiteBundle::menu.html.twig" %}
+                        {% endblock %}
+                    </div>
+                </nav>
+            </div>
+        </header>
+        {% if app.session.flashbag.has('success') %}
+            <div class="container alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="flash-notice">
+                        <p>{% autoescape false %}{{ flashMessage }}{% endautoescape %}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if app.session.flashbag.has('info') %}
+            <div class="container alert alert-info fade in">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {% for flashMessage in app.session.flashbag.get('info') %}
+                    <div class="flash-notice">
+                        <p>{% autoescape false %}{{ flashMessage }}{% endautoescape %}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div id="main" class="container">
+            {% block body %}{% endblock %}
         </div>
-    {% endif %}
-    <section class="container">
-        {% block body %}{% endblock %}
-    </section>
-</div>
-{% block javascripts %}
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="/bundles/ovskiwebsite/js/clear-local-storage.js"></script>
-        <script src="/bundles/ovskiwebsite/js/analytics.js"></script>
-{% endblock %}
-</body>
+        <footer class="container">
+            © Baptiste Bouchereau | No rights reserved
+        </footer>
+        {% block javascripts %}
+                <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+                <script src="/bundles/ovskiwebsite/js/clear-local-storage.js"></script>
+                <script src="/bundles/ovskiwebsite/js/analytics.js"></script>
+        {% endblock %}
+    </body>
 </html>
