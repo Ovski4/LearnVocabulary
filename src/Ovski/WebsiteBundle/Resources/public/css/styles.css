@@ -364,6 +364,33 @@ header a > i.fa {
     border: none;
 }
 
+/* Contact page */
+
+.contact .message label {
+    display: block;
+}
+
+.contact textarea {
+    max-width: 90%;
+}
+
+.contact .details {
+    padding-bottom: 20px;
+}
+
+.contact .details label {
+    min-width: 50px;
+}
+
+.contact .details input {
+    max-width: 100%;
+}
+
+
+.contact button#contact_submit {
+    margin-top: 20px;
+}
+
 /* New learning page */
 
 .new-learning form label {

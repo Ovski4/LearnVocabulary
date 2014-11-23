@@ -11,18 +11,19 @@
 
 {% block body %}
     <h2>{% trans %}Contact{% endtrans %}</h2>
-    <div class="row oldschool">
+    <p>{% trans %}Do you want some help? Have you got new ideas or any suggestions to improve this website? Do not hesitate, send a mail already!{% endtrans %}</p>
+    <div class="row contact">
         <div class="col-md-12">
             {{ form_start(form) }}
             {{ form_errors(form) }}
-            <div class="col-xs-12 col-sm-5">
+            <div class="col-xs-12 col-sm-3 details">
                 <div class="fields">
                     {{ form_row(form.name) }}
                     {{ form_row(form.subject) }}
                     {{ form_row(form.email) }}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-5 message">
+            <div class="col-xs-12 col-sm-9 message">
                 {{ form_row(form.message) }}
                 <div class="submit">
                     {{ form_row(form.submit) }}
