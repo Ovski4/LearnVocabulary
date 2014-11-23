@@ -641,6 +641,10 @@ h3.ajax-ready {
     margin: 15px 65px;
 }
 
+.login-form .fos_user_resetting_reset > div > input[type="submit"]{
+    margin: 15px 0 0 0;
+}
+
 .login-form .related-links {
     padding-top: 15px;
 }

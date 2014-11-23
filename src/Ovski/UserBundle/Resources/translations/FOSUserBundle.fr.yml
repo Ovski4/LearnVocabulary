@@ -92,6 +92,8 @@ layout:
     login: Connexion
     register: Inscription
     logged_in_as: Connecté en tant que %username%
+    password:
+        forgot: Mot de passe oublié?
 
 # Form field labels
 form:

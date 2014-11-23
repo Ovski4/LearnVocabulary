@@ -92,6 +92,8 @@ layout:
     login: Log in
     register: Register
     logged_in_as: Logged in as %username%
+    password:
+        forgot: Forgot your password?
 
 # Form field labels
 form:
