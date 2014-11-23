@@ -21,7 +21,12 @@
                 <i class="fa fa-question-circle"></i>
             </a>
         </li>
-
+        <li {% if active == 'contact' %} class="current" {% endif %}>
+            <a href={{ path("contact") }}>
+                {% trans %}Contact{% endtrans %}
+                <i class="fa fa-send"></i>
+            </a>
+        </li>
         {{ render(controller('OvskiLanguageBundle:Learning:dropdownLearnings', {'active': active})) }}
     {% else %}
         <li {% if active == 'login' %} class="current" {% endif %}>
