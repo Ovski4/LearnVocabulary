@@ -23,7 +23,7 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "lexik/form-filter-bundle": "2.0.*",
         "gedmo/doctrine-extensions": "dev-master",
-        "mailgun/mailgun-php": "~1.7.1"
+        "cspoo/swiftmailer-mailgun-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

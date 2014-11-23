@@ -86,3 +86,7 @@ twig:
     form:
         resources:
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
+
+cspoo_swiftmailer_mailgun:
+    key: "%mailgun_key%"
+    domain: "%mailgun_domain%"

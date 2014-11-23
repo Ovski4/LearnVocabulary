@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Ovski\UserBundle\OvskiUserBundle(),
             new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
-            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle()
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new cspoo\Swiftmailer\MailgunBundle\cspooSwiftmailerMailgunBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

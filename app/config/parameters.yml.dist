@@ -6,14 +6,16 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
-
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    mailer_transport:  mailgun
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+    mailgun_key: ~
+    mailgun_domain: ~

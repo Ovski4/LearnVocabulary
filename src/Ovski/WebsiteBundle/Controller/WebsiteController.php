@@ -2,18 +2,12 @@
 
 namespace Ovski\WebsiteBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Ovski\LanguageBundle\Entity\Translation;
-use Ovski\LanguageBundle\Form\TranslationType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Exception\NotValidCurrentPageException;
+use Ovski\WebsiteBundle\Form\ContactType;
 
 /**
  * Website controller.
@@ -67,7 +61,10 @@ class WebsiteController extends Controller
      */
     public function contactAction()
     {
-        return array();
+
+        $form = $this->createMailForm();
+
+        return array('form' => $form->createView());
     }
 
     /**
@@ -86,5 +83,54 @@ class WebsiteController extends Controller
             'route' => $route,
             'routeParams' => $routeParams
         );
+    }
+
+
+    /**
+     * Creates a form to send a mail
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createMailForm()
+    {
+        $form = $this->createForm(
+            new ContactType(),
+            null,
+            array(
+                'action' => $this->generateUrl('send_mail'),
+                'method' => 'POST'
+            )
+        );
+        return $form;
+    }
+
+    /**
+     * Mail Action
+     *
+     * @Route("/contact/send-message", name="send_mail")
+     * @Method("POST")
+     */
+    public function mailAction(Request $request)
+    {
+        $form = $this->createMailForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $data = $form->getData();
+            $message = \Swift_Message::newInstance()
+                ->setSubject($data['subject'])
+                ->setFrom('contact@learn-vocabulary.com')
+                ->setTo('baptiste.bouchereau@gmail.com')
+                ->setBody(
+                    $this->renderView('OvskiWebsiteBundle:Mail:email.txt.twig',
+                        array('message' => $data['message'], 'from' => $data['email'])
+                    )
+                )
+            ;
+            $this->get('mailer')->send($message);
+            $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('Mail sent!'));
+            return $this->redirect($this->generateUrl('contact'));
+        } else {
+            throw new \Exception("Unvalid form");
+        }
     }
 }

@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    {{ parent() }} |
+    {% trans %}Tips{% endtrans %}
+{% endblock %}
+
 {% block menu %}
     {% include "OvskiWebsiteBundle::menu.html.twig" with {'active': 'tips'} %}
 {% endblock %}
