@@ -1,0 +1,16 @@
+learnvocabulary:
+  restart: always
+  ports:
+   - 8005:80
+  environment:
+   - VIRTUAL_HOST=test.ovski.net
+  build: .
+  links:
+   - mysql:ovski_lv_mysql
+mysql:
+  image: mysql
+  environment:
+   - MYSQL_ROOT_PASSWORD=ovski2015
+  restart: always
+  volumes:
+   - /home/ovski/VolumesDocker/learn-vocabulary/mysql/var/lib/mysql:/var/lib/mysql
