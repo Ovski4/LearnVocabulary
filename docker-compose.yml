@@ -1,16 +1,34 @@
-learnvocabulary:
-  restart: always
-  ports:
-   - 8005:80
-  environment:
-   - VIRTUAL_HOST=test.ovski.net
-  build: .
-  links:
-   - mysql:ovski_lv_mysql
 mysql:
-  image: mysql
+  image: mysql:latest
   environment:
-   - MYSQL_ROOT_PASSWORD=ovski2015
-  restart: always
+   - MYSQL_ROOT_PASSWORD=dev
   volumes:
-   - /home/ovski/VolumesDocker/learn-vocabulary/mysql/var/lib/mysql:/var/lib/mysql
+   - /var/docker/mysql/learn-vocabulary:/var/lib/mysql
+app:
+  image: ovski/symfony2:dev
+  volumes:
+   - .:/var/www
+   - /var/log/docker/nginx/learn-vocabulary:/var/log/nginx
+  links:
+   - elk:syslog_server
+   - mysql:mysql
+  ports:
+   - 8071:80
+  environment:
+   - VIRTUAL_HOST=dev.learn-vocabulary.com
+adminer:
+  image: clue/adminer
+  environment:
+   - VIRTUAL_HOST=dev.adminer.learn-vocabulary.com
+  ports:
+   - 8056:80
+  links:
+   - mysql:mysql
+elk:
+  image: ovski/elk:elasticdump
+  environment:
+   - VIRTUAL_HOST=dev.logs.learn-vocabulary.com
+  volumes:
+   - /var/docker/elk/learn-vocabulary:/data
+  ports:
+    - 8003:80
