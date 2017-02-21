@@ -16,7 +16,8 @@ class TranslationManager
      *
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
@@ -28,7 +29,8 @@ class TranslationManager
      * @return string
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function generateCsv($userId, $learningSlug) {
+    public function generateCsv($userId, $learningSlug)
+    {
         $learning = $this->em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
             $userId,
             array('slug' => $learningSlug)
@@ -84,7 +86,8 @@ class TranslationManager
         return $content;
     }
 
-    public function importCsv($user, $learningSlug, $csv) {
+    public function importCsv($user, $learningSlug, $csv)
+    {
         $learning = $this->em->getRepository('OvskiLanguageBundle:Learning')->getOneByUser(
             $user->getId(),
             array('slug' => $learningSlug)
@@ -155,7 +158,8 @@ class TranslationManager
      * @param Word $word
      * @return mixed
      */
-    private function getWordIfExists(Word $word) {
+    private function getWordIfExists(Word $word)
+    {
 
         $existingWord = $this->em->getRepository('OvskiLanguageBundle:Word')->findOneBy(
             array(
