@@ -8,10 +8,10 @@
         <title>{% block title %}{% trans %}Learn Vocabulary{% endtrans %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bundles/ovskiwebsite/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bundles/ovskiwebsite/css/font-awesome.min.css">
         <link rel="stylesheet" href="/bundles/ovskiwebsite/css/styles.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="/bundles/ovskiwebsite/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="hidden-xs beta-version">
@@ -70,9 +70,9 @@
             © Baptiste Bouchereau | No rights reserved
         </footer>
         {% block javascripts %}
-                <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                <script src="/bundles/ovskiwebsite/js/clear-local-storage.js"></script>
-                <script src="/bundles/ovskiwebsite/js/analytics.js"></script>
+            <script src="/bundles/ovskiwebsite/js/bootstrap.min.js"></script>
+            <script src="/bundles/ovskiwebsite/js/clear-local-storage.js"></script>
+            <script src="/bundles/ovskiwebsite/js/analytics.js"></script>
         {% endblock %}
     </body>
 </html>
