@@ -1,34 +1,52 @@
-mysql:
-  image: mysql:latest
-  environment:
-   - MYSQL_ROOT_PASSWORD=dev
-  volumes:
-   - /var/docker/mysql/learn-vocabulary:/var/lib/mysql
-app:
-  image: ovski/symfony2:dev
-  volumes:
-   - .:/var/www
-   - /var/log/docker/nginx/learn-vocabulary:/var/log/nginx
-  links:
-   - elk:syslog_server
-   - mysql:mysql
-  ports:
-   - 8071:80
-  environment:
-   - VIRTUAL_HOST=dev.learn-vocabulary.com
-adminer:
-  image: clue/adminer
-  environment:
-   - VIRTUAL_HOST=dev.adminer.learn-vocabulary.com
-  ports:
-   - 8056:80
-  links:
-   - mysql:mysql
-elk:
-  image: ovski/elk:elasticdump
-  environment:
-   - VIRTUAL_HOST=dev.logs.learn-vocabulary.com
-  volumes:
-   - /var/docker/elk/learn-vocabulary:/data
-  ports:
-    - 8003:80
+version: '2'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: learn-vocabulary-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+      - MYSQL_USER=learn_vocabulary
+      - MYSQL_DATABASE=learn_vocabulary
+      - MYSQL_PASSWORD=learn_vocabulary
+    volumes:
+      - /var/docker/learn-vocabulary/var/lib/mysql:/var/lib/mysql
+      - ./docker/conf/mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+
+  adminer:
+    image: clue/adminer
+    container_name: learn-vocabulary-adminer
+    environment:
+      - VIRTUAL_HOST=adminer.learn-vocabulary.docker
+    depends_on:
+      - mysql
+
+  php:
+    image: learn-vocabulary/php:5.6-fpm
+    container_name: learn-vocabulary-php
+    build:
+      context: docker/build/php5.6
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:1.10
+    container_name: learn-vocabulary-nginx
+    environment:
+      - VIRTUAL_HOST=learn-vocabulary.docker
+    volumes_from:
+      - php
+    volumes:
+      - ./docker/conf/nginx/vhost_symfony.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php
+
+networks:
+
+  default:
+    external:
+      name: dev

@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     mysql
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_host: learn-vocabulary-mysql
+    database_port: null
+    database_name: learn_vocabulary
+    database_user: learn_vocabulary
+    database_password: learn_vocabulary
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
