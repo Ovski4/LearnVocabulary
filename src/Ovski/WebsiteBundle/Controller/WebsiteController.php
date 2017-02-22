@@ -61,7 +61,6 @@ class WebsiteController extends Controller
      */
     public function contactAction()
     {
-
         $form = $this->createMailForm();
 
         return array('form' => $form->createView());
@@ -118,7 +117,7 @@ class WebsiteController extends Controller
             $data = $form->getData();
             $message = \Swift_Message::newInstance()
                 ->setSubject($data['subject'])
-                ->setFrom('contact@learn-vocabulary.com')
+                ->setFrom('baptiste.bouchereau@gmail.com')
                 ->setTo('baptiste.bouchereau@gmail.com')
                 ->setBody(
                     $this->renderView('OvskiWebsiteBundle:Mail:email.txt.twig',

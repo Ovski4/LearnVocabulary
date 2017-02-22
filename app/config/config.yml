@@ -70,7 +70,6 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
-    host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
@@ -86,7 +85,3 @@ twig:
     form:
         resources:
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
-
-cspoo_swiftmailer_mailgun:
-    key: "%mailgun_key%"
-    domain: "%mailgun_domain%"
