@@ -4,49 +4,54 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: learn-vocabulary-mysql
+    container_name: ${COMPANY_NAME}-${PROJECT_NAME}-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_USER=learn_vocabulary
-      - MYSQL_DATABASE=learn_vocabulary
-      - MYSQL_PASSWORD=learn_vocabulary
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - /var/docker/learn-vocabulary/var/lib/mysql:/var/lib/mysql
-      - ./docker/conf/mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - ${VOLUME_ROOT_PATH}/${COMPANY_NAME}/${PROJECT_NAME}/mysql:/var/lib/mysql
+      - .docker/conf/mysql/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf
 
   adminer:
     image: clue/adminer
-    container_name: learn-vocabulary-adminer
+    container_name: ${COMPANY_NAME}-${PROJECT_NAME}-adminer
     environment:
-      - VIRTUAL_HOST=adminer.learn-vocabulary.docker
+      - VIRTUAL_HOST=${VIRTUAL_HOST_ADMINER}
     depends_on:
       - mysql
 
   php:
-    image: learn-vocabulary/php:5.6-fpm
-    container_name: learn-vocabulary-php
+    image: ${COMPANY_NAME}-${PROJECT_NAME}/php:${PHP_VERSION}-fpm
+    container_name: ${COMPANY_NAME}-${PROJECT_NAME}-php
     build:
-      context: docker/build/php5.6
+      context: .docker/build/php
+      dockerfile: Dockerfile-${PHP_VERSION}
     volumes:
       - ./:/var/www/html
+      - ${VOLUME_ROOT_PATH}/${COMPANY_NAME}/${PROJECT_NAME}/composer:/root/.composer
     depends_on:
       - mysql
 
   nginx:
-    image: nginx:1.10
-    container_name: learn-vocabulary-nginx
+    image: nginx:${NGINX_VERSION}
+    container_name: ${COMPANY_NAME}-${PROJECT_NAME}-nginx
     environment:
-      - VIRTUAL_HOST=learn-vocabulary.docker
+      - VIRTUAL_HOST=${VIRTUAL_HOST_NGINX}
+      - PHP_CONTAINER_NAME=${COMPANY_NAME}-${PROJECT_NAME}-php
+      - SYMFONY_ENTRYPOINT=${SYMFONY_ENTRYPOINT}
     volumes_from:
       - php
     volumes:
-      - ./docker/conf/nginx/vhost_symfony.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - .docker/conf/nginx/vhost_symfony.conf.template:/etc/nginx/vhost_symfony.conf.template
+      - .docker/conf/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - php
+    command: /bin/bash -c "envsubst '$$PHP_CONTAINER_NAME $$SYMFONY_ENTRYPOINT' < /etc/nginx/vhost_symfony.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
 networks:
 
   default:
     external:
-      name: dev
+      name: ${NETWORK_NAME}

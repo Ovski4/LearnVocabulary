@@ -1,6 +1,6 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host: learn-vocabulary-mysql
+    database_host: ovski-learn-vocabulary-mysql
     database_port: null
     database_name: learn_vocabulary
     database_user: learn_vocabulary

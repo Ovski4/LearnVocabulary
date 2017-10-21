@@ -1,20 +1,18 @@
 server {
     root /var/www/html/web;
 
-    access_log /proc/self/fd/1;
-    error_log /proc/self/fd/2;
+    access_log /dev/stdout;
+    error_log /dev/stderr;
 
     charset utf-8;
 
     location / {
         # try to serve file directly, fallback to app_dev.php
-        try_files $uri /app_dev.php$is_args$args;
+        try_files $uri /$SYMFONY_ENTRYPOINT$is_args$args;
     }
 
-    # DEV
-    # This rule should only be placed on your development environment
-    location ~ ^/(app|app_dev|config)\.php(/|$) {
-        fastcgi_pass learn-vocabulary-php:9000;
+    location ~ ^/$SYMFONY_ENTRYPOINT(/|$) {
+        fastcgi_pass $PHP_CONTAINER_NAME:9000;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
