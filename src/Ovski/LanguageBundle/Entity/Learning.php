@@ -12,7 +12,7 @@ use Ovski\LanguageBundle\Validator\Constraints as OvskiAssert;
  *
  * @ORM\Table(name="ovski_learning", uniqueConstraints={
  *     @ORM\UniqueConstraint(
- *         name="unique_language_idx",
+ *         name="unique_learning_idx",
  *         columns={"language1_id", "language2_id"}
  *     )
  * })
