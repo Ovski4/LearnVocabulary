@@ -30,10 +30,10 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager)
     {
         $users = array(
-            'baptiste'
+            'baptiste' => 'pwd'
         );
 
-        foreach ($users as $i => $name) {
+        foreach ($users as $name => $password) {
             $user = new User();
             $user->setUsername($name);
             $user->setEmail($name . '@example.com');
@@ -41,7 +41,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $encodedPw = $this->container
                 ->get('security.encoder_factory')
                 ->getEncoder($user)
-                ->encodePassword($name, $user->getSalt())
+                ->encodePassword($password, $user->getSalt())
             ;
             $user->setPassword($encodedPw);
             $this->addReference($name, $user);

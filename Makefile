@@ -67,8 +67,8 @@ pac:
 	docker-compose run --rm php php app/console $(cmd)
 
 .PHONY: phpunit
-phpunit: ./vendor/phpunit/phpunit/phpunit.php ./app/phpunit.xml.dist
-	docker-compose run --rm php php ./vendor/phpunit/phpunit/phpunit.php -c app/
+phpunit: ./vendor/phpunit/phpunit/phpunit ./app/phpunit.xml.dist
+	docker-compose run --rm php php ./vendor/phpunit/phpunit/phpunit -c app/
 
 
 default: pac
