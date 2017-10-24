@@ -273,7 +273,8 @@ class TranslationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
-        $form = $this->createForm(new TranslationType($learning), $translation, array(
+        $form = $this->createForm(TranslationType::class, $translation, array(
+            'learning' => $learning,
             'action' => $this->generateUrl('translation_edition', array('slug' => $slug)),
             'method' => 'POST',
         ));
@@ -319,7 +320,8 @@ class TranslationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $learning = $em->getRepository('OvskiLanguageBundle:Learning')->findOneBySlug($slug);
-        $form = $this->createForm(new TranslationType($learning), $translation, array(
+        $form = $this->createForm(TranslationType::class, $translation, array(
+            'learning' => $learning,
             'action' => $this->generateUrl('translation_update', array('id' => $translation->getId(), 'slug' => $slug)),
             'method' => 'PUT',
         ));

@@ -12,21 +12,6 @@ use Ovski\LanguageBundle\Entity\Learning;
 class TranslationType extends AbstractType
 {
     /**
-     * @var \Ovski\LanguageBundle\Entity\Learning
-     */
-    private $learning;
-
-    /**
-     * Constructor
-     *
-     * @param Learning $learning
-     */
-    public function __construct(Learning $learning)
-    {
-        $this->learning = $learning;
-    }
-
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -38,8 +23,12 @@ class TranslationType extends AbstractType
                 'label' => 'Word type',
                 'required'  => false,
             ))
-            ->add('word1', new WordType($this->learning->getLanguage1()))
-            ->add('word2', new WordType($this->learning->getLanguage2()))
+            ->add('word1', WordType::class, array(
+                'language' => $options['learning']->getLanguage1()
+            ))
+            ->add('word2', WordType::class, array(
+                'language' => $options['learning']->getLanguage2()
+            ))
             ->add('submit', SubmitType::class, array('label' => 'Add'));
         ;
     }
@@ -49,9 +38,14 @@ class TranslationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Ovski\LanguageBundle\Entity\Translation',
-        ));
+        $resolver
+            ->setRequired(array(
+                'learning'
+            ))
+            ->setDefaults(array(
+                'data_class' => 'Ovski\LanguageBundle\Entity\Translation',
+            )
+        );
     }
 
     /**

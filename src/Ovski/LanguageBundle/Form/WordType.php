@@ -5,6 +5,7 @@ namespace Ovski\LanguageBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Ovski\LanguageBundle\Entity\Language;
@@ -12,39 +13,24 @@ use Ovski\LanguageBundle\Entity\Language;
 class WordType extends AbstractType
 {
     /**
-     * @var \Ovski\LanguageBundle\Entity\Language
-     */
-    private $language;
-
-    /**
-     * Constructor
-     *
-     * @param Language $language
-     */
-    public function __construct($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $attr = $this->getAttr();
+        $attr = $this->getAttr($options['language']);
 
         $builder
             ->add('article', EntityType::class, array(
                 'attr' => $attr,
                 'required'  => false,
                 'class' => 'OvskiLanguageBundle:Article',
-                'query_builder' => function(EntityRepository $er) {
+                'query_builder' => function(EntityRepository $er) use ($options) {
                     return
                         $er
                             ->createQueryBuilder('a')
                             ->where('a.language=:languageId')
-                            ->setParameter('languageId', $this->language->getId())
+                            ->setParameter('languageId', $options['language']->getId())
                         ;
                 }
             ))
@@ -59,25 +45,35 @@ class WordType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Ovski\LanguageBundle\Entity\Word',
-            'label' => $this->language->getName(),
-            'attr' => array('class' => 'ovski-word'),
-        ));
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Ovski\LanguageBundle\Entity\Word',
+                'attr' => array('class' => 'ovski-word'),
+                'label'
+            ))
+            ->setDefault('label', function (Options $options) {
+                return $options['language']->getName();
+            })
+            ->setRequired(array(
+                'language'
+            ))
+        ;
     }
 
     /**
      * Get attributes to set on article selectbox
      *
+     * @param $language
+     *
      * @return array
      * @throws \Exception
      */
-    private function getAttr() {
+    private function getAttr($language) {
         $class = "ovski-article-selectbox";
-        if (!$this->language->requireArticles()) {
-            $onlyArticle = $this->language->getArticles()[0];
+        if (!$language->requireArticles()) {
+            $onlyArticle = $language->getArticles()[0];
             if (!$onlyArticle) {
-                throw new \Exception(sprintf("You should have at least one article for language %s", $this->language->getName()));
+                throw new \Exception(sprintf("You should have at least one article for language %s", $language->getName()));
             }
             $class = sprintf("%s empty", $class);
             $attr = array(
