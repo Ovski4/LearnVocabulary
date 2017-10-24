@@ -3,6 +3,7 @@
 namespace Ovski\UserBundle\Controller;
 
 use Ovski\UserBundle\Form\ParametersType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,12 +49,12 @@ class ParametersController extends Controller
      */
     private function createEditForm()
     {
-        $form = $this->createForm(new ParametersType(), $this->getUser(), array(
+        $form = $this->createForm(ParametersType::class, $this->getUser(), array(
             'action' => $this->generateUrl('parameters_edit'),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }

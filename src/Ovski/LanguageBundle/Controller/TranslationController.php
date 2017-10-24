@@ -2,6 +2,8 @@
 
 namespace Ovski\LanguageBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,9 +58,9 @@ class TranslationController extends Controller
         );
 
         // create filter form and add filters to query builder if in request
-        $filterForm = $this->get('form.factory')->create(new TranslationFilterType());
-        if ($this->get('request')->query->has($filterForm->getName())) {
-            $filterForm->submit($this->get('request')->query->get($filterForm->getName()));
+        $filterForm = $this->get('form.factory')->create(TranslationFilterType::class);
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->get($filterForm->getName()));
             $this
                 ->get('lexik_form_filter.query_builder_updater')
                 ->addFilterConditions($filterForm, $translationQueryBuilder)
@@ -141,9 +143,9 @@ class TranslationController extends Controller
         );
 
         // create filter form and add filters to query builder if in request
-        $filterForm = $this->get('form.factory')->create(new TranslationFilterType());
-        if ($this->get('request')->query->has($filterForm->getName())) {
-            $filterForm->submit($this->get('request')->query->get($filterForm->getName()));
+        $filterForm = $this->get('form.factory')->create(TranslationFilterType::class);
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->get($filterForm->getName()));
             $this
                 ->get('lexik_form_filter.query_builder_updater')
                 ->addFilterConditions($filterForm, $translationQueryBuilder)
@@ -322,7 +324,7 @@ class TranslationController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -429,7 +431,7 @@ class TranslationController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
+            ->add('id', HiddenType::class)
             ->getForm()
         ;
     }

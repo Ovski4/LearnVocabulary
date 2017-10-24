@@ -5,23 +5,23 @@ namespace Ovski\LanguageBundle\Validator\Constraints;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class TranslationUniqueValidator extends ConstraintValidator
 {
     private $em;
-    private $securityContext;
+    private $tokenStorage;
 
     /**
      * Constructor
      *
      * @param EntityManager $em
-     * @param SecurityContext $securityContext
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(EntityManager $em, SecurityContext $securityContext)
+    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage)
     {
         $this->em = $em;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function validate($translation, Constraint $constraint)
@@ -85,7 +85,7 @@ class TranslationUniqueValidator extends ConstraintValidator
                 'word2'    => $word2,
                 'wordType' => $translation->getWordType(),
                 'learning' => $translation->getLearning(),
-                'user'     => $this->securityContext->getToken()->getUser()
+                'user'     => $this->tokenStorage->getToken()->getUser()
             )
         );
 

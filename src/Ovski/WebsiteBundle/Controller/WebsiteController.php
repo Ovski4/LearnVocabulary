@@ -93,7 +93,7 @@ class WebsiteController extends Controller
     private function createMailForm()
     {
         $form = $this->createForm(
-            new ContactType(),
+            ContactType::class,
             null,
             array(
                 'action' => $this->generateUrl('send_mail'),

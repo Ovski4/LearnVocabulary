@@ -11,12 +11,12 @@ services:
             - { name: validator.constraint_validator, alias: translation_requires_articles_validator }
     ovski.translation_unique_validator:
         class: 'Ovski\LanguageBundle\Validator\Constraints\TranslationUniqueValidator'
-        arguments: ['@doctrine.orm.entity_manager', '@security.context']
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
         tags:
             - { name: validator.constraint_validator, alias: translation_unique_validator }
     ovski.learning_unique_validator:
         class: 'Ovski\LanguageBundle\Validator\Constraints\LearningUniqueValidator'
-        arguments: ['@doctrine.orm.entity_manager', '@security.context']
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
         tags:
             - { name: validator.constraint_validator, alias: learning_unique_validator }
     ovski.learning_languages_not_identical_validator:

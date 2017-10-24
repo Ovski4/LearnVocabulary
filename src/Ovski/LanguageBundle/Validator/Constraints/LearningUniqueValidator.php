@@ -6,7 +6,7 @@ namespace Ovski\LanguageBundle\Validator\Constraints;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class LearningUniqueValidator extends ConstraintValidator
 {
@@ -17,11 +17,12 @@ class LearningUniqueValidator extends ConstraintValidator
      * Constructor
      *
      * @param EntityManager $em
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(EntityManager $em, SecurityContext $securityContext)
+    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage)
     {
         $this->em = $em;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function validate($learning, Constraint $constraint)
@@ -44,7 +45,7 @@ class LearningUniqueValidator extends ConstraintValidator
         }
 
         $learning2 = $this->em->getRepository('OvskiLanguageBundle:Learning')->getByUser(
-            $this->securityContext->getToken()->getUser()->getId(),
+            $this->tokenStorage->getToken()->getUser()->getId(),
             array(
                 'language1' => $language2Id,
                 'language2' => $language1Id

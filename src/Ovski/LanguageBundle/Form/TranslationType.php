@@ -2,9 +2,11 @@
 
 namespace Ovski\LanguageBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Ovski\LanguageBundle\Entity\Learning;
 
 class TranslationType extends AbstractType
@@ -31,21 +33,21 @@ class TranslationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('wordType', 'entity', array(
+            ->add('wordType', EntityType::class, array(
                 'class' => 'OvskiLanguageBundle:WordType',
                 'label' => 'Word type',
                 'required'  => false,
             ))
             ->add('word1', new WordType($this->learning->getLanguage1()))
             ->add('word2', new WordType($this->learning->getLanguage2()))
-            ->add('submit', 'submit', array('label' => 'Add'));
+            ->add('submit', SubmitType::class, array('label' => 'Add'));
         ;
     }
-    
+
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Ovski\LanguageBundle\Entity\Translation',
@@ -55,7 +57,7 @@ class TranslationType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ovski_languagebundle_translation';
     }

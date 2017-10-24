@@ -3,7 +3,9 @@
 namespace Ovski\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ParametersType extends AbstractType
@@ -15,27 +17,19 @@ class ParametersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('maxItemsPerPage', 'integer', array(
+            ->add('maxItemsPerPage', IntegerType::class, array(
                 'label' => 'Maximum number of translations per page'
             ))
         ;
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Ovski\UserBundle\Entity\User'
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ovski_userbundle_parameters';
     }
 }

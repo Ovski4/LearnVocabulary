@@ -2,8 +2,11 @@
 
 namespace Ovski\LanguageBundle\Form\FilterType;
 
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\BooleanFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\EntityFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TranslationFilterType extends AbstractType
@@ -11,22 +14,27 @@ class TranslationFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('wordType', 'filter_entity', array(
+            ->add('wordType', EntityFilterType::class, array(
                 'class' => 'OvskiLanguageBundle:WordType',
                 'label' => 'Word type'
             ))
-            ->add('isStarred', 'filter_boolean', array(
+            ->add('isStarred', BooleanFilterType::class, array(
                 'label' => 'Favorite'
             ))
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'translation_filter';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * Configure options
+     *
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'csrf_protection'   => false,

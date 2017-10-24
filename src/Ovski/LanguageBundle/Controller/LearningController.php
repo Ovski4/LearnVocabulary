@@ -122,7 +122,7 @@ class LearningController extends Controller
      */
     private function createCreateForm(Learning $learning)
     {
-        $form = $this->createForm(new LearningType(), $learning, array(
+        $form = $this->createForm(LearningType::class, $learning, array(
             'action' => $this->generateUrl('learning_create'),
             'method' => 'POST',
         ));
