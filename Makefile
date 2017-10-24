@@ -68,7 +68,7 @@ pac:
 
 .PHONY: phpunit
 phpunit: ./vendor/phpunit/phpunit/phpunit ./app/phpunit.xml.dist
-	docker-compose run --rm php php ./vendor/phpunit/phpunit/phpunit -c app/
+	docker-compose run --rm php php ./vendor/symfony/phpunit-bridge/bin/simple-phpunit -c app/
 
 
 default: pac
