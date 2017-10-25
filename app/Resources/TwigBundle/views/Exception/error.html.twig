@@ -7,19 +7,28 @@
 
 
 {% block menu %}
-    <li>
-        <a href={{ path("home") }}>
-            {% trans %}Come back to the web site{% endtrans %}
-            <i class="fa fa-backward"></i>
-        </a>
-    </li>
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="{{ path("home") }}">
+                {% trans %}Come back to the web site{% endtrans %}
+                <i class="fa fa-backward"></i>
+            </a>
+        </li>
+    </ul>
 {% endblock %}
 
 {% block body %}
-    <h1>{% trans %}Oups! An error occured{% endtrans %}</h1>
-    <h2>{% trans %}The server returned an error{% endtrans %} "{{ status_code }} {{ status_text }}".</h2>
-    <a href={{ path("home") }}>
-        <i class="fa fa-play"></i>
-        {% trans %}Come back to the web site{% endtrans %}
-    </a>
+    <div class="error-page">
+        <div class="col-md-8">
+            <h1>{% trans %}Oups! An error occured{% endtrans %}</h1>
+            <h2>{% trans %}The server returned an error{% endtrans %} "{{ status_code }} {{ status_text }}".</h2>
+            <a href="{{ path("home") }}" style="padding-top: 100px; display: inline-block">
+                <i class="fa fa-play"></i>
+                {% trans %}Come back to the web site{% endtrans %}
+            </a>
+        </div>
+        <div class="col-md-4">
+            <img src="/bundles/ovskiwebsite/img/error_image.png" alt="flag-dispersion">
+        </div>
+    </div>
 {% endblock %}
