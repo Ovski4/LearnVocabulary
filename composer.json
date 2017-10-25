@@ -4,10 +4,10 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": {
-            "": "src/",
-            "SymfonyStandard": "app/"
-        }
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -16,27 +16,30 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.8.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
+        "cspoo/swiftmailer-mailgun-bundle": "0.2.*",
         "doctrine/doctrine-bundle": "~1.2",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0",
-        "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "white-october/pagerfanta-bundle": "~1.0",
+        "doctrine/doctrine-fixtures-bundle": "~2.2",
+        "doctrine/orm": "~2.5",
         "friendsofsymfony/user-bundle": "~2.0",
-        "lexik/form-filter-bundle": "~5.0",
         "gedmo/doctrine-extensions": "~2.0",
-        "cspoo/swiftmailer-mailgun-bundle": "0.2.*"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "lexik/form-filter-bundle": "~5.0",
+        "sensio/distribution-bundle": "~5.0",
+        "sensio/framework-extra-bundle": "~3.0",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "symfony/symfony": "3.3.*",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "twig/extensions": "~1.5",
+        "twig/twig": "^2.4",
+        "white-october/pagerfanta-bundle": "~1.0",
+        "friendsofsymfony/rest-bundle": "^2.2",
+        "jms/serializer-bundle": "^2.2",
+        "lexik/jwt-authentication-bundle": "^2.4"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "symfony/phpunit-bridge": "^3.3",
-        "phpunit/phpunit": "5.7.*"
+        "sensio/generator-bundle": "~3.0",
+        "symfony/phpunit-bridge": "^3.3"
     },
     "scripts": {
         "post-root-package-install": [
@@ -59,15 +62,19 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ]
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
-        "symfony-assets-install": "symlink",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_url": "DATABASE_URL",
+                "secret": "SYMFONY_SECRET"
+            }
         }
     }
 }

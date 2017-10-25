@@ -1,14 +1,11 @@
-/web/bundles/
-/app/bootstrap.php.cache
-/app/cache/*
+/var/
+!var/cache/.gitkeep
+!var/logs/.gitkeep
 /app/config/parameters.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-/build/
+/phpunit.xml
 /vendor/
-/bin/
-/composer.phar
+/web/bundles/
+
 .idea/
 
 #tmp files

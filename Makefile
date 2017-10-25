@@ -60,15 +60,15 @@ phpdcd:
 	docker run --rm -i -v `pwd`:/project jolicode/phaudit bash -c 'phpdcd $(php_sources); exit $$?'
 
 
-# Symfony2.x app commands
+# Symfony3.x app commands
 
-.PHONY: pac
-pac:
-	docker-compose run --rm php php app/console $(cmd)
+.PHONY: pbc
+pbc:
+	docker-compose run --rm php php bin/console $(cmd)
 
 .PHONY: phpunit
-phpunit: ./vendor/phpunit/phpunit/phpunit ./app/phpunit.xml.dist
-	docker-compose run --rm php php ./vendor/symfony/phpunit-bridge/bin/simple-phpunit -c app/
+phpunit: ./vendor/symfony/phpunit-bridge/bin/simple-phpunit ./phpunit.xml.dist
+	docker-compose run --rm php php ./vendor/symfony/phpunit-bridge/bin/simple-phpunit
 
 
-default: pac
+default: pbc
