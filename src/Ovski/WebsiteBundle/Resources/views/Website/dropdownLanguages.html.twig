@@ -5,11 +5,16 @@
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         {% for key, language in languages %}
-            <li>{{ app.request.get('_route')}}</li>
             <li role="presentation">
-                <a role="menuitem" tabindex="-1" href="{{ path(route, routeParams|merge({'_locale': key})) }}">
-                    {{ language }}
-                </a>
+                {% if route is not empty %}
+                    <a role="menuitem" tabindex="-1" href="{{ path(route, routeParams|default([])|merge({'_locale': key})) }}">
+                        {{ language }}
+                    </a>
+                {% else %}
+                    <a role="menuitem" tabindex="-1" href="{{ path('home', {'_locale': key}) }}">
+                        {{ language }}
+                    </a>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
