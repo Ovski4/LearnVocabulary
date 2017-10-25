@@ -68,6 +68,8 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
             '/contact',
             '/register/',
             '/resetting/request',
+            '/_error/404',
+            '/_error/500',
         );
 
         $urls = array(
