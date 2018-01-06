@@ -19,7 +19,6 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
@@ -30,6 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - LexikFormFilterBundle:Form:form_div_layout.html.twig
 
 # Assetic Configuration
 assetic:
@@ -83,8 +84,3 @@ fos_user:
     from_email:
       address: contact@learn-vocabulary.com
       sender_name: Learn Vocabulary
-# LexikFilter Configuration
-twig:
-    form:
-        resources:
-            - LexikFormFilterBundle:Form:form_div_layout.html.twig

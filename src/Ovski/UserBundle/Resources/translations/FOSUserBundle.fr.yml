@@ -30,7 +30,7 @@ profile:
         last_login: Dernier passage
         country: Pays
         member_from: Membre depuis %from% jours
-        age: %age% ans
+        age: "%age% ans"
         undefined_age: Age non renseigné
         description: Description personnelle
         undefined_description: Description non renseigné

@@ -21,4 +21,4 @@ doctrine:
         connections:
             default:
                 driver: pdo_sqlite
-                path: %kernel.root_dir%/../tests/sqlite_database.db
+                path: "%kernel.root_dir%/../tests/sqlite_database.db"

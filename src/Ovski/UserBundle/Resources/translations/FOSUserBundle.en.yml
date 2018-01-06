@@ -25,12 +25,12 @@ security:
 profile:
     show:
         avatar: Avatar
-        username: %username%'s profile
+        username: "%username%'s profile"
         email: Email
         last_login: Last login
         country: Country
         member_from: Member from %from% days
-        age: %age% years old
+        age: "%age% years old"
         undefined_age: Undefined age
         description: Personal description
         undefined_description: Undefined description
@@ -49,13 +49,13 @@ change_password:
 # Registration
 registration:
     check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
-    confirmed: Congrats %username%, your account is now activated.
+    confirmed: "Congrats %username%, your account is now activated."
     back: Back to the originating page.
     submit: Register
     flash:
         user_created: The user has been created successfully
     email:
-        subject: Welcome %username%!
+        subject: "Welcome %username%!"
         message: |
             Hello %username%!
 
