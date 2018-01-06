@@ -1,0 +1,23 @@
+Ovski\LanguageBundle\Entity\Translation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [ids]
+        createdAt:
+            expose: true
+            groups: [translation]
+        word1:
+            expose: true
+            groups: [translation]
+        word2:
+            expose: true
+            groups: [translation]
+        wordType:
+            expose: true
+            groups: [translation]
+        #learning:
+        #    expose: true
+        isStared:
+            expose: true
+            groups: [translation]

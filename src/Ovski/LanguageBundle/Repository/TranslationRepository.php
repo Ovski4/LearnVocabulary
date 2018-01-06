@@ -21,11 +21,19 @@ class TranslationRepository extends EntityRepository
         $qb = $this->createQueryBuilder('t');
 
         foreach ($params as $key => $value) {
-            $qb
-                ->andWhere(sprintf('t.%s = :param'.$key, $key))
-                ->setParameter('param'.$key, $value)
-            ;
+            if ($key === 'learningSlug') {
+                $qb
+                    ->join('t.learning', 'l', 'with', 'l.slug = :'.$key)
+                    ->setParameter($key, $value)
+                ;
+            } else {
+                $qb
+                    ->andWhere(sprintf('t.%s = :param'.$key, $key))
+                    ->setParameter('param'.$key, $value)
+                ;
+            }
         }
+
         foreach ($orderBy as $sort => $order) {
             $qb->addOrderBy('t.'.$sort, $order);
         }

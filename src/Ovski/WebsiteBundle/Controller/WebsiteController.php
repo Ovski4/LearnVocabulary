@@ -61,6 +61,7 @@ class WebsiteController extends Controller
      */
     public function contactAction()
     {
+        throw new \Exception('Error on purpose');
         $form = $this->createMailForm();
 
         return array('form' => $form->createView());

@@ -3,7 +3,7 @@
 target_container    ?= php
 php_sources         ?= .
 js_sources          ?= Resources/public/js
-phpcs_ignored_files ?= vendor/*,app/cache/*
+phpcs_ignored_files ?= vendor/*,var/*
 mysql_container_name = $(shell docker-compose ps |grep '^[a-Z-]*-mysql' |sed 's/-mysql .*/-mysql/')
 
 

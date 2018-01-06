@@ -1,0 +1,16 @@
+Ovski\LanguageBundle\Entity\Word:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [ids]
+        value:
+            expose: true
+            groups: [translation]
+        article:
+            expose: true
+        #wordType:
+        #    expose: true
+        language:
+            expose: true
+            groups: [translation]

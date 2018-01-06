@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 
-class ApplicationAvailabilityFunctionalTest extends WebTestCase
+class ApiFunctionalTest extends WebTestCase
 {
     /**
      * @var Application
@@ -52,7 +52,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
      */
     public function testAuthPageIsSuccessful($url)
     {
-        $client = $this->logIn();
+        $jwt = $this->getJWT();
         $client->request('GET', $url);
 
         $this->assertTrue($client->getResponse()->isSuccessful());
@@ -86,37 +86,12 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
 
     }
 
-    public function authenticatedUrlProvider()
-    {
-        $urlsWithLocal = array(
-            '/languages/',
-            '/languages/new',
-            '/revision/french-spanish',
-            '/edition/french-spanish',
-            '/edition/french-spanish/1/edit',
-            '/settings/',
-            '/profile/',
-            '/profile/edit',
-            '/profile/change-password',
-        );
-
-        $urls = array();
-
-        // Prefix the urls with a local by locals
-        foreach ($urlsWithLocal as $urlWithLocal) {
-            $urls[] = array('/fr' . $urlWithLocal);
-            $urls[] = array('/en' . $urlWithLocal);
-        }
-
-        return $urls;
-    }
-
     /**
-     * Log a user in
+     * Get the json web token
      *
      * @return \Symfony\Bundle\FrameworkBundle\Client
      */
-    private function logIn()
+    private function getJWT()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/en/login');
@@ -129,7 +104,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         );
 
         $client->submit($form, $data);
- //       $client->followRedirect();
+        $client->followRedirect();
 
         return $client;
     }

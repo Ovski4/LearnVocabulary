@@ -1,0 +1,13 @@
+Ovski\LanguageBundle\Entity\Language:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [ids]
+        name:
+            expose: true
+            groups: [translation, learning]
+        requireArticles:
+            expose: true
+        articles:
+            expose: true

@@ -1,0 +1,15 @@
+Ovski\LanguageBundle\Entity\Learning:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [ids]
+        language1:
+            expose: true
+            groups: [learning]
+        language2:
+            expose: true
+            groups: [learning]
+        slug:
+            expose: true
+            groups: [learning]

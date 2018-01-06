@@ -24,3 +24,11 @@ fos_user:
     prefix:   /{_locale}
     requirements:
         _locale: en|fr
+
+api_login_check:
+    path: /api/login_check
+
+ovski_api_language_languages:
+    type:     rest
+    resource: "@OvskiLanguageBundle/Controller/Api"
+    prefix:   /{_locale}/api

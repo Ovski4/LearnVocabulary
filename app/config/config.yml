@@ -26,12 +26,10 @@ framework:
     fragments:       ~
     http_method_override: true
 
-# Twig Configuration
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
-# Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
@@ -44,7 +42,6 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
-# Doctrine Configuration
 doctrine:
     dbal:
         driver:   "%database_driver%"
@@ -68,14 +65,12 @@ doctrine:
                 prefix: Gedmo\Translatable\Entity
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
 
-# Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# FOSUser Bundle Configuration
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
@@ -83,6 +78,21 @@ fos_user:
     from_email:
       address: contact@learn-vocabulary.com
       sender_name: Learn Vocabulary
+
+fos_rest:
+    routing_loader:
+        default_format: json
+
+jms_serializer:
+   metadata:
+       auto_detection: true
+
+lexik_jwt_authentication:
+    private_key_path: '%jwt_private_key_path%'
+    public_key_path:  '%jwt_public_key_path%'
+    pass_phrase:      '%jwt_key_pass_phrase%'
+    token_ttl:        '%jwt_token_ttl%'
+
 # LexikFilter Configuration
 twig:
     form:

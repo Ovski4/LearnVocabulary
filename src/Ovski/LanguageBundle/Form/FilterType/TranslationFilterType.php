@@ -2,8 +2,10 @@
 
 namespace Ovski\LanguageBundle\Form\FilterType;
 
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\BooleanFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\EntityFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +23,17 @@ class TranslationFilterType extends AbstractType
             ->add('isStarred', BooleanFilterType::class, array(
                 'label' => 'Favorite'
             ))
+            /*
+            https://github.com/lexik/LexikFormFilterBundle/blob/master/Resources/doc/working-with-the-bundle.md#iii-working-with-entity-associations-and-embeddeding-filters
+            ->add('word1', TextFilterType::class, array(
+                'condition_pattern' => FilterOperands::STRING_CONTAINS,
+                'label' => 'Word 1'
+            ))
+            ->add('word2', TextFilterType::class, array(
+                'condition_pattern' => FilterOperands::STRING_CONTAINS,
+                'label' => 'Word 2'
+            ))
+            */
         ;
     }
 
