@@ -1,0 +1,16 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: ovski-learn-vocabulary-mysql
+    database_port: null
+    database_name: learn_vocabulary
+    database_user: learn_vocabulary
+    database_password: learn_vocabulary
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    mailer_transport: gmail
+    mailer_user: null
+    mailer_password: null
